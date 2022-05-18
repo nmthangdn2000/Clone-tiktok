@@ -8,13 +8,11 @@ const model = {
   firstName: {
     type: String,
     required: [true, ERROR.FirstNameIsRequired.toString()],
-    unique: true,
     trim: true,
   },
   lastName: {
     type: String,
     required: [true, ERROR.LastNameIsRequired.toString()],
-    unique: true,
     trim: true,
   },
   email: {

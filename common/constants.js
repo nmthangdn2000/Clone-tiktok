@@ -61,11 +61,24 @@ const ERROR = {
   CanNotCreateWishvideos: 152,
   CanNotDeleteWishvideos: 153,
   CanNotUpdateWishvideos: 154,
-  // Comment 151
-  CanNotGetComment: 151,
-  CanNotCreateComment: 152,
-  CanNotDeleteComment: 153,
-  CanNotUpdateComment: 154,
+  // Comment 161
+  CanNotGetComment: 161,
+  CanNotCreateComment: 162,
+  CanNotDeleteComment: 163,
+  CanNotUpdateComment: 164,
+  // Follow 171
+  CanNotGetFollow: 171,
+  CanNotGetFollower: 172,
+  CanNotGetFollowing: 173,
+  CanNotCreateFollow: 174,
+  CanNotDeleteFollow: 175,
+  CanNotUpdateFollow: 176,
+  CanNotAddFollower: 177,
+  CanNotAddFollowing: 178,
+  CanNotDeleteFollower: 179,
+  CanNotDeleteFollowing: 180,
+  CanNotUpdateFollower: 181,
+  CanNotUpdateFollowing: 182,
 };
 
 const TYPE_ACCOUNT = {
