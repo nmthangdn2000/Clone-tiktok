@@ -61,6 +61,8 @@ const deleteFollowing = async (user, id) => {
     { multi: true }
   );
   if (!follow) throw new Error(ERROR.CanNotDeleteFollowing);
+
+  await deleteFollower(user, id);
 };
 
 const updateFollower = async (user, id) => {
@@ -70,10 +72,11 @@ const updateFollower = async (user, id) => {
 };
 
 const updateFollowing = async (user, id) => {
-  console.log(id);
   if (!id) throw new Error(ERROR.CanNotUpdateFollowing);
   const update = await FollowModel.updateOne({ user }, { $push: { following: id }, updatedAt: new Date() });
   if (update.modifiedCount < 1) throw new Error(ERROR.CanNotUpdateFollowing);
+
+  await updateFollower(user, id);
 };
 
 export {
