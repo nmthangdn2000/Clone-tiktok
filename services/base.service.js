@@ -1,4 +1,5 @@
 import fs from 'fs';
+import ffmpeg from 'fluent-ffmpeg';
 
 const pagination = (total, limit) => {
   return Math.ceil(total / limit);
@@ -52,4 +53,22 @@ const textToSlug = (title, sapceToStrikethrough = true) => {
   return slug;
 };
 
-export { textToSlug, pagination, deleteFile, listStringImage };
+const takeScreenshorts = (video) => {
+  return new Promise((resolve, reject) => {
+    const filename = `${video.split('.')[0]}.jpg`;
+    ffmpeg({ source: `./public/videos/${video}` })
+      .takeScreenshots({
+        filename: `./public/images/${filename}`,
+        timemarks: ['20%'],
+      })
+      .on('filenames', (filname) => console.log('create filename: ', filname))
+      .on('end', () => {
+        resolve(filename);
+      })
+      .on('error', (err) => {
+        reject(new Error(err));
+      });
+  });
+};
+
+export { textToSlug, pagination, deleteFile, listStringImage, takeScreenshorts };

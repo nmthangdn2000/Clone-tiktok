@@ -79,6 +79,11 @@ const ERROR = {
   CanNotDeleteFollowing: 180,
   CanNotUpdateFollower: 181,
   CanNotUpdateFollowing: 182,
+  // Comment 191
+  CanNotGetLike: 191,
+  CanNotCreateLike: 192,
+  CanNotDeleteLike: 193,
+  CanNotUpdateLike: 194,
 };
 
 const TYPE_ACCOUNT = {

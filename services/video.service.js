@@ -1,6 +1,6 @@
 import { ERROR, LIMIT, PAGE } from '../common/constants';
 import VideoModel from '../models/video.model';
-import { textToSlug, pagination, deleteFile } from './base.service';
+import { textToSlug, pagination, deleteFile, takeScreenshorts } from './base.service';
 
 const getAll = async ({ q = '', page = PAGE, limit = LIMIT, sort }) => {
   const query = q
@@ -51,9 +51,11 @@ const create = async (data, user, fileName) => {
       .filter((f) => f);
   }
   if (data.caption) data.captionSlug = textToSlug(data.caption, false);
+  const background = await takeScreenshorts(fileName);
   const url = `videos/${fileName}`;
   const newVideo = new VideoModel({
     ...data,
+    background: `images/${background}`,
     author: user,
     url,
   });
@@ -66,6 +68,7 @@ const deleteById = async (id) => {
   const video = await VideoModel.findByIdAndDelete(id);
   if (!video) throw new Error(ERROR.CanNotDeleteVideo);
   deleteFile(video.url);
+  deleteFile(video.background);
 };
 
 const updateById = async (id, data, fileName) => {

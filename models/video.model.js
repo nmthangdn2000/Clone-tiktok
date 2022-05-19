@@ -9,6 +9,7 @@ const name = 'videos';
 const model = {
   caption: String,
   captionSlug: String,
+  background: String,
   url: {
     type: String,
     require: [true, ERROR.UrlVideoIsRequired.toString()],

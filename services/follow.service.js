@@ -33,7 +33,6 @@ const getFollowing = async (user, { q = '' }) => {
 };
 
 const create = async (user) => {
-  console.log('cái lozz');
   const newFollow = new FollowModel({
     follower: [],
     following: [],
