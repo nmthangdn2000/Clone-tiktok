@@ -4,7 +4,7 @@ import { ERROR } from '../common/constants';
 
 const Schema = mongoose.Schema;
 // model name
-const name = 'follow';
+const name = 'follows';
 
 const model = {
   user: {

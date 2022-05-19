@@ -6,6 +6,7 @@ import commentRouter from '../router/comment.router';
 import followRouter from '../router/follow.router';
 import wishvideosRouter from '../router/wishvideos.router';
 import likeRouter from '../router/like.router';
+import notificationRouter from '../router/notification.router';
 
 const initRouter = (app) => {
   app.use('/api', authRouter);
@@ -16,6 +17,7 @@ const initRouter = (app) => {
   app.use('/api/follow', followRouter);
   app.use('/api/wishvideo', wishvideosRouter);
   app.use('/api/like', likeRouter);
+  app.use('/api/notification', notificationRouter);
 };
 
 export default initRouter;

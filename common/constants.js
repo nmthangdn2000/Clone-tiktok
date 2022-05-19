@@ -84,6 +84,11 @@ const ERROR = {
   CanNotCreateLike: 192,
   CanNotDeleteLike: 193,
   CanNotUpdateLike: 194,
+  // Comment 201
+  CanNotGetNotification: 201,
+  CanNotCreateNotification: 202,
+  CanNotDeleteNotification: 203,
+  CanNotUpdateNotification: 204,
 };
 
 const TYPE_ACCOUNT = {
@@ -101,4 +106,11 @@ const STATUS_ORDER = {
   APPROVED: 1,
 };
 
-export { LIMIT, PAGE, HttpMethod, ERROR, RESPONSE, TYPE_ACCOUNT, STATUS_ACCOUNT, STATUS_ORDER };
+const REF_MODEL = {
+  VIDEO: 'videos',
+  LIKEL: 'likes',
+  FOLLOW: 'follows',
+  COMMENT: 'comments',
+};
+
+export { LIMIT, PAGE, HttpMethod, ERROR, RESPONSE, TYPE_ACCOUNT, STATUS_ACCOUNT, STATUS_ORDER, REF_MODEL };
