@@ -1,23 +1,18 @@
-import { View, Text, Image, StyleSheet } from 'react-native';
-import React, { useRef } from 'react';
-import Video from 'react-native-video';
+import { View, Text, Image, StyleSheet, StatusBar } from 'react-native';
+import React, { useEffect } from 'react';
 import { LOGO_IMG } from '../../configs/source';
 import { COLOR, TEXT } from '../../configs/styles/index';
 
 const SplashScreen = ({ navigation }) => {
-  const videoRef = useRef(null);
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.replace('Home');
+    }, 3000);
+  });
   return (
-    <View>
-      <Text onPress={() => navigation.navigate('Home')} style={styles.text}>
-        SplashScreen
-      </Text>
-      <Image
-        source={LOGO_IMG}
-        style={{
-          width: 200,
-          height: 200,
-        }}
-      />
+    <View style={styles.container}>
+      <StatusBar animated={true} backgroundColor="black" hidden={true} />
+      <Image source={LOGO_IMG} style={styles.logo} />
     </View>
   );
 };
@@ -27,10 +22,12 @@ export default SplashScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '',
+    backgroundColor: COLOR.BLACK,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  text: {
-    color: COLOR.BLACK,
-    ...TEXT.REGULAR,
+  logo: {
+    width: 400,
+    height: 400,
   },
 });
