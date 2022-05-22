@@ -1,12 +1,12 @@
-import { View, Text, Image, StyleSheet, StatusBar } from 'react-native';
+import { View, Image, StyleSheet, StatusBar } from 'react-native';
 import React, { useEffect } from 'react';
 import { LOGO_IMG } from '../../configs/source';
-import { COLOR, TEXT } from '../../configs/styles/index';
+import { COLOR } from '../../configs/styles/index';
 
 const SplashScreen = ({ navigation }) => {
   useEffect(() => {
     setTimeout(() => {
-      navigation.replace('Home');
+      navigation.replace('MainScreen');
     }, 3000);
   });
   return (
