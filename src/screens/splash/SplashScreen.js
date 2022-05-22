@@ -1,21 +1,19 @@
-import { View, Text } from 'react-native';
-import React from 'react';
+import { View, Text, Image, StyleSheet } from 'react-native';
+import React, { useRef } from 'react';
 import Video from 'react-native-video';
+import { LOGO_IMG } from '../../configs/source';
+import { COLOR, TEXT } from '../../configs/styles/index';
 
 const SplashScreen = ({ navigation }) => {
+  const videoRef = useRef(null);
   return (
     <View>
-      <Text onPress={() => navigation.navigate('Home')}>SplashScreen</Text>
-      <Video
-        source={{
-          uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-        }}
+      <Text onPress={() => navigation.navigate('Home')} style={styles.text}>
+        SplashScreen
+      </Text>
+      <Image
+        source={LOGO_IMG}
         style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0,
           width: 200,
           height: 200,
         }}
@@ -25,3 +23,14 @@ const SplashScreen = ({ navigation }) => {
 };
 
 export default SplashScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '',
+  },
+  text: {
+    color: COLOR.BLACK,
+    ...TEXT.REGULAR,
+  },
+});
