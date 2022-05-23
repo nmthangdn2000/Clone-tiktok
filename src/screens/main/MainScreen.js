@@ -1,7 +1,7 @@
 import { Image, StyleSheet } from 'react-native';
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { COLOR, TEXT } from '../../configs/styles';
+import { COLOR } from '../../configs/styles';
 
 import HomeScreen from '../home/HomeScreen';
 import DiscoverScreen from '../discover/DiscoverScreen';
@@ -19,7 +19,7 @@ import {
 
 const Bottom = createBottomTabNavigator();
 
-const MainScreen = () => {
+const MainScreen = ({ navigation }) => {
   return (
     <Bottom.Navigator
       screenOptions={{
@@ -67,6 +67,12 @@ const MainScreen = () => {
             return (
               <Image source={NEW_VIDEO_IMG} style={styles.newVideoTabIcon} />
             );
+          },
+        }}
+        listeners={{
+          tabPress: e => {
+            e.preventDefault();
+            navigation.navigate('NewVideo');
           },
         }}
       />
