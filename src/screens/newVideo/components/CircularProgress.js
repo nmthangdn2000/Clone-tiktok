@@ -8,42 +8,83 @@ import Animated, {
   useAnimatedProps,
   Easing,
   cancelAnimation,
+  useAnimatedStyle,
 } from 'react-native-reanimated';
 
-const BACKGROUND_COLOR = COLOR.BLACK;
-const BACKGROUND_STROKE_COLOR = COLOR.LIGHT;
+const BACKGROUND_COLOR = COLOR.LIGHT_GRAY;
+const BACKGROUND_STROKE_COLOR = COLOR.setOpacity(COLOR.DANGER, 0.6);
 const STROKE_COLOR = COLOR.DANGER;
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
-const CircularProgress = ({ widthButton = 100 }) => {
-  const R = (widthButton * 2) / (2 * Math.PI) + 10;
+const CircularProgress = ({ widthButton = 120, second = 3000 }) => {
+  const SIZE_MORE = 15;
+  // circle radius
+  const R = widthButton / 2 - SIZE_MORE;
+
+  const CIRCLE_LENGTH = 2 * Math.PI * R;
 
   const [isRecord, setIsRecord] = useState(true);
+
   const progress = useSharedValue(0);
+  const borderRadius = useSharedValue(50);
+  const widthButtonRecord = useSharedValue(widthButton - 40);
 
   const animatedProps = useAnimatedProps(() => ({
     //   2 * Math.PI * (R + 10) is 2PI*R
-    strokeDashoffset: 2 * Math.PI * (R + 10) * (1 - progress.value),
+    strokeDashoffset: CIRCLE_LENGTH * (1 - progress.value),
   }));
 
-  const handleClick = useCallback(() => {
-    if (isRecord) {
-      progress.value = withTiming(1, {
-        duration: (1 - progress.value) * 3000,
+  const styleAnimated = useAnimatedStyle(() => {
+    const timer = 200;
+    return {
+      borderRadius: withTiming(borderRadius.value, {
+        duration: timer,
         easing: Easing.linear,
-      });
+      }),
+      width: withTiming(widthButtonRecord.value, {
+        duration: timer,
+        easing: Easing.linear,
+      }),
+      height: withTiming(widthButtonRecord.value, {
+        duration: timer,
+        easing: Easing.linear,
+      }),
+    };
+  });
+
+  const handleClick = () => {
+    if (isRecord) {
+      progress.value = withTiming(
+        1,
+        {
+          duration: (1 - progress.value) * second,
+          easing: Easing.linear,
+        },
+        value => {
+          if (value) {
+            // setIsRecord(true);
+            progress.value = 0;
+            borderRadius.value = 50;
+            widthButtonRecord.value = widthButton - 40;
+          }
+        },
+      );
+
+      borderRadius.value = 10;
+      widthButtonRecord.value = widthButton - 80;
     } else {
       cancelAnimation(progress);
+      borderRadius.value = 50;
+      widthButtonRecord.value = widthButton - 40;
     }
     setIsRecord(!isRecord);
-  }, [isRecord]);
+  };
 
   const styles = StyleSheet.create({
     container: {
       width: widthButton,
       height: widthButton,
-      backgroundColor: 'red',
     },
     containerButton: {
       position: 'absolute',
@@ -53,10 +94,8 @@ const CircularProgress = ({ widthButton = 100 }) => {
       alignItems: 'center',
     },
     button: {
-      width: widthButton - 30,
-      height: widthButton - 30,
-      borderRadius: 50,
-      //   backgroundColor: 'blue',
+      backgroundColor: COLOR.DANGER,
+
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -68,8 +107,9 @@ const CircularProgress = ({ widthButton = 100 }) => {
           cx={widthButton / 2}
           cy={widthButton / 2}
           r={R}
-          stroke={BACKGROUND_COLOR}
-          strokeWidth={10}
+          strokeWidth={6}
+          stroke={isRecord ? BACKGROUND_STROKE_COLOR : BACKGROUND_COLOR}
+          fill={BACKGROUND_COLOR}
         />
         <AnimatedCircle
           cx={widthButton / 2}
@@ -77,17 +117,13 @@ const CircularProgress = ({ widthButton = 100 }) => {
           r={R}
           stroke={STROKE_COLOR}
           strokeWidth={6}
-          strokeDasharray={2 * Math.PI * (R + 10)}
+          strokeDasharray={CIRCLE_LENGTH}
           animatedProps={animatedProps}
         />
       </Svg>
       <View style={styles.containerButton}>
-        <TouchableOpacity
-          activeOpacity={1}
-          style={styles.button}
-          onPress={handleClick}>
-          <Animated.Text>{Math.floor(progress.value * 15000)}</Animated.Text>
-          <Text>adadad</Text>
+        <TouchableOpacity activeOpacity={1} onPress={handleClick}>
+          <Animated.View style={[styles.button, styleAnimated]} />
         </TouchableOpacity>
       </View>
     </View>

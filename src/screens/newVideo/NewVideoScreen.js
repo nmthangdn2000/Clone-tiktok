@@ -60,7 +60,7 @@ const NewVideoScreen = () => {
         }}
       </RNCamera> */}
       <View style={styles.button}>
-        <CircularProgress circleLenghth={1000} />
+        <CircularProgress />
         {/* <TouchableOpacity
           onPress={() => takePicture(camera)}
           style={styles.capture}> */}

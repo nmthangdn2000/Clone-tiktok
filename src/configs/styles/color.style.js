@@ -3,8 +3,10 @@ const COLOR = {
   LIGHT: '#F6F9FB',
   BLACK: '#000000',
   DANGER: '#E04422',
+  LIGHT_DANGER: '#FFC4C4',
+  LIGHTER_DANGER: '#FFE8E3',
   GRAY: '#818181',
-  LIGHT_GRAY: '#F3F3F3',
+  LIGHT_GRAY: '#dadada',
   TRANSPARENT: 'transparent',
 
   setOpacity: (hexColor, opacity) => {
