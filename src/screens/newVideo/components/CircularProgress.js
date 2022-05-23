@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import React, { useState, useCallback } from 'react';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
 import { COLOR } from '../../../configs/styles';
 import Svg, { Circle } from 'react-native-svg';
 import Animated, {
@@ -9,6 +9,7 @@ import Animated, {
   Easing,
   cancelAnimation,
   useAnimatedStyle,
+  runOnJS,
 } from 'react-native-reanimated';
 
 const BACKGROUND_COLOR = COLOR.LIGHT_GRAY;
@@ -27,7 +28,7 @@ const CircularProgress = ({ widthButton = 120, second = 3000 }) => {
   const [isRecord, setIsRecord] = useState(true);
 
   const progress = useSharedValue(0);
-  const borderRadius = useSharedValue(50);
+  const borderRadiusButtonRecord = useSharedValue(50);
   const widthButtonRecord = useSharedValue(widthButton - 40);
 
   const animatedProps = useAnimatedProps(() => ({
@@ -37,21 +38,22 @@ const CircularProgress = ({ widthButton = 120, second = 3000 }) => {
 
   const styleAnimated = useAnimatedStyle(() => {
     const timer = 200;
+    const borderRadius = withTiming(borderRadiusButtonRecord.value, {
+      duration: timer,
+      easing: Easing.linear,
+    });
+    const width = withTiming(widthButtonRecord.value, {
+      duration: timer,
+      easing: Easing.linear,
+    });
     return {
-      borderRadius: withTiming(borderRadius.value, {
-        duration: timer,
-        easing: Easing.linear,
-      }),
-      width: withTiming(widthButtonRecord.value, {
-        duration: timer,
-        easing: Easing.linear,
-      }),
-      height: withTiming(widthButtonRecord.value, {
-        duration: timer,
-        easing: Easing.linear,
-      }),
+      borderRadius,
+      width,
+      height: width,
     };
   });
+
+  const updateState = () => setIsRecord(true);
 
   const handleClick = () => {
     if (isRecord) {
@@ -61,21 +63,21 @@ const CircularProgress = ({ widthButton = 120, second = 3000 }) => {
           duration: (1 - progress.value) * second,
           easing: Easing.linear,
         },
-        value => {
-          if (value) {
-            // setIsRecord(true);
+        isFinished => {
+          if (isFinished) {
+            runOnJS(updateState)();
             progress.value = 0;
-            borderRadius.value = 50;
+            borderRadiusButtonRecord.value = 50;
             widthButtonRecord.value = widthButton - 40;
           }
         },
       );
 
-      borderRadius.value = 10;
+      borderRadiusButtonRecord.value = 10;
       widthButtonRecord.value = widthButton - 80;
     } else {
       cancelAnimation(progress);
-      borderRadius.value = 50;
+      borderRadiusButtonRecord.value = 50;
       widthButtonRecord.value = widthButton - 40;
     }
     setIsRecord(!isRecord);
