@@ -2,6 +2,9 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { RNCamera } from 'react-native-camera';
 import CircularProgress from './components/CircularProgress';
+import Effect from './components/Effect';
+import Upload from './components/Upload';
+import { SPACING } from '../../configs/styles';
 
 const NewVideoScreen = () => {
   const PendingView = () => (
@@ -59,13 +62,13 @@ const NewVideoScreen = () => {
           );
         }}
       </RNCamera> */}
-      <View style={styles.button}>
-        <CircularProgress />
-        {/* <TouchableOpacity
-          onPress={() => takePicture(camera)}
-          style={styles.capture}> */}
-        {/* <Text style={{ fontSize: 14 }}> SNAP </Text> */}
-        {/* </TouchableOpacity> */}
+      <View style={styles.containerBottom}>
+        <Effect />
+        <View style={styles.containerButtonRecord}>
+          <Text style={{ color: 'white' }}>âccac</Text>
+          <CircularProgress />
+        </View>
+        <Upload />
       </View>
     </View>
   );
@@ -93,12 +96,17 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     margin: 20,
   },
-  button: {
+  containerBottom: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     bottom: 0,
     left: 0,
     right: 0,
     position: 'absolute',
+    backgroundColor: 'black',
+    padding: SPACING.S6,
+  },
+  containerButtonRecord: {
+    alignItems: 'center',
   },
 });
