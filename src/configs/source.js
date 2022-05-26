@@ -12,7 +12,9 @@ const REPLY_IMG = require('../assets/images/reply.png');
 const SEARCH_IMG = require('../assets/images/search.png');
 const USER_IMG = require('../assets/images/user.png');
 const Effects_Illustration_IMG = require('../assets/images/Effects-Illustration.png');
+const AVATA_IMG = require('../assets/images/avata.jpg');
 const Illustration_IMG = require('../assets/images/Illustration.png');
+const Bookmark_IMG = require('../assets/images/Bookmark.png');
 
 export {
   LOGO_IMG,
@@ -29,5 +31,7 @@ export {
   SEARCH_IMG,
   USER_IMG,
   Effects_Illustration_IMG,
+  AVATA_IMG,
   Illustration_IMG,
+  Bookmark_IMG,
 };

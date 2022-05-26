@@ -36,7 +36,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -51,21 +51,52 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-
-	<!-- Required with iOS 10 and higher -->
 	<key>NSCameraUsageDescription</key>
 	<string>Your message to user when the camera is accessed for the first time</string>
-
-	<!-- Required with iOS 11 and higher: include this only if you are planning to use the camera roll -->
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Your message to user when the photo library is accessed for the first time</string>
-
-	<!-- Include this only if you are planning to use the camera roll -->
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Your message to user when the photo library is accessed for the first time</string>
-
-	<!-- Include this only if you are planning to use the microphone for video recording -->
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Your message to user when the microphone is accessed for the first time</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>BeVietnamPro-Black.ttf</string>
+		<string>BeVietnamPro-BlackItalic.ttf</string>
+		<string>BeVietnamPro-Bold.ttf</string>
+		<string>BeVietnamPro-BoldItalic.ttf</string>
+		<string>BeVietnamPro-ExtraBold.ttf</string>
+		<string>BeVietnamPro-ExtraBoldItalic.ttf</string>
+		<string>BeVietnamPro-ExtraLight.ttf</string>
+		<string>BeVietnamPro-ExtraLightItalic.ttf</string>
+		<string>BeVietnamPro-Italic.ttf</string>
+		<string>BeVietnamPro-Light.ttf</string>
+		<string>BeVietnamPro-LightItalic.ttf</string>
+		<string>BeVietnamPro-Medium.ttf</string>
+		<string>BeVietnamPro-MediumItalic.ttf</string>
+		<string>BeVietnamPro-Regular.ttf</string>
+		<string>BeVietnamPro-SemiBold.ttf</string>
+		<string>BeVietnamPro-SemiBoldItalic.ttf</string>
+		<string>BeVietnamPro-Thin.ttf</string>
+		<string>BeVietnamPro-ThinItalic.ttf</string>
+		<string>lato-black.ttf</string>
+		<string>lato-blackitalic.ttf</string>
+		<string>lato-bold.ttf</string>
+		<string>lato-bolditalic.ttf</string>
+		<string>lato-hairline.ttf</string>
+		<string>lato-hairlineitalic.ttf</string>
+		<string>lato-heavy.ttf</string>
+		<string>lato-heavyitalic.ttf</string>
+		<string>lato-italic.ttf</string>
+		<string>lato-light.ttf</string>
+		<string>lato-lightitalic.ttf</string>
+		<string>lato-medium.ttf</string>
+		<string>lato-mediumitalic.ttf</string>
+		<string>lato-regular.ttf</string>
+		<string>lato-semibold.ttf</string>
+		<string>lato-semibolditalic.ttf</string>
+		<string>lato-thin.ttf</string>
+		<string>lato-thinitalic.ttf</string>
+	</array>
 </dict>
 </plist>

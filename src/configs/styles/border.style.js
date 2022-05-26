@@ -1,10 +1,10 @@
 const BORDER = {
   NONE: 0,
-  SMALL: 8,
-  NORMAL: 12,
-  MEDIUM: 16,
-  LARGE: 24,
-  LARGER: 32,
+  SMALL: 4,
+  NORMAL: 8,
+  MEDIUM: 12,
+  LARGE: 16,
+  LARGER: 24,
   PILL: 1000,
 };
 
