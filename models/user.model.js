@@ -1,8 +1,8 @@
-import * as BaseModel from './base.model';
-import { ERROR, STATUS_ACCOUNT, TYPE_ACCOUNT } from '../common/constants';
+import * as BaseModel from "./base.model";
+import { ERROR, STATUS_ACCOUNT, TYPE_ACCOUNT } from "../common/constants";
 
 // model name
-const name = 'users';
+const name = "users";
 
 const model = {
   firstName: {
@@ -15,6 +15,12 @@ const model = {
     required: [true, ERROR.LastNameIsRequired.toString()],
     trim: true,
   },
+  userName: {
+    type: String,
+    required: [true, ERROR.UserNameIsRequired.toString()],
+    unique: true,
+    trim: true,
+  },
   email: {
     type: String,
     required: [true, ERROR.EmailIsRequired.toString()],
@@ -23,7 +29,7 @@ const model = {
   },
   avata: {
     type: String,
-    default: 'avata-default.png',
+    default: "avata-default.png",
   },
   password: {
     type: String,
@@ -46,6 +52,6 @@ const model = {
   },
 };
 
-const index = { firstName: 'text', lastName: 'text', email: 'text' };
+const index = { firstName: "text", lastName: "text", email: "text" };
 
 export default BaseModel.createModel({ name, model, index });
