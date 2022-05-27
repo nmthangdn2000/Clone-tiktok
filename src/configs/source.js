@@ -7,6 +7,7 @@ const MESSAGE_CIRCLE_IMG = require('../assets/images/message-circle.png');
 const MESSAGE_IMG = require('../assets/images/message.png');
 const MUSIC_NOTE_IMG = require('../assets/images/music-note.png');
 const NEW_VIDEO_IMG = require('../assets/images/new-video.png');
+const NEW_VIDEO_DART_IMG = require('../assets/images/new-video-dart.png');
 const PLUS_BUTTON_IMG = require('../assets/images/plus-button.png');
 const REPLY_IMG = require('../assets/images/reply.png');
 const SEARCH_IMG = require('../assets/images/search.png');
@@ -46,4 +47,5 @@ export {
   ARROW_BACK_IMG,
   ADD_ACCOUNT_ICON_IMG,
   MORE_VERT_IMG,
+  NEW_VIDEO_DART_IMG,
 };

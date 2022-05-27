@@ -1,5 +1,5 @@
-import { StyleSheet, View, SafeAreaView, Text } from 'react-native';
-import React from 'react';
+import { StyleSheet, SafeAreaView, StatusBar } from 'react-native';
+import React, { useEffect } from 'react';
 import User from './User';
 import { Tabs } from 'react-native-collapsible-tab-view';
 import ListVideo from './ListVideo';
@@ -22,7 +22,10 @@ const data = [
   { key: '9' },
   { key: '10' },
 ];
-const ProfileScreen = () => {
+const ProfileScreen = ({ setTheme }) => {
+  // useEffect(() => {
+  //   setTheme('light');
+  // });
   return (
     <SafeAreaView style={styles.container}>
       <Tabs.Container renderHeader={User}>
