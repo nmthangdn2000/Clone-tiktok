@@ -30,10 +30,7 @@ const ProfileScreen = () => {
           <ListVideo dataList={data} />
         </Tabs.Tab>
         <Tabs.Tab name="HeartIcon_IMG">
-          <Tabs.ScrollView>
-            <View style={[styles.box, styles.boxA]} />
-            <View style={[styles.box, styles.boxB]} />
-          </Tabs.ScrollView>
+          <ListVideo dataList={data} />
         </Tabs.Tab>
       </Tabs.Container>
     </SafeAreaView>

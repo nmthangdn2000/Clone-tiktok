@@ -36,6 +36,9 @@ const User = () => {
           <Image source={Bookmark_IMG} style={styles.iconButton} />
         </View>
       </View>
+      <View style={styles.containerBio}>
+        <Text>Thêm tiểu sử</Text>
+      </View>
     </View>
   );
 };
@@ -103,5 +106,14 @@ const styles = StyleSheet.create({
   iconButton: {
     width: 18,
     height: 22,
+  },
+  containerBio: {
+    marginTop: SPACING.S4,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  txtBio: {
+    ...TEXT.REGULAR,
+    color: COLOR.GRAY,
   },
 });

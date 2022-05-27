@@ -1,4 +1,4 @@
-import { Image, StyleSheet } from 'react-native';
+import { Image, StyleSheet, Pressable } from 'react-native';
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { COLOR } from '../../configs/styles';
@@ -15,11 +15,15 @@ import {
   NEW_VIDEO_IMG,
   SEARCH_IMG,
   USER_IMG,
+  ARROW_BACK_IMG,
+  ADD_ACCOUNT_ICON_IMG,
+  MORE_VERT_IMG,
 } from '../../configs/source';
 
 const Bottom = createBottomTabNavigator();
 
 const MainScreen = ({ navigation }) => {
+  const handleButtonBack = () => navigation.goBack();
   return (
     <Bottom.Navigator
       screenOptions={{
@@ -96,6 +100,17 @@ const MainScreen = ({ navigation }) => {
         component={ProfileScreen}
         options={{
           headerShown: true,
+          headerTitleAlign: 'center',
+          headerLeft: () => (
+            <Pressable style={{ marginLeft: 10 }} onPress={handleButtonBack}>
+              <Image source={ADD_ACCOUNT_ICON_IMG} />
+            </Pressable>
+          ),
+          headerRight: () => (
+            <Pressable style={{ marginRight: 10 }} onPress={null}>
+              <Image source={MORE_VERT_IMG} />
+            </Pressable>
+          ),
           tabBarIcon: ({ color }) => {
             return (
               <Image

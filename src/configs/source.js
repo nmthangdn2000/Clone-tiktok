@@ -16,7 +16,11 @@ const AVATA_IMG = require('../assets/images/avata.jpg');
 const Illustration_IMG = require('../assets/images/Illustration.png');
 const Bookmark_IMG = require('../assets/images/Bookmark.png');
 const LISTICON_IMG = require('../assets/images/ListIcon.png');
+const PLAY_ARROW_IMG = require('../assets/images/play_arrow.png');
 const HEARTICON_IMG = require('../assets/images/HeartIcon.png');
+const ARROW_BACK_IMG = require('../assets/images/arrow_back.png');
+const ADD_ACCOUNT_ICON_IMG = require('../assets/images/AddAccountIcon.png');
+const MORE_VERT_IMG = require('../assets/images/more_vert.png');
 
 export {
   LOGO_IMG,
@@ -38,4 +42,8 @@ export {
   Bookmark_IMG,
   LISTICON_IMG,
   HEARTICON_IMG,
+  PLAY_ARROW_IMG,
+  ARROW_BACK_IMG,
+  ADD_ACCOUNT_ICON_IMG,
+  MORE_VERT_IMG,
 };
