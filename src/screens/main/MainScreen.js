@@ -95,6 +95,7 @@ const MainScreen = ({ navigation }) => {
         name="Hồ sơ"
         component={ProfileScreen}
         options={{
+          headerShown: true,
           tabBarIcon: ({ color }) => {
             return (
               <Image

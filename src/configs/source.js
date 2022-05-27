@@ -15,6 +15,8 @@ const Effects_Illustration_IMG = require('../assets/images/Effects-Illustration.
 const AVATA_IMG = require('../assets/images/avata.jpg');
 const Illustration_IMG = require('../assets/images/Illustration.png');
 const Bookmark_IMG = require('../assets/images/Bookmark.png');
+const LISTICON_IMG = require('../assets/images/ListIcon.png');
+const HEARTICON_IMG = require('../assets/images/HeartIcon.png');
 
 export {
   LOGO_IMG,
@@ -34,4 +36,6 @@ export {
   AVATA_IMG,
   Illustration_IMG,
   Bookmark_IMG,
+  LISTICON_IMG,
+  HEARTICON_IMG,
 };
