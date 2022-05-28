@@ -1,6 +1,7 @@
 import { ERROR, LIMIT, PAGE } from '../common/constants';
 import VideoModel from '../models/video.model';
-import { textToSlug, pagination, deleteFile, takeScreenshorts } from './base.service';
+import * as audioService from './audio.service';
+import { textToSlug, pagination, deleteFile, takeScreenshorts, takeAudio } from './base.service';
 
 const getAll = async ({ q = '', page = PAGE, limit = LIMIT, sort }) => {
   const query = q
@@ -22,7 +23,8 @@ const getAll = async ({ q = '', page = PAGE, limit = LIMIT, sort }) => {
   const count = VideoModel.find(query).countDocuments();
   // chưa làm sort
   const getVideos = VideoModel.find(query)
-    .populate('categories', 'name slug')
+    // .populate('categories', 'name slug')
+    .populate('audio', 'name author background')
     .skip(page * limit - limit)
     .limit(Number(limit));
   const [total, videos] = await Promise.all([count, getVideos]);
@@ -41,8 +43,9 @@ const getById = async (id) => {
 };
 
 const create = async (data, user, fileName) => {
-  if (!user || !fileName || data.categories?.length == 0) throw new Error(ERROR.CanNotCreateVideo);
-  if (!Array.isArray(data.categories)) data.categories = data.categories.split(',').map((category) => category.trim());
+  //|| data.categories?.length == 0
+  if (!user._id || !fileName) throw new Error(ERROR.CanNotCreateVideo);
+  // if (!Array.isArray(data.categories)) data.categories = data.categories.split(',').map((category) => category.trim());
   if (!data.hashtag) data.hashtag = [];
   else {
     data.hashtag = data.hashtag
@@ -52,11 +55,24 @@ const create = async (data, user, fileName) => {
   }
   if (data.caption) data.captionSlug = textToSlug(data.caption, false);
   const background = await takeScreenshorts(fileName);
+
+  if (!data.audio) {
+    const fileAudio = await takeAudio(fileName);
+    const audio = await audioService.create({
+      name: `Nhạc nền - ${user.name}`,
+      background: user.avata,
+      author: user.name,
+      url: `audios/${fileAudio}`,
+    });
+
+    data.audio = audio;
+  }
+
   const url = `videos/${fileName}`;
   const newVideo = new VideoModel({
     ...data,
     background: `images/${background}`,
-    author: user,
+    author: user._id,
     url,
   });
   const video = await newVideo.save();

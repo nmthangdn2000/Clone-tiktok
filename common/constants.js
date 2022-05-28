@@ -1,23 +1,23 @@
-"use strict";
+'use strict';
 
 const LIMIT = 10;
 const PAGE = 1;
 
 const HttpMethod = {
-  GET: "GET",
-  POST: "POST",
-  PUT: "PUT",
-  DELETE: "DELETE",
+  GET: 'GET',
+  POST: 'POST',
+  PUT: 'PUT',
+  DELETE: 'DELETE',
 };
 
 const RESPONSE = {
-  SUCCESS: "Success",
-  LOGIN_SUCCESS: "Login Success",
-  REGISTER_SUCCESS: "Register Success",
-  VERIFY_EMAIL_SUCCESS: "Verify email success",
-  SEND_VERIFY_EMAIL_SUCCESS: "Send verify email success",
-  SEND_TOKEN_RESET_PASSWORD_SUCCESS: "Send token reset password success",
-  CHANGE_PASSWORD_SUCCESS: "change password success",
+  SUCCESS: 'Success',
+  LOGIN_SUCCESS: 'Login Success',
+  REGISTER_SUCCESS: 'Register Success',
+  VERIFY_EMAIL_SUCCESS: 'Verify email success',
+  SEND_VERIFY_EMAIL_SUCCESS: 'Send verify email success',
+  SEND_TOKEN_RESET_PASSWORD_SUCCESS: 'Send token reset password success',
+  CHANGE_PASSWORD_SUCCESS: 'change password success',
 };
 
 const ERROR = {
@@ -39,9 +39,8 @@ const ERROR = {
   CantNotSendVerifyEmail: 120,
   CantNotResetPassword: 121,
   CantNotUpdatePassword: 122,
-  FirstNameIsRequired: 123,
-  LastNameIsRequired: 124,
-  UserNameIsRequired: 125,
+  NameIsRequired: 123,
+  UserNameIsRequired: 124,
   // Videos 131
   CanNotGetVideo: 131,
   CanNotCreateVideo: 132,
@@ -90,6 +89,12 @@ const ERROR = {
   CanNotCreateNotification: 202,
   CanNotDeleteNotification: 203,
   CanNotUpdateNotification: 204,
+  // Audio 211
+  CanNotGetAudio: 211,
+  CanNotCreateAudio: 212,
+  CanNotDeleteAudio: 213,
+  CanNotUpdateAudio: 214,
+  AudioIsRequired: 116,
 };
 
 const TYPE_ACCOUNT = {
@@ -108,20 +113,10 @@ const STATUS_ORDER = {
 };
 
 const REF_MODEL = {
-  VIDEO: "videos",
-  LIKEL: "likes",
-  FOLLOW: "follows",
-  COMMENT: "comments",
+  VIDEO: 'videos',
+  LIKEL: 'likes',
+  FOLLOW: 'follows',
+  COMMENT: 'comments',
 };
 
-export {
-  LIMIT,
-  PAGE,
-  HttpMethod,
-  ERROR,
-  RESPONSE,
-  TYPE_ACCOUNT,
-  STATUS_ACCOUNT,
-  STATUS_ORDER,
-  REF_MODEL,
-};
+export { LIMIT, PAGE, HttpMethod, ERROR, RESPONSE, TYPE_ACCOUNT, STATUS_ACCOUNT, STATUS_ORDER, REF_MODEL };

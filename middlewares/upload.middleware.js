@@ -2,7 +2,10 @@ import multer from 'multer';
 
 const diskStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, './public/videos');
+    const field = file.fieldname;
+    if (field == 'audio') return cb(null, './public/audios');
+    if (field == 'background') return cb(null, './public/images');
+    return cb(null, './public/videos');
   },
   filename: (req, file, cb) => {
     const originalname = file.originalname.split('.');

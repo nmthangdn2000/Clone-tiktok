@@ -66,9 +66,26 @@ const takeScreenshorts = (video) => {
         resolve(filename);
       })
       .on('error', (err) => {
-        reject(new Error(err));
+        reject(err);
       });
   });
 };
 
-export { textToSlug, pagination, deleteFile, listStringImage, takeScreenshorts };
+const takeAudio = (video) => {
+  return new Promise((resolve, reject) => {
+    const filename = `${video.split('.')[0]}.mp3`;
+    ffmpeg({ source: `./public/videos/${video}` })
+      .output(`./public/audios/${filename}`)
+      .on('end', function () {
+        console.log('conversion ended');
+        resolve(filename);
+      })
+      .on('error', function (err) {
+        console.log('error: ', e.code, e.msg);
+        reject(err);
+      })
+      .run();
+  });
+};
+
+export { textToSlug, pagination, deleteFile, listStringImage, takeScreenshorts, takeAudio };

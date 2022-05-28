@@ -23,7 +23,7 @@ const getById = async (req, res) => {
 
 const create = async (req, res) => {
   try {
-    await videoService.create(req.body, req.user._id, req.file.filename);
+    await videoService.create(req.body, req.user, req.file.filename);
     responseSuccess(res);
   } catch (error) {
     console.log(error);

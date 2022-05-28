@@ -19,14 +19,19 @@ const model = {
     ref: 'users',
     required: [true, ERROR.UserIsRequired.toString()],
   },
-  categories: [
-    {
-      // _id: false,
-      type: Schema.Types.ObjectId,
-      ref: 'categories',
-      required: [true, ERROR.CategorieIsRequired.toString()],
-    },
-  ],
+  audio: {
+    type: Schema.Types.ObjectId,
+    ref: 'audios',
+    // required: [true, ERROR.UserIsRequired.toString()],
+  },
+  // categories: [
+  //   {
+  //     // _id: false,
+  //     type: Schema.Types.ObjectId,
+  //     ref: 'categories',
+  //     required: [true, ERROR.CategorieIsRequired.toString()],
+  //   },
+  // ],
   like: {
     type: Number,
     default: 0,
