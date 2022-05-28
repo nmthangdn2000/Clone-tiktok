@@ -4,6 +4,8 @@ import appConfig from '../configs/appConfig';
 import routerConfig from '../configs/routerConfig';
 import path from 'path';
 import cors from 'cors';
+import socketIo from '../socket/index.socket';
+import http from 'http';
 
 const app = express();
 const __dirname = path.resolve();
@@ -28,9 +30,11 @@ const initApiRouters = () => {
 };
 
 const start = () => {
+  const server = http.createServer(app);
   initStatic();
   initApiRouters();
-  app.listen(appConfig.env.port, () => console.log(`Server started on port: ${appConfig.env.port}`));
+  socketIo(server);
+  server.listen(appConfig.env.port, () => console.log(`Server started on port: ${appConfig.env.port}`));
 };
 
 export { start };

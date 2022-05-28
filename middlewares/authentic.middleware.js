@@ -17,4 +17,17 @@ const verifyUser = (req, res, next) => {
   }
 };
 
-export { verifyUser };
+const verifyUserSocket = (socket, next) => {
+  try {
+    const token = socket.handshake.auth.token.split(' ')[1];
+    const decoded = jwt.verify(token, appConfig.KEY_SECRET_JWT);
+    socket.user = decoded;
+    next();
+    // res.send('ok');
+  } catch (error) {
+    console.log(error);
+    next(new Error('Authorization failed'));
+  }
+};
+
+export { verifyUser, verifyUserSocket };
