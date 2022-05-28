@@ -19,8 +19,10 @@ const create = async (user) => {
 
 const deleteByUser = async (user, id) => {
   if (!id || !user) throw new Error(ERROR.CanNotDeleteLike);
-  const like = await LikeModel.updateOne({ user }, { $pull: { follower: id }, updatedAt: new Date() }, { multi: true });
+  const like = await LikeModel.updateOne({ user }, { $pull: { videos: id }, updatedAt: new Date() }, { multi: true });
   if (!like) throw new Error(ERROR.CanNotDeleteLike);
+
+  await videoService.updateById(id, { $inc: { like: -1 } });
 };
 
 const updateByUser = async (user, id) => {

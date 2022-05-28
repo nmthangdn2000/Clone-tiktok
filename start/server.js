@@ -3,6 +3,7 @@ import logger from 'morgan';
 import appConfig from '../configs/appConfig';
 import routerConfig from '../configs/routerConfig';
 import path from 'path';
+import cors from 'cors';
 
 const app = express();
 const __dirname = path.resolve();
@@ -22,6 +23,7 @@ const initStatic = () => {
 };
 
 const initApiRouters = () => {
+  app.use(cors({ origin: getCorsOrigins(), credentials: true }));
   routerConfig(app);
 };
 
@@ -32,3 +34,10 @@ const start = () => {
 };
 
 export { start };
+
+function getCorsOrigins() {
+  const origins = process.env.CORS_ORIGINS;
+  if (!origins) return '*';
+
+  return origins.split(',').map((origin) => origin.trim());
+}
