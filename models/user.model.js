@@ -47,6 +47,6 @@ const model = {
   },
 };
 
-const index = { firstName: 'text', lastName: 'text', email: 'text' };
+const index = { name: 'text', email: 'text' };
 
 export default BaseModel.createModel({ name, model, index });
