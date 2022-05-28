@@ -44,7 +44,7 @@ const getById = async (id) => {
 
 const create = async (data, user, fileName) => {
   //|| data.categories?.length == 0
-  if (!user._id || !fileName) throw new Error(ERROR.CanNotCreateVideo);
+  if (user._id || !fileName) throw new Error(ERROR.CanNotCreateVideo);
   // if (!Array.isArray(data.categories)) data.categories = data.categories.split(',').map((category) => category.trim());
   if (!data.hashtag) data.hashtag = [];
   else {

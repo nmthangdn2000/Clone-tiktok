@@ -1,5 +1,6 @@
 import * as videoService from '../services/video.service';
 import { responseError, responseSuccess, responseSuccessWithData } from './base.controller';
+import { deleteFile } from '../services/base.service';
 
 const getAll = async (req, res) => {
   try {
@@ -22,11 +23,13 @@ const getById = async (req, res) => {
 };
 
 const create = async (req, res) => {
+  console.log(req.file);
   try {
     await videoService.create(req.body, req.user, req.file.filename);
     responseSuccess(res);
   } catch (error) {
     console.log(error);
+    if (req.file && req.file.filename) deleteFile(`videos/${req.file.filename}`);
     responseError(res, error.message);
   }
 };
