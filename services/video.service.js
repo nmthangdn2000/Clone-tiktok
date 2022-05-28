@@ -72,13 +72,21 @@ const deleteById = async (id) => {
 };
 
 const updateById = async (id, data, fileName) => {
-  console.log(id);
-  console.log(data);
   if (!id) throw new Error(ERROR.CanNotUpdateVideo);
-  // if (files && files.length > 0) data.url = fileName;
-  const video = await VideoModel.findByIdAndUpdate(id, { ...data, updatedAt: new Date() });
+  if (fileName) {
+    data.url = `videos/${fileName}`;
+    const background = await takeScreenshorts(fileName);
+    data.background = `images/${background}`;
+  }
+  const video = await VideoModel.findByIdAndUpdate(id, {
+    ...data,
+    updatedAt: new Date(),
+  });
   if (!video) throw new Error(ERROR.CanNotUpdateVideo);
-  // if (fileName) deleteFile(video.url);
+  if (fileName) {
+    deleteFile(video.url);
+    deleteFile(video.background);
+  }
 };
 
 export { getAll, getById, create, deleteById, updateById };
