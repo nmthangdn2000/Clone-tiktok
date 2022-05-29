@@ -7,15 +7,15 @@ const Schema = mongoose.Schema;
 const name = 'likes';
 
 const model = {
-  user: {
+  video: {
     type: Schema.Types.ObjectId,
-    ref: 'users',
+    ref: 'videos',
     required: [true, ERROR.UserIsRequired.toString()],
   },
-  videos: [
+  users: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'videos',
+      ref: 'users',
       required: [true, ERROR.VideoIsRequired.toString()],
     },
   ],

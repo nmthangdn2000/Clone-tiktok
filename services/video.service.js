@@ -1,6 +1,7 @@
 import { ERROR, LIMIT, PAGE } from '../common/constants';
 import VideoModel from '../models/video.model';
 import * as audioService from './audio.service';
+import * as likeService from './like.service';
 import { textToSlug, pagination, deleteFile, takeScreenshorts, takeAudio } from './base.service';
 
 const getAll = async ({ q = '', page = PAGE, limit = LIMIT, sort }) => {
@@ -87,6 +88,8 @@ const create = async (data, user, fileName) => {
   });
   const video = await newVideo.save();
   if (!video) throw new Error(ERROR.CanNotCreateVideo);
+
+  likeService.create(video._id, user._id);
 };
 
 const deleteById = async (id) => {
@@ -100,6 +103,8 @@ const deleteById = async (id) => {
 
   deleteFile(video.url);
   deleteFile(video.background);
+
+  likeService.deleteByVideo(video._id);
 };
 
 const updateById = async (id, data, fileName) => {

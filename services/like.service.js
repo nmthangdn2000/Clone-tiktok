@@ -1,36 +1,67 @@
+import mongoose from 'mongoose';
 import { ERROR } from '../common/constants';
 import LikeModel from '../models/like.model';
+import VideoModel from '../models/video.model';
 import * as videoService from './video.service';
 
-const getByUser = async (user, select = '') => {
-  const like = await LikeModel.findOne({ user }).select(select);
-  if (!like) await create(user);
-  return like || [];
+const getByUser = async (user) => {
+  const like = await LikeModel.find({ users: user }).populate('users', 'name userName avata');
+  if (!like) throw new Error(ERROR.CanNotGetLikeVideo);
+  return like;
 };
 
-const create = async (user) => {
+const create = async (video) => {
   const newLike = new LikeModel({
-    videos: [],
-    user,
+    video,
+    users: [],
   });
   const like = await newLike.save();
   if (!like) throw new Error(ERROR.CanNotCreateLike);
 };
 
-const deleteByUser = async (user, id) => {
-  if (!id || !user) throw new Error(ERROR.CanNotDeleteLike);
-  const like = await LikeModel.updateOne({ user }, { $pull: { videos: id }, updatedAt: new Date() }, { multi: true });
+const deleteByVideo = async (video) => {
+  if (!video) throw new Error();
+  const like = await LikeModel.findOneAndDelete({ video });
   if (!like) throw new Error(ERROR.CanNotDeleteLike);
+};
+
+const dislike = async (user, id) => {
+  if (!id || !user) throw new Error(ERROR.CanNotDislike);
+  const like = await LikeModel.findOneAndUpdate(
+    { video: id },
+    { $pull: { users: user }, updatedAt: new Date() },
+    { multi: true }
+  );
+  if (!like) throw new Error(ERROR.CanNotDislike);
 
   await videoService.updateById(id, { $inc: { like: -1 } });
 };
 
-const updateByUser = async (user, id) => {
-  if (!id || !user) throw new Error(ERROR.CanNotUpdateLike);
-  const update = await LikeModel.updateOne({ user }, { $push: { videos: id }, updatedAt: new Date() });
-  if (update.modifiedCount < 1) throw new Error(ERROR.CanNotUpdateLike);
+const like = async (user, id) => {
+  if (!id || !user) throw new Error(ERROR.CanNotLike);
+  const update = await LikeModel.findOneAndUpdate({ video: id }, { $addToSet: { users: user } });
+  if (!update) throw new Error(ERROR.CanNotLike);
 
-  await videoService.updateById(id, { $inc: { like: 1 } });
+  const countLike = await LikeModel.aggregate([
+    { $match: { video: mongoose.Types.ObjectId(id) } },
+    {
+      $project: {
+        video: 1,
+        users: { $size: '$users' },
+      },
+    },
+  ]);
+
+  await videoService.updateById(id, { like: countLike[0].users });
 };
 
-export { getByUser, deleteByUser, updateByUser };
+const getSumLikeByUser = async (user) => {
+  const sumLike = await VideoModel.aggregate([
+    { $match: { author: mongoose.Types.ObjectId(user) } },
+    { $group: { _id: null, sum: { $sum: '$like' } } },
+  ]);
+  if (!sumLike) throw new Error(ERROR.CanNotGetSumLike);
+  return sumLike[0].sum;
+};
+
+export { getSumLikeByUser, getByUser, dislike, like, create, deleteByVideo };

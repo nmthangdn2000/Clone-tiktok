@@ -79,12 +79,15 @@ const ERROR = {
   CanNotDeleteFollowing: 180,
   CanNotUpdateFollower: 181,
   CanNotUpdateFollowing: 182,
-  // Comment 191
-  CanNotGetLike: 191,
+  // Like 191
+  CanNotGetLikeVideo: 191,
   CanNotCreateLike: 192,
   CanNotDeleteLike: 193,
   CanNotUpdateLike: 194,
-  // Comment 201
+  CanNotGetSumLike: 195,
+  CanNotLike: 196,
+  CanNotDislike: 197,
+  // Notification 201
   CanNotGetNotification: 201,
   CanNotCreateNotification: 202,
   CanNotDeleteNotification: 203,
