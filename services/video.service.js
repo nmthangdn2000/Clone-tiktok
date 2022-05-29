@@ -83,6 +83,11 @@ const deleteById = async (id) => {
   if (!id) throw new Error(ERROR.CanNotDeleteVideo);
   const video = await VideoModel.findByIdAndDelete(id);
   if (!video) throw new Error(ERROR.CanNotDeleteVideo);
+
+  // remove audio if there are no videos using that audio
+  const haveUse = await VideoModel.findOne({ audio: video.audio });
+  if (!haveUse) audioService.deleteById(video.audio);
+
   deleteFile(video.url);
   deleteFile(video.background);
 };

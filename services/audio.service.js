@@ -1,5 +1,6 @@
 import { ERROR } from '../common/constants';
 import AudioModel from '../models/audio.model';
+import { deleteFile } from './base.service';
 
 const getAll = async (query) => {
   const audio = await AudioModel.find({});
@@ -27,6 +28,9 @@ const deleteById = async (id) => {
   if (!id) throw new Error(ERROR.CanNotDeleteAudio);
   const audio = await AudioModel.findByIdAndDelete(id);
   if (!audio) throw new Error(ERROR.CanNotDeleteAudio);
+
+  if (audio.background.split('/')[0] === 'images') deleteFile(audio.background);
+  if (audio.background.split('/')[0] === 'audios') deleteFile(audio.url);
 };
 
 const updateById = async (id, data) => {
