@@ -4,8 +4,8 @@ import * as audioController from '../controllers/audio.controller';
 import { uploadDiskStorage } from '../middlewares/upload.middleware';
 
 const initRoute = () => {
-  route({ method: HttpMethod.GET, action: audioController.getAll });
-  route({ method: HttpMethod.GET, url: '/:id', action: audioController.getById });
+  route({ method: HttpMethod.GET, action: audioController.getAll, middelware: [] });
+  route({ method: HttpMethod.GET, url: '/:id', action: audioController.getById, middelware: [] });
   route({
     method: HttpMethod.POST,
     url: '',

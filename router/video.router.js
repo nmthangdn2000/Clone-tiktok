@@ -4,9 +4,9 @@ import * as productController from '../controllers/video.controller';
 import { uploadDiskStorage } from '../middlewares/upload.middleware';
 
 const initRoute = () => {
-  route({ method: HttpMethod.GET, url: '/all', action: productController.getAll });
+  route({ method: HttpMethod.GET, url: '/all', action: productController.getAll, middelware: [] });
   route({ method: HttpMethod.GET, url: '', action: productController.getByUser });
-  route({ method: HttpMethod.GET, url: '/:id', action: productController.getById });
+  route({ method: HttpMethod.GET, url: '/:id', action: productController.getById, middelware: [] });
   route({
     method: HttpMethod.POST,
     url: '',

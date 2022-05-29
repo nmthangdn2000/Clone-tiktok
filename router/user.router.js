@@ -4,8 +4,8 @@ import * as userController from '../controllers/user.controller';
 import { uploadDiskStorage } from '../middlewares/upload.middleware';
 
 const initRoute = () => {
-  route({ method: HttpMethod.GET, action: userController.filter });
-  route({ method: HttpMethod.GET, url: '/:id', action: userController.getById });
+  route({ method: HttpMethod.GET, action: userController.filter, middelware: [] });
+  route({ method: HttpMethod.GET, url: '/:id', action: userController.getById, middelware: [] });
   route({ method: HttpMethod.DELETE, url: '/:id', action: userController.deleteById });
   route({
     method: HttpMethod.PUT,
