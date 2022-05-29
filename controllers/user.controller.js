@@ -35,7 +35,7 @@ const deleteById = async (req, res) => {
 
 const updateById = async (req, res) => {
   try {
-    await userService.updateById(req.user._id, req.body);
+    await userService.updateById(req.user._id, req.body, req.file?.filename);
     responseSuccess(res);
   } catch (error) {
     console.log(error);

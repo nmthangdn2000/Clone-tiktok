@@ -71,7 +71,7 @@ const create = async (data, user, fileName) => {
     const fileAudio = await takeAudio(fileName);
     const audio = await audioService.create({
       name: `Nhạc nền - ${user.name}`,
-      background: user.avata,
+      background: user.avatar,
       author: user.name,
       url: `audios/${fileAudio}`,
     });

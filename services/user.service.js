@@ -43,13 +43,16 @@ const deleteById = async (id) => {
   if (!id) throw new Error(ERROR.CanNotDeleteUser);
   const user = await UserModel.findByIdAndDelete(id);
   if (!user) throw new Error(ERROR.CanNotDeleteUser);
-  deleteFile(user.avata);
+  deleteFile(user.avatar);
 };
 
-const updateById = async (id, data) => {
+const updateById = async (id, data, avatar) => {
   if (!id) throw new Error(ERROR.CanNotUpdateUser);
-  const update = await UserModel.updateOne({ _id: id }, { ...data, updatedAt: new Date() });
-  if (update.modifiedCount < 1) throw new Error(ERROR.CanNotUpdateUser);
+  if (avatar) data.avatar = `avatars/${avatar}`;
+  const user = await UserModel.findByIdAndUpdate(id, { ...data, updatedAt: new Date() });
+  if (!user) throw new Error(ERROR.CanNotUpdateUser);
+
+  deleteFile(user.avatar);
 };
 
 export { filter, getById, deleteById, updateById };

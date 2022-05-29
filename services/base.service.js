@@ -7,7 +7,7 @@ const pagination = (total, limit) => {
 
 const deleteFile = (filename, fileId) => {
   //   if (fileId) driveHelper.deleteFile(fileId);
-  if (filename && filename != 'avata-default.png') {
+  if (filename && filename != 'avatar-default.png') {
     fs.unlink(`./public/${filename}`, (err) => {
       if (err) console.log(err);
       console.log(`successfully deleted ${filename}`);

@@ -22,10 +22,11 @@ const model = {
     unique: true,
     trim: true,
   },
-  avata: {
+  avatar: {
     type: String,
-    default: 'avata-default.png',
+    default: 'avatar-default.png',
   },
+  bio: String,
   password: {
     type: String,
     required: [true, ERROR.PasswordIsRequired.toString()],

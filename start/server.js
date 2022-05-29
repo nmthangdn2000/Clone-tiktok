@@ -6,9 +6,12 @@ import path from 'path';
 import cors from 'cors';
 import socketIo from '../socket/index.socket';
 import http from 'http';
+import fs from 'fs';
 
 const app = express();
 const __dirname = path.resolve();
+
+const listFolder = ['public/images', 'public/audios', 'public/videos', 'public/avatars'];
 
 const middleware = [
   logger('dev'), // common, dev,
@@ -18,6 +21,11 @@ const middleware = [
 ];
 
 const initStatic = () => {
+  Array.from(listFolder).forEach((f) => {
+    const isExists = fs.existsSync(path.join(__dirname, f));
+    if (!isExists) fs.mkdirSync(path.join(__dirname, f), true);
+  });
+
   Array.from(middleware).forEach((m) => {
     app.use(m);
   });

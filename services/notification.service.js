@@ -9,7 +9,7 @@ import * as videoService from './video.service';
 
 const getByUser = async (user, { page = PAGE, limit = LIMIT }) => {
   const notification = await NotificationModel.find({ user })
-    .populate('user', 'firstName lastName avata')
+    .populate('user', 'firstName lastName avatar')
     .skip(page * limit - limit)
     .limit(Number(limit));
   if (!notification) throw new Error(ERROR.CanNotGetNotification);
