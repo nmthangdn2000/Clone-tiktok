@@ -3,7 +3,6 @@ import { ERROR, LIMIT, PAGE } from '../common/constants';
 import FollowModel from '../models/follow.model';
 
 const getByUser = async (user) => {
-  console.log(user);
   const follow = await FollowModel.aggregate([
     { $match: { user: mongoose.Types.ObjectId(user) } },
     {

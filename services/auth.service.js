@@ -5,6 +5,8 @@ import jwt from 'jsonwebtoken';
 import appConfig from '../configs/appConfig';
 import * as mailer from '../helpers/mailer';
 import { textToSlug } from './base.service';
+import * as likeService from './like.service';
+import * as followService from './follow.service';
 
 const login = async (email, password) => {
   const query = {
@@ -14,8 +16,15 @@ const login = async (email, password) => {
   const user = await User.findOne(query).select('-password').lean();
   if (!user) throw new Error(ERROR.AccountDoesNotExist);
   const { _id, name, avata, userName, ...data } = user;
+
+  const getSumLike = likeService.getSumLikeByUser(_id);
+  const getFollow = followService.getByUser(_id);
+  const [totalLike, follow] = await Promise.all([getSumLike, getFollow]);
+  const follower = follow ? follow.follower : 0;
+  const following = follow ? follow.following : 0;
+
   const token = endCodeToken({ _id, name, avata, userName });
-  return { ...user, token };
+  return { ...user, token, totalLike, follower, following };
 };
 
 const register = async (data) => {

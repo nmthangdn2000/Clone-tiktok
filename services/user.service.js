@@ -1,6 +1,8 @@
 import { ERROR, LIMIT, PAGE, RESPONSE } from '../common/constants';
 import UserModel from '../models/user.model';
 import { deleteFile, pagination } from './base.service';
+import * as likeService from './like.service';
+import * as followService from './follow.service';
 
 const filter = async (q = '', page = PAGE, limit = LIMIT, sort) => {
   const query = q
@@ -27,9 +29,14 @@ const filter = async (q = '', page = PAGE, limit = LIMIT, sort) => {
 };
 
 const getById = async (id) => {
-  const user = await UserModel.findById(id);
+  const getUser = UserModel.findById(id).lean();
+  const getSumLike = likeService.getSumLikeByUser(id);
+  const getFollow = followService.getByUser(id);
+  const [user, totalLike, follow] = await Promise.all([getUser, getSumLike, getFollow]);
   if (!user) throw new Error(ERROR.CanNotGetUser);
-  return user;
+  const follower = follow ? follow.follower : 0;
+  const following = follow ? follow.following : 0;
+  return { ...user, totalLike, follower, following };
 };
 
 const deleteById = async (id) => {
