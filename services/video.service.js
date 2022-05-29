@@ -36,6 +36,16 @@ const getAll = async ({ q = '', page = PAGE, limit = LIMIT, sort }) => {
   };
 };
 
+const getByUser = async (user, { page = PAGE, limit = LIMIT, sort }) => {
+  const videos = await VideoModel.find({ author: user })
+    // .populate('categories', 'name slug')
+    .populate('audio', 'name author background')
+    .skip(page * limit - limit)
+    .limit(Number(limit));
+  if (!videos) throw new Error(ERROR.CanNotGetVideo);
+  return videos;
+};
+
 const getById = async (id) => {
   const video = await VideoModel.findById(id).populate('categories', 'name slug');
   if (!video) throw new Error(ERROR.CanNotGetVideo);
@@ -110,4 +120,4 @@ const updateById = async (id, data, fileName) => {
   }
 };
 
-export { getAll, getById, create, deleteById, updateById };
+export { getAll, getByUser, getById, create, deleteById, updateById };
