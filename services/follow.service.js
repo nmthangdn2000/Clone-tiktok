@@ -43,49 +43,41 @@ const create = async (user) => {
   if (!follow) throw new Error(ERROR.CanNotCreateFollow);
 };
 
-const deleteFollower = async (user, id) => {
-  if (!id) throw new Error(ERROR.CanNotDeleteFollower);
+const unFollower = async (user, id) => {
+  if (!id) throw new Error(ERROR.CanNotUnfollower);
   const follow = await FollowModel.updateOne(
     { user },
     { $pull: { follower: id }, updatedAt: new Date() },
     { multi: true }
   );
-  if (!follow) throw new Error(ERROR.CanNotDeleteFollower);
+  if (!follow) throw new Error(ERROR.CanNotUnfollower);
 };
 
-const deleteFollowing = async (user, id) => {
-  if (!id) throw new Error(ERROR.CanNotDeleteFollowing);
+const unFollowing = async (user, id) => {
+  console.log(id);
+  if (!id) throw new Error(ERROR.CanNotUnfollowing);
   const follow = await FollowModel.updateOne(
     { user },
     { $pull: { following: id }, updatedAt: new Date() },
     { multi: true }
   );
-  if (!follow) throw new Error(ERROR.CanNotDeleteFollowing);
+  if (follow.modifiedCount < 1) throw new Error(ERROR.CanNotUnfollowing);
 
-  await deleteFollower(user, id);
+  await unFollower(id, user);
 };
 
-const updateFollower = async (user, id) => {
-  if (!id) throw new Error(ERROR.CanNotUpdateFollower);
-  const update = await FollowModel.updateOne({ user }, { $push: { follower: id }, updatedAt: new Date() });
-  if (update.modifiedCount < 1) throw new Error(ERROR.CanNotUpdateFollower);
+const follower = async (user, id) => {
+  if (!id) throw new Error(ERROR.CanNotFollower);
+  const update = await FollowModel.updateOne({ user }, { $addToSet: { follower: id }, updatedAt: new Date() });
+  if (update.modifiedCount < 1) throw new Error(ERROR.CanNotFollower);
 };
 
-const updateFollowing = async (user, id) => {
-  if (!id) throw new Error(ERROR.CanNotUpdateFollowing);
-  const update = await FollowModel.updateOne({ user }, { $push: { following: id }, updatedAt: new Date() });
-  if (update.modifiedCount < 1) throw new Error(ERROR.CanNotUpdateFollowing);
+const following = async (user, id) => {
+  if (!id) throw new Error(ERROR.CanNotFollowing);
+  const update = await FollowModel.updateOne({ user }, { $addToSet: { following: id }, updatedAt: new Date() });
+  if (update.modifiedCount < 1) throw new Error(ERROR.CanNotFollowing);
 
-  await updateFollower(user, id);
+  await follower(id, user);
 };
 
-export {
-  getFollower,
-  getFollowing,
-  getByUser,
-  create,
-  deleteFollower,
-  deleteFollowing,
-  updateFollower,
-  updateFollowing,
-};
+export { getFollower, getFollowing, getByUser, create, unFollower, unFollowing, follower, following };

@@ -31,9 +31,9 @@ const getFollowing = async (req, res) => {
   }
 };
 
-const deleteFollower = async (req, res) => {
+const unFollower = async (req, res) => {
   try {
-    await followService.deleteFollower(req.user._id, req.params.id);
+    await followService.unFollower(req.user._id, req.params.id);
     responseSuccess(res);
   } catch (error) {
     console.log(error);
@@ -41,9 +41,9 @@ const deleteFollower = async (req, res) => {
   }
 };
 
-const deleteFollowing = async (req, res) => {
+const unFollowing = async (req, res) => {
   try {
-    await followService.deleteFollowing(req.user._id, req.params.id);
+    await followService.unFollowing(req.user._id, req.params.id);
     responseSuccess(res);
   } catch (error) {
     console.log(error);
@@ -51,9 +51,9 @@ const deleteFollowing = async (req, res) => {
   }
 };
 
-const updateFollower = async (req, res) => {
+const follower = async (req, res) => {
   try {
-    await followService.updateFollower(req.user._id, req.params.id);
+    await followService.follower(req.user._id, req.params.id);
     responseSuccess(res);
   } catch (error) {
     console.log(error);
@@ -61,9 +61,9 @@ const updateFollower = async (req, res) => {
   }
 };
 
-const updateFollowing = async (req, res) => {
+const following = async (req, res) => {
   try {
-    await followService.updateFollowing(req.user._id, req.params.id);
+    await followService.following(req.user._id, req.params.id);
     responseSuccess(res);
   } catch (error) {
     console.log(error);
@@ -71,4 +71,4 @@ const updateFollowing = async (req, res) => {
   }
 };
 
-export { getByUser, getFollower, getFollowing, deleteFollower, deleteFollowing, updateFollower, updateFollowing };
+export { getByUser, getFollower, getFollowing, unFollower, unFollowing, follower, following };
