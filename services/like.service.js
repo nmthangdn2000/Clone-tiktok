@@ -7,9 +7,10 @@ import * as videoService from './video.service';
 const getByUser = async (user) => {
   const like = await LikeModel.find({ users: user })
     .populate('video', 'background like')
-    .select('-users -createdAt -updatedAt');
+    .select('-users -createdAt -updatedAt -_id');
   if (!like) throw new Error(ERROR.CanNotGetLikeVideo);
-  return like;
+
+  return like?.length > 0 ? like.map((item) => item.video) : [];
 };
 
 const create = async (video) => {
