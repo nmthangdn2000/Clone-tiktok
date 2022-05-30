@@ -7,6 +7,7 @@ const CLOSE_IMG = require('../assets/images/Close.png');
 const USER_IMG = require('../assets/images/user.png');
 const USER_FILLED_IMG = require('../assets/images/user-filled.png');
 const HEARTICON_LOCK_IMG = require('../assets/images/HeartIcon-lock.png');
+const FLIP_IMG = require('../assets/images/flip.png');
 
 const LOGO_IMG = require('../assets/images/TikTok-Logo.png');
 const Illustrations_BG_IMG = require('../assets/images/Illustrations.png');
@@ -59,4 +60,5 @@ export {
   NEW_VIDEO_DART_IMG,
   CLOSE_IMG,
   USER_FILLED_IMG,
+  FLIP_IMG,
 };

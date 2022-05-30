@@ -75,7 +75,7 @@ const CircularProgress = ({
     stopRecording();
   };
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (isRecord) {
       progress.value = withTiming(
         1,
@@ -95,7 +95,7 @@ const CircularProgress = ({
 
       borderRadiusButtonRecord.value = 10;
       widthButtonRecord.value = widthButton - 80;
-      startRecording();
+      await startRecording();
     } else {
       cancelAnimation(progress);
       borderRadiusButtonRecord.value = 50;

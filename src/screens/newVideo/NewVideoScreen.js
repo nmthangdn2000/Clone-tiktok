@@ -25,7 +25,13 @@ const NewVideoScreen = () => {
         </View>
         <Upload />
       </View>
-      <Video source={{ uri: pathVideo }} style={styles.backgroundVideo} />
+      {pathVideo && (
+        <Video
+          source={{ uri: pathVideo }}
+          style={styles.backgroundVideo}
+          controls={true}
+        />
+      )}
     </View>
   );
 };
