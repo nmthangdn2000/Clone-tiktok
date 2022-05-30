@@ -89,7 +89,7 @@ const create = async (data, user, fileName) => {
   const video = await newVideo.save();
   if (!video) throw new Error(ERROR.CanNotCreateVideo);
 
-  likeService.create(video._id, user._id);
+  likeService.create(video._id, user._id).catch((err) => console.log(err));
 };
 
 const deleteById = async (id) => {
@@ -104,7 +104,7 @@ const deleteById = async (id) => {
   deleteFile(video.url);
   deleteFile(video.background);
 
-  likeService.deleteByVideo(video._id);
+  likeService.deleteByVideo(video._id).catch((err) => console.log(err));
 };
 
 const updateById = async (id, data, fileName) => {
