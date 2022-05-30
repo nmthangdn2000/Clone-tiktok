@@ -5,7 +5,9 @@ import VideoModel from '../models/video.model';
 import * as videoService from './video.service';
 
 const getByUser = async (user) => {
-  const like = await LikeModel.find({ users: user }).populate('users', 'name userName avatar');
+  const like = await LikeModel.find({ users: user })
+    .populate('video', 'background like')
+    .select('-users -createdAt -updatedAt');
   if (!like) throw new Error(ERROR.CanNotGetLikeVideo);
   return like;
 };
