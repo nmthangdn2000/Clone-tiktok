@@ -1,8 +1,11 @@
+const HOME_IMG = require('../assets/images/home.png');
+const HOME_FILLED_IMG = require('../assets/images/home-filled.png');
+const SELECTED_IMG = require('../assets/images/Selected.png');
+
 const LOGO_IMG = require('../assets/images/TikTok-Logo.png');
 const DISC_IMG = require('../assets/images/disc.png');
 const FLOATING_MUSIC_NOTE_IMG = require('../assets/images/floating-music-note.png');
 const HEART_IMG = require('../assets/images/heart.png');
-const HOME_IMG = require('../assets/images/home.png');
 const MESSAGE_CIRCLE_IMG = require('../assets/images/message-circle.png');
 const MESSAGE_IMG = require('../assets/images/message.png');
 const MUSIC_NOTE_IMG = require('../assets/images/music-note.png');
@@ -16,9 +19,8 @@ const Effects_Illustration_IMG = require('../assets/images/Effects-Illustration.
 const AVATA_IMG = require('../assets/images/avata.jpg');
 const Illustration_IMG = require('../assets/images/Illustration.png');
 const Bookmark_IMG = require('../assets/images/Bookmark.png');
-const LISTICON_IMG = require('../assets/images/ListIcon.png');
 const PLAY_ARROW_IMG = require('../assets/images/play_arrow.png');
-const HEARTICON_IMG = require('../assets/images/HeartIcon.png');
+const HEARTICON_LOCK_IMG = require('../assets/images/HeartIcon-lock.png');
 const ARROW_BACK_IMG = require('../assets/images/arrow_back.png');
 const ADD_ACCOUNT_ICON_IMG = require('../assets/images/AddAccountIcon.png');
 const MORE_VERT_IMG = require('../assets/images/more_vert.png');
@@ -29,6 +31,7 @@ export {
   FLOATING_MUSIC_NOTE_IMG,
   HEART_IMG,
   HOME_IMG,
+  HOME_FILLED_IMG,
   MESSAGE_CIRCLE_IMG,
   MESSAGE_IMG,
   MUSIC_NOTE_IMG,
@@ -41,8 +44,8 @@ export {
   AVATA_IMG,
   Illustration_IMG,
   Bookmark_IMG,
-  LISTICON_IMG,
-  HEARTICON_IMG,
+  SELECTED_IMG,
+  HEARTICON_LOCK_IMG,
   PLAY_ARROW_IMG,
   ARROW_BACK_IMG,
   ADD_ACCOUNT_ICON_IMG,
