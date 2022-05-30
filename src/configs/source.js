@@ -9,6 +9,7 @@ const USER_FILLED_IMG = require('../assets/images/user-filled.png');
 const HEARTICON_LOCK_IMG = require('../assets/images/HeartIcon-lock.png');
 
 const LOGO_IMG = require('../assets/images/TikTok-Logo.png');
+const Illustrations_BG_IMG = require('../assets/images/Illustrations.png');
 const DISC_IMG = require('../assets/images/disc.png');
 const FLOATING_MUSIC_NOTE_IMG = require('../assets/images/floating-music-note.png');
 const HEART_IMG = require('../assets/images/heart.png');
@@ -47,6 +48,7 @@ export {
   Effects_Illustration_IMG,
   AVATA_IMG,
   Illustration_IMG,
+  Illustrations_BG_IMG,
   Bookmark_IMG,
   SELECTED_IMG,
   HEARTICON_LOCK_IMG,

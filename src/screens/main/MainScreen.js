@@ -29,6 +29,7 @@ import {
   USER_FILLED_IMG,
   MESSAGE_FILLED_IMG,
 } from '../../configs/source';
+import BoxCreateVideo from './components/BoxCreateVideo';
 
 const Bottom = createBottomTabNavigator();
 
@@ -43,11 +44,11 @@ const MainScreen = ({ navigation }) => {
         animated={true}
         backgroundColor={theme === 'dart' ? 'black' : 'white'}
       />
-
       <Bottom.Navigator
         screenOptions={{
           tabBarStyle: {
             backgroundColor: theme === 'dart' ? COLOR.BLACK : COLOR.WHITE,
+            zIndex: 100,
           },
           headerShown: false,
           tabBarActiveTintColor: theme === 'dart' ? COLOR.WHITE : COLOR.BLACK,
@@ -167,6 +168,7 @@ const MainScreen = ({ navigation }) => {
           }}
         />
       </Bottom.Navigator>
+      <BoxCreateVideo />
     </>
   );
 };
