@@ -29,10 +29,10 @@ const ProfileScreen = ({ setTheme }) => {
   return (
     <SafeAreaView style={styles.container}>
       <Tabs.Container renderHeader={User}>
-        <Tabs.Tab name="ListIcon_IMG">
+        <Tabs.Tab name="SELECTED_IMG">
           <ListVideo dataList={data} />
         </Tabs.Tab>
-        <Tabs.Tab name="HeartIcon_IMG">
+        <Tabs.Tab name="HEARTICON_LOCK_IMG">
           <ListVideo dataList={data} />
         </Tabs.Tab>
       </Tabs.Container>

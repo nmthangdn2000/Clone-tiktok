@@ -1,4 +1,11 @@
-import { Image, StyleSheet, Pressable, StatusBar } from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Pressable,
+  StatusBar,
+  View,
+  Text,
+} from 'react-native';
 import React, { useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { COLOR } from '../../configs/styles';
@@ -16,9 +23,11 @@ import {
   NEW_VIDEO_DART_IMG,
   SEARCH_IMG,
   USER_IMG,
-  ARROW_BACK_IMG,
   ADD_ACCOUNT_ICON_IMG,
   MORE_VERT_IMG,
+  HOME_FILLED_IMG,
+  USER_FILLED_IMG,
+  MESSAGE_FILLED_IMG,
 } from '../../configs/source';
 
 const Bottom = createBottomTabNavigator();
@@ -34,6 +43,7 @@ const MainScreen = ({ navigation }) => {
         animated={true}
         backgroundColor={theme === 'dart' ? 'black' : 'white'}
       />
+
       <Bottom.Navigator
         screenOptions={{
           tabBarStyle: {
@@ -47,10 +57,10 @@ const MainScreen = ({ navigation }) => {
           name="Trang chủ"
           component={HomeScreen}
           options={{
-            tabBarIcon: ({ color }) => {
+            tabBarIcon: ({ color, focused }) => {
               return (
                 <Image
-                  source={HOME_IMG}
+                  source={focused ? HOME_FILLED_IMG : HOME_IMG}
                   tintColor={color}
                   style={styles.bottomTabIcon}
                 />
@@ -67,7 +77,7 @@ const MainScreen = ({ navigation }) => {
           name="Tìm kiếm"
           component={DiscoverScreen}
           options={{
-            tabBarIcon: ({ color }) => {
+            tabBarIcon: ({ color, focused }) => {
               return (
                 <Image
                   source={SEARCH_IMG}
@@ -108,10 +118,10 @@ const MainScreen = ({ navigation }) => {
           name="Hộp thư"
           component={InboxScreen}
           options={{
-            tabBarIcon: ({ color }) => {
+            tabBarIcon: ({ color, focused }) => {
               return (
                 <Image
-                  source={MESSAGE_IMG}
+                  source={focused ? MESSAGE_FILLED_IMG : MESSAGE_IMG}
                   tintColor={color}
                   style={styles.bottomTabIcon}
                 />
@@ -140,10 +150,10 @@ const MainScreen = ({ navigation }) => {
                 <Image source={MORE_VERT_IMG} />
               </Pressable>
             ),
-            tabBarIcon: ({ color }) => {
+            tabBarIcon: ({ color, focused }) => {
               return (
                 <Image
-                  source={USER_IMG}
+                  source={focused ? USER_FILLED_IMG : USER_IMG}
                   tintColor={color}
                   style={styles.bottomTabIcon}
                 />
@@ -165,8 +175,8 @@ export default MainScreen;
 
 const styles = StyleSheet.create({
   bottomTabIcon: {
-    width: 20,
-    height: 20,
+    width: 28,
+    height: 28,
   },
   newVideoTabIcon: {
     width: 48,
