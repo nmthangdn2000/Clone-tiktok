@@ -18,7 +18,12 @@ const STROKE_COLOR = COLOR.DANGER;
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
-const CircularProgress = ({ widthButton = 120, second = 3000 }) => {
+const CircularProgress = ({
+  widthButton = 120,
+  second = 3000,
+  camera,
+  setPathVideo,
+}) => {
   const SIZE_MORE = 15;
   // circle radius
   const R = widthButton / 2 - SIZE_MORE;
@@ -53,7 +58,22 @@ const CircularProgress = ({ widthButton = 120, second = 3000 }) => {
     };
   });
 
-  const updateState = () => setIsRecord(true);
+  const startRecording = async () => {
+    const { uri, codec = 'mp4' } = await camera.current.recordAsync();
+    if (uri) {
+      console.log(uri);
+      setPathVideo(uri);
+    }
+  };
+
+  const stopRecording = () => {
+    camera.current.stopRecording();
+  };
+
+  const updateState = () => {
+    setIsRecord(true);
+    stopRecording();
+  };
 
   const handleClick = () => {
     if (isRecord) {
@@ -75,10 +95,12 @@ const CircularProgress = ({ widthButton = 120, second = 3000 }) => {
 
       borderRadiusButtonRecord.value = 10;
       widthButtonRecord.value = widthButton - 80;
+      startRecording();
     } else {
       cancelAnimation(progress);
       borderRadiusButtonRecord.value = 50;
       widthButtonRecord.value = widthButton - 40;
+      stopRecording();
     }
     setIsRecord(!isRecord);
   };
@@ -102,6 +124,7 @@ const CircularProgress = ({ widthButton = 120, second = 3000 }) => {
       justifyContent: 'center',
     },
   });
+
   return (
     <View style={styles.container}>
       <Svg style={{ transform: [{ rotate: '-90deg' }] }}>

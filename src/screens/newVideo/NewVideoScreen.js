@@ -1,75 +1,31 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import React from 'react';
-import { RNCamera } from 'react-native-camera';
+import React, { useRef, useState } from 'react';
+
 import CircularProgress from './components/CircularProgress';
 import Effect from './components/Effect';
 import Upload from './components/Upload';
 import { SPACING } from '../../configs/styles';
+import Camera from './components/Camera';
+import Video from 'react-native-video';
 
 const NewVideoScreen = () => {
-  const PendingView = () => (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: 'lightgreen',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
-      <Text>Waiting</Text>
-    </View>
-  );
-  const takePicture = async camera => {
-    const options = { quality: 0.5, base64: true };
-    const data = await camera.takePictureAsync(options);
-    //  eslint-disable-next-line
-    console.log(data.uri);
-  };
+  const camera = useRef(null);
+  const video = useRef(null);
+
+  const [pathVideo, setPathVideo] = useState(null);
+
   return (
     <View style={styles.container}>
-      {/* <RNCamera
-        style={styles.preview}
-        type={RNCamera.Constants.Type.back}
-        flashMode={RNCamera.Constants.FlashMode.off}
-        androidCameraPermissionOptions={{
-          title: 'Permission to use camera',
-          message: 'We need your permission to use your camera',
-          buttonPositive: 'Ok',
-          buttonNegative: 'Cancel',
-        }}
-        androidRecordAudioPermissionOptions={{
-          title: 'Permission to use audio recording',
-          message: 'We need your permission to use your audio',
-          buttonPositive: 'Ok',
-          buttonNegative: 'Cancel',
-        }}>
-        {({ camera, status, recordAudioPermissionStatus }) => {
-          if (status !== 'READY') {
-            return <PendingView />;
-          }
-          return (
-            <View
-              style={{
-                flex: 0,
-                flexDirection: 'row',
-                justifyContent: 'center',
-              }}>
-              <TouchableOpacity
-                onPress={() => takePicture(camera)}
-                style={styles.capture}>
-                <Text style={{ fontSize: 14 }}> SNAP </Text>
-              </TouchableOpacity>
-            </View>
-          );
-        }}
-      </RNCamera> */}
+      <Camera camera={camera} />
       <View style={styles.containerBottom}>
         <Effect />
         <View style={styles.containerButtonRecord}>
           <Text style={{ color: 'white' }}>âccac</Text>
-          <CircularProgress />
+          <CircularProgress camera={camera} setPathVideo={setPathVideo} />
         </View>
         <Upload />
       </View>
+      <Video source={{ uri: pathVideo }} style={styles.backgroundVideo} />
     </View>
   );
 };
@@ -108,5 +64,12 @@ const styles = StyleSheet.create({
   },
   containerButtonRecord: {
     alignItems: 'center',
+  },
+  backgroundVideo: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
 });
