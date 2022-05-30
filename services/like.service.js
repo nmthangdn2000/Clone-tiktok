@@ -61,7 +61,7 @@ const getSumLikeByUser = async (user) => {
     { $group: { _id: null, sum: { $sum: '$like' } } },
   ]);
   if (!sumLike) throw new Error(ERROR.CanNotGetSumLike);
-  return sumLike[0].sum;
+  return sumLike[0]?.sum;
 };
 
 export { getSumLikeByUser, getByUser, dislike, like, create, deleteByVideo };
