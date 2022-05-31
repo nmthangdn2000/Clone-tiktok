@@ -4,7 +4,7 @@ import { ERROR } from '../common/constants';
 
 const getByUser = async (req, res) => {
   try {
-    const data = await likeService.getByUser(req.user._id, req.query);
+    const data = await likeService.getByUser(req.params.id);
     responseSuccessWithData(res, data);
   } catch (error) {
     console.log(error);
