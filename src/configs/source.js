@@ -7,7 +7,11 @@ const CLOSE_IMG = require('../assets/images/Close.png');
 const USER_IMG = require('../assets/images/user.png');
 const USER_FILLED_IMG = require('../assets/images/user-filled.png');
 const HEARTICON_LOCK_IMG = require('../assets/images/HeartIcon-lock.png');
+const FLASH_OFF_IMG = require('../assets/images/flash_off.png');
+const FLASH_ON_IMG = require('../assets/images/flash_on.png');
 const FLIP_IMG = require('../assets/images/flip.png');
+const SPEED_IMG = require('../assets/images/speed.png');
+const TIMESTAMP_IMG = require('../assets/images/timestamp.png');
 
 const LOGO_IMG = require('../assets/images/TikTok-Logo.png');
 const Illustrations_BG_IMG = require('../assets/images/Illustrations.png');
@@ -61,4 +65,8 @@ export {
   CLOSE_IMG,
   USER_FILLED_IMG,
   FLIP_IMG,
+  FLASH_OFF_IMG,
+  FLASH_ON_IMG,
+  SPEED_IMG,
+  TIMESTAMP_IMG,
 };

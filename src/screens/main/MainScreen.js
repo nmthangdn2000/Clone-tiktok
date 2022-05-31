@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import React, { useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { COLOR } from '../../configs/styles';
+import { COLOR, TEXT } from '../../configs/styles';
 
 import HomeScreen from '../home/HomeScreen';
 import DiscoverScreen from '../discover/DiscoverScreen';
@@ -49,6 +49,11 @@ const MainScreen = ({ navigation }) => {
           tabBarStyle: {
             backgroundColor: theme === 'dart' ? COLOR.BLACK : COLOR.WHITE,
             zIndex: 100,
+          },
+          tabBarLabelStyle: {
+            marginTop: -10,
+            ...TEXT.SMALL_STRONG,
+            fontSize: 10,
           },
           headerShown: false,
           tabBarActiveTintColor: theme === 'dart' ? COLOR.WHITE : COLOR.BLACK,

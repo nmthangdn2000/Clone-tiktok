@@ -7,8 +7,9 @@ import Upload from './components/Upload';
 import { SPACING } from '../../configs/styles';
 import Camera from './components/Camera';
 import Video from 'react-native-video';
+import CloseButton from './components/CloseButton';
 
-const NewVideoScreen = () => {
+const NewVideoScreen = ({ navigation }) => {
   const camera = useRef(null);
   const video = useRef(null);
 
@@ -16,7 +17,8 @@ const NewVideoScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Camera camera={camera} />
+      <Camera camera={camera} navigation={navigation} />
+      <CloseButton navigation={navigation} />
       <View style={styles.containerBottom}>
         <Effect />
         <View style={styles.containerButtonRecord}>
@@ -65,7 +67,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     position: 'absolute',
-    backgroundColor: 'black',
     padding: SPACING.S6,
   },
   containerButtonRecord: {

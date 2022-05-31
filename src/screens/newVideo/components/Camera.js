@@ -1,24 +1,53 @@
 import { StyleSheet, View, Text, Image, Pressable } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { RNCamera } from 'react-native-camera';
-import { FLIP_IMG } from '../../../configs/source';
+import {
+  FLIP_IMG,
+  SPEED_IMG,
+  FLASH_OFF_IMG,
+  TIMESTAMP_IMG,
+} from '../../../configs/source';
 import { TEXT, COLOR, SHADOW, SPACING } from '../../../configs/styles';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
 
 const Camera = ({ camera }) => {
+  const [typeCamera, setTypeCamera] = useState(true);
+
   const options = [
+    { icon: SPEED_IMG, name: 'Tốc độ', onclick: () => console.log('a') },
     { icon: FLIP_IMG, name: 'Lật', onclick: () => console.log('a') },
-    { icon: FLIP_IMG, name: 'Lật', onclick: () => console.log('a') },
-    { icon: FLIP_IMG, name: 'Lật', onclick: () => console.log('a') },
-    { icon: FLIP_IMG, name: 'Lật', onclick: () => console.log('a') },
-    { icon: FLIP_IMG, name: 'Lật', onclick: () => console.log('a') },
+    { icon: TIMESTAMP_IMG, name: 'Hẹn giờ', onclick: () => console.log('a') },
+    { icon: FLASH_OFF_IMG, name: 'Flash', onclick: () => console.log('a') },
   ];
+
+  const rotateFlip = useSharedValue(0);
+
+  const flipStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ rotate: `${rotateFlip.value}deg` }],
+    };
+  }, []);
+
+  const handleClickFlip = () => {
+    rotateFlip.value =
+      rotateFlip.value === 360 ? withSpring(0) : withSpring(360);
+    setTypeCamera(!typeCamera);
+  };
 
   return (
     <>
-      {/* <RNCamera
+      <RNCamera
         ref={camera}
         style={styles.preview}
-        type={RNCamera.Constants.Type.back}
+        type={
+          typeCamera
+            ? RNCamera.Constants.Type.front
+            : RNCamera.Constants.Type.back
+        }
         flashMode={RNCamera.Constants.FlashMode.off}
         defaultVideoQuality={RNCamera.Constants.VideoQuality['480p']}
         androidCameraPermissionOptions={{
@@ -34,11 +63,18 @@ const Camera = ({ camera }) => {
           buttonNegative: 'Cancel',
         }}
         android
-      /> */}
+      />
       <View style={styles.containerOption}>
-        {options.map(option => {
+        <Pressable onPress={handleClickFlip} style={styles.itemOption}>
+          <Animated.Image source={FLIP_IMG} style={[styles.icon, flipStyle]} />
+          <Text style={styles.txtOption}>Lật</Text>
+        </Pressable>
+        {options.map((option, index) => {
           return (
-            <Pressable onPress={option.onclick} style={styles.itemOption}>
+            <Pressable
+              key={index}
+              onPress={option.onclick}
+              style={styles.itemOption}>
               <Image source={option.icon} style={styles.icon} />
               <Text style={styles.txtOption}>{option.name}</Text>
             </Pressable>
@@ -58,7 +94,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   containerOption: {
-    backgroundColor: 'red',
     position: 'absolute',
     right: 0,
     alignItems: 'center',
