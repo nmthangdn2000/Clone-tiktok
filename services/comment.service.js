@@ -8,7 +8,7 @@ import * as videoService from './video.service';
 // };
 
 const getByIdVideo = async (video) => {
-  const comment = await CommentModel.find({ video }).populate('user', 'firstName lastName avatar');
+  const comment = await CommentModel.find({ video }).populate('user', 'name userName avatar');
   if (!comment) throw new Error(ERROR.CanNotGetComment);
   return comment;
 };

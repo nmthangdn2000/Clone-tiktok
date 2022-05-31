@@ -20,15 +20,13 @@ const getByUser = async (user) => {
 };
 
 const getFollower = async (user, { q = '' }) => {
-  const follower = FollowModel.findOne({ user }).populate('follower', 'firstName lastName avatar').select('follower');
+  const follower = FollowModel.findOne({ user }).populate('follower', 'name userName avatar').select('follower');
   if (!follower) throw new Error(ERROR.CanNotGetFollower);
   return follower;
 };
 
 const getFollowing = async (user, { q = '' }) => {
-  const following = FollowModel.findOne({ user })
-    .populate('following', 'firstName lastName avatar')
-    .select('following');
+  const following = FollowModel.findOne({ user }).populate('following', 'name userName avatar').select('following');
   if (!following) throw new Error(ERROR.CanNotGetFollowing);
   return following;
 };
