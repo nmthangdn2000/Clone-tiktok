@@ -48,7 +48,7 @@ const getByUser = async (user, { page = PAGE, limit = LIMIT, sort }) => {
 };
 
 const getById = async (id) => {
-  const video = await VideoModel.findById(id).populate('categories', 'name slug');
+  const video = await VideoModel.findById(id).populate('audio', 'name author background');
   if (!video) throw new Error(ERROR.CanNotGetVideo);
   return video;
 };
