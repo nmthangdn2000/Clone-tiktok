@@ -14,14 +14,22 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 
-const Camera = ({ camera }) => {
+const Camera = ({ camera, isRecord }) => {
   const [typeCamera, setTypeCamera] = useState(true);
+  const [flash, setFlash] = useState(false);
 
   const options = [
     { icon: SPEED_IMG, name: 'Tốc độ', onclick: () => console.log('a') },
     { icon: FLIP_IMG, name: 'Lật', onclick: () => console.log('a') },
     { icon: TIMESTAMP_IMG, name: 'Hẹn giờ', onclick: () => console.log('a') },
-    { icon: FLASH_OFF_IMG, name: 'Flash', onclick: () => console.log('a') },
+    {
+      icon: FLASH_OFF_IMG,
+      name: 'Flash',
+      onclick: () => {
+        console.log('Flash');
+        setFlash(!flash);
+      },
+    },
   ];
 
   const rotateFlip = useSharedValue(0);
@@ -48,7 +56,11 @@ const Camera = ({ camera }) => {
             ? RNCamera.Constants.Type.front
             : RNCamera.Constants.Type.back
         }
-        flashMode={RNCamera.Constants.FlashMode.off}
+        flashMode={
+          flash
+            ? RNCamera.Constants.FlashMode.on
+            : RNCamera.Constants.FlashMode.off
+        }
         defaultVideoQuality={RNCamera.Constants.VideoQuality['480p']}
         androidCameraPermissionOptions={{
           title: 'Permission to use camera',
@@ -64,23 +76,28 @@ const Camera = ({ camera }) => {
         }}
         android
       />
-      <View style={styles.containerOption}>
-        <Pressable onPress={handleClickFlip} style={styles.itemOption}>
-          <Animated.Image source={FLIP_IMG} style={[styles.icon, flipStyle]} />
-          <Text style={styles.txtOption}>Lật</Text>
-        </Pressable>
-        {options.map((option, index) => {
-          return (
-            <Pressable
-              key={index}
-              onPress={option.onclick}
-              style={styles.itemOption}>
-              <Image source={option.icon} style={styles.icon} />
-              <Text style={styles.txtOption}>{option.name}</Text>
-            </Pressable>
-          );
-        })}
-      </View>
+      {isRecord && (
+        <View style={styles.containerOption}>
+          <Pressable onPress={handleClickFlip} style={styles.itemOption}>
+            <Animated.Image
+              source={FLIP_IMG}
+              style={[styles.icon, flipStyle]}
+            />
+            <Text style={styles.txtOption}>Lật</Text>
+          </Pressable>
+          {options.map((option, index) => {
+            return (
+              <Pressable
+                key={index}
+                onPress={option.onclick}
+                style={styles.itemOption}>
+                <Image source={option.icon} style={styles.icon} />
+                <Text style={styles.txtOption}>{option.name}</Text>
+              </Pressable>
+            );
+          })}
+        </View>
+      )}
     </>
   );
 };
@@ -108,7 +125,6 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     tintColor: COLOR.WHITE,
-    ...SHADOW.REGULAR,
   },
   txtOption: {
     ...TEXT.SMALL_STRONG,

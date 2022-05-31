@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SplashScreen from './src/screens/splash/SplashScreen';
 import MainScreen from './src/screens/main/MainScreen';
 import NewVideoScreen from './src/screens/newVideo/NewVideoScreen';
+import PreviewVideoScreen from './src/screens/newVideo/PreviewVideoScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +25,11 @@ const App = () => {
         <Stack.Screen
           name="NewVideo"
           component={NewVideoScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="PreviewVideoScreen"
+          component={PreviewVideoScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

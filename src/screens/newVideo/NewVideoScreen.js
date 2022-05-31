@@ -13,27 +13,38 @@ const NewVideoScreen = ({ navigation }) => {
   const camera = useRef(null);
   const video = useRef(null);
 
-  const [pathVideo, setPathVideo] = useState(null);
+  const [isRecord, setIsRecord] = useState(true);
+
+  const startRecording = async () => {
+    const { uri, codec = 'mp4' } = await camera.current.recordAsync();
+    if (uri) {
+      navigation.navigate('PreviewVideoScreen', {
+        pathVideo: uri,
+      });
+    }
+  };
+
+  const stopRecording = () => {
+    camera.current.stopRecording();
+  };
 
   return (
     <View style={styles.container}>
-      <Camera camera={camera} navigation={navigation} />
-      <CloseButton navigation={navigation} />
+      <Camera camera={camera} navigation={navigation} isRecord={isRecord} />
+      {isRecord && <CloseButton navigation={navigation} />}
       <View style={styles.containerBottom}>
-        <Effect />
+        {isRecord && <Effect />}
         <View style={styles.containerButtonRecord}>
-          <Text style={{ color: 'white' }}>âccac</Text>
-          <CircularProgress camera={camera} setPathVideo={setPathVideo} />
+          {isRecord && <Text style={{ color: 'white' }}>âccac</Text>}
+          <CircularProgress
+            startRecording={startRecording}
+            stopRecording={stopRecording}
+            isRecord={isRecord}
+            setIsRecord={setIsRecord}
+          />
         </View>
-        <Upload />
+        {isRecord && <Upload />}
       </View>
-      {pathVideo && (
-        <Video
-          source={{ uri: pathVideo }}
-          style={styles.backgroundVideo}
-          controls={true}
-        />
-      )}
     </View>
   );
 };

@@ -26,7 +26,7 @@ const BoxCreateVideo = () => {
   useEffect(() => {
     const a = setTimeout(() => {
       translateY.value = withSpring(0);
-    }, 15000);
+    }, 5000);
 
     return () => {
       clearTimeout(a);

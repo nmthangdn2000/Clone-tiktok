@@ -20,17 +20,17 @@ const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 const CircularProgress = ({
   widthButton = 120,
-  second = 3000,
-  camera,
-  setPathVideo,
+  second = 10000,
+  startRecording,
+  stopRecording,
+  isRecord,
+  setIsRecord,
 }) => {
   const SIZE_MORE = 15;
   // circle radius
   const R = widthButton / 2 - SIZE_MORE;
 
   const CIRCLE_LENGTH = 2 * Math.PI * R;
-
-  const [isRecord, setIsRecord] = useState(true);
 
   const progress = useSharedValue(0);
   const borderRadiusButtonRecord = useSharedValue(50);
@@ -58,18 +58,6 @@ const CircularProgress = ({
     };
   });
 
-  const startRecording = async () => {
-    const { uri, codec = 'mp4' } = await camera.current.recordAsync();
-    if (uri) {
-      console.log(uri);
-      setPathVideo(uri);
-    }
-  };
-
-  const stopRecording = () => {
-    camera.current.stopRecording();
-  };
-
   const updateState = () => {
     setIsRecord(true);
     stopRecording();
@@ -77,32 +65,36 @@ const CircularProgress = ({
 
   const handleClick = async () => {
     if (isRecord) {
-      progress.value = withTiming(
-        1,
-        {
-          duration: (1 - progress.value) * second,
-          easing: Easing.linear,
-        },
-        isFinished => {
-          if (isFinished) {
-            runOnJS(updateState)();
-            progress.value = 0;
-            borderRadiusButtonRecord.value = 50;
-            widthButtonRecord.value = widthButton - 40;
-          }
-        },
-      );
+      // took a while before recording
+      setTimeout(() => {
+        progress.value = withTiming(
+          1,
+          {
+            duration: (1 - progress.value) * second,
+            easing: Easing.linear,
+          },
+          isFinished => {
+            if (isFinished) {
+              runOnJS(updateState)();
+              progress.value = 0;
+              borderRadiusButtonRecord.value = 50;
+              widthButtonRecord.value = widthButton - 40;
+            }
+          },
+        );
 
-      borderRadiusButtonRecord.value = 10;
-      widthButtonRecord.value = widthButton - 80;
+        borderRadiusButtonRecord.value = 10;
+        widthButtonRecord.value = widthButton - 80;
+      }, 1500);
+      setIsRecord(!isRecord);
       await startRecording();
     } else {
+      setIsRecord(!isRecord);
       cancelAnimation(progress);
       borderRadiusButtonRecord.value = 50;
       widthButtonRecord.value = widthButton - 40;
       stopRecording();
     }
-    setIsRecord(!isRecord);
   };
 
   const styles = StyleSheet.create({

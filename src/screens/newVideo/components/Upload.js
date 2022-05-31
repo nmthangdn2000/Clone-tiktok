@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
+    width: 80,
   },
   icon: {
     borderRadius: BORDER.SMALL,

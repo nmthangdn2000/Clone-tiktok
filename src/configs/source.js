@@ -12,6 +12,7 @@ const FLASH_ON_IMG = require('../assets/images/flash_on.png');
 const FLIP_IMG = require('../assets/images/flip.png');
 const SPEED_IMG = require('../assets/images/speed.png');
 const TIMESTAMP_IMG = require('../assets/images/timestamp.png');
+const MUSIC_ICON_IMG = require('../assets/images/Music-icon.png');
 
 const LOGO_IMG = require('../assets/images/TikTok-Logo.png');
 const Illustrations_BG_IMG = require('../assets/images/Illustrations.png');
@@ -69,4 +70,5 @@ export {
   FLASH_ON_IMG,
   SPEED_IMG,
   TIMESTAMP_IMG,
+  MUSIC_ICON_IMG,
 };

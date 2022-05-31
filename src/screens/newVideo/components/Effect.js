@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     // borderWidth: 2,
     justifyContent: 'center',
     alignItems: 'center',
+    width: 80,
   },
   icon: {
     width: 41,
