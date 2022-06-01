@@ -5,8 +5,8 @@ import { uploadDiskStorage } from '../middlewares/upload.middleware';
 
 const initRoute = () => {
   route({ method: HttpMethod.GET, url: '/all', action: productController.getAll, middelware: [] });
-  route({ method: HttpMethod.GET, url: '', action: productController.getByUser });
-  route({ method: HttpMethod.GET, url: '/:id', action: productController.getById, middelware: [] });
+  route({ method: HttpMethod.GET, url: '/list/user/:id', action: productController.getByUser, middelware: [] });
+  route({ method: HttpMethod.GET, url: '/detail/:id', action: productController.getById, middelware: [] });
   route({
     method: HttpMethod.POST,
     url: '',
