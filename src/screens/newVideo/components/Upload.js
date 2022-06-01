@@ -1,14 +1,22 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, Pressable, Image } from 'react-native';
 import React from 'react';
 import { BORDER, COLOR, TEXT } from '../../../configs/styles/index';
 import { Illustration_IMG } from '../../../configs/source';
+import { launchImageLibrary } from 'react-native-image-picker';
 
 const Upload = () => {
+  const handleClick = async () => {
+    const options = { mediaType: 'video' };
+
+    const result = await launchImageLibrary(options);
+    console.log(result);
+  };
+
   return (
-    <View style={styles.container}>
+    <Pressable onPress={handleClick} style={styles.container}>
       <Image source={Illustration_IMG} style={styles.icon} />
       <Text style={styles.text}>Tải lên</Text>
-    </View>
+    </Pressable>
   );
 };
 

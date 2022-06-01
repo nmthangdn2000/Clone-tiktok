@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import React, { useRef, useState } from 'react';
 
 import CircularProgress from './components/CircularProgress';
@@ -6,12 +6,10 @@ import Effect from './components/Effect';
 import Upload from './components/Upload';
 import { SPACING } from '../../configs/styles';
 import Camera from './components/Camera';
-import Video from 'react-native-video';
 import CloseButton from './components/CloseButton';
 
 const NewVideoScreen = ({ navigation }) => {
   const camera = useRef(null);
-  const video = useRef(null);
 
   const [isRecord, setIsRecord] = useState(true);
 
