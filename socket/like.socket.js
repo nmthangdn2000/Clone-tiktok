@@ -12,7 +12,7 @@ export default (io, socket) => {
 
   const test = (idVideo, cb) => {
     setTimeout(() => {
-      cb({ message: 'có cái quần', idVideo, user });
+      cb({ message: 'test', idVideo, user });
     }, 10000);
   };
 
