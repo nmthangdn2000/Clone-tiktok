@@ -2,10 +2,18 @@ import mongoose from 'mongoose';
 import { ERROR } from '../common/constants';
 import LikeModel from '../models/like.model';
 import VideoModel from '../models/video.model';
+import UserModel from '../models/user.model';
 import * as videoService from './video.service';
 
-const getByUser = async (user) => {
-  const like = await LikeModel.find({ users: user })
+const getByUser = async ({ user, id }) => {
+  if (!user) {
+    const privacy = await UserModel.findById(id).select('privacy');
+    console.log(privacy);
+    if (privacy.privacy.like) throw new Error(ERROR.VideoPrivate);
+  }
+  const query = { users: user ? user : id };
+  console.log(query);
+  const like = await LikeModel.find(query)
     .populate('video', 'background like')
     .select('-users -createdAt -updatedAt -_id');
   if (!like) throw new Error(ERROR.CanNotGetLikeVideo);

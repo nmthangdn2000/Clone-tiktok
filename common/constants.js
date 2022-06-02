@@ -48,6 +48,7 @@ const ERROR = {
   CanNotUpdateVideo: 134,
   UrlVideoIsRequired: 135,
   VideoIsRequired: 136,
+  VideoPrivate: 137,
   // Categories 141
   NameCategorieIsRequired: 141,
   SlugCategorieIsRequired: 142,

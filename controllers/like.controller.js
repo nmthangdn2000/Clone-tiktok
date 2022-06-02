@@ -4,7 +4,19 @@ import { ERROR } from '../common/constants';
 
 const getByUser = async (req, res) => {
   try {
-    const data = await likeService.getByUser(req.params.id);
+    console.log('getByUser');
+    const data = await likeService.getByUser({ user: req.user._id });
+    responseSuccessWithData(res, data);
+  } catch (error) {
+    console.log(error);
+    responseError(res, error.message);
+  }
+};
+
+const getByIdUser = async (req, res) => {
+  try {
+    console.log('getByIdUser');
+    const data = await likeService.getByUser({ id: req.params.id });
     responseSuccessWithData(res, data);
   } catch (error) {
     console.log(error);
@@ -55,4 +67,4 @@ const getSumLikeByUser = async (req, res) => {
   }
 };
 
-export { getSumLikeByUser, getByUser, like };
+export { getSumLikeByUser, getByUser, getByIdUser, like };
