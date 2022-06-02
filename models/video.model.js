@@ -41,6 +41,10 @@ const model = {
     default: 0,
   },
   hashtag: [String],
+  privacy: {
+    type: Boolean,
+    default: false,
+  },
 };
 
 export default BaseModel.createModel({ name, model });

@@ -14,7 +14,17 @@ const getAll = async (req, res) => {
 
 const getByUser = async (req, res) => {
   try {
-    const data = await videoService.getByUser(req.params.id, req.query);
+    const data = await videoService.getByUser({ user: req.user._id, q: req.query });
+    responseSuccessWithData(res, data);
+  } catch (error) {
+    console.log(error);
+    responseError(res, error.message);
+  }
+};
+
+const getByIdUser = async (req, res) => {
+  try {
+    const data = await videoService.getByUser({ id: req.params.id, q: req.query });
     responseSuccessWithData(res, data);
   } catch (error) {
     console.log(error);
@@ -64,4 +74,4 @@ const updateById = async (req, res) => {
   }
 };
 
-export { getByUser, getAll, getById, create, deleteById, updateById };
+export { getByUser, getByIdUser, getAll, getById, create, deleteById, updateById };

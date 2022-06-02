@@ -10,16 +10,19 @@ const getAll = async ({ q = '', page = PAGE, limit = LIMIT, sort }) => {
         $or: [
           {
             caption: { $regex: new RegExp(q), $options: 'si' },
+            privacy: false,
           },
           {
             captionSlug: { $regex: new RegExp(q), $options: 'si' },
+            privacy: false,
           },
           {
             hashtag: { $regex: new RegExp(q), $options: 'si' },
+            privacy: false,
           },
         ],
       }
-    : {};
+    : { privacy: false };
 
   const count = VideoModel.find(query).countDocuments();
   // chưa làm sort
@@ -36,10 +39,15 @@ const getAll = async ({ q = '', page = PAGE, limit = LIMIT, sort }) => {
     totalPage: pagination(total, limit),
   };
 };
-
-const getByUser = async (user, { page = PAGE, limit = LIMIT, sort }) => {
-  const count = VideoModel.find({ author: user }).countDocuments();
-  const getVideos = VideoModel.find({ author: user })
+//pri is private
+const getByUser = async ({ id, q: { page = PAGE, limit = LIMIT, sort, privacy = false }, user }) => {
+  const query = { author: id };
+  if (user) {
+    query.privacy = privacy;
+    query.author = user;
+  } else query.privacy = false;
+  const count = VideoModel.find(query).countDocuments();
+  const getVideos = VideoModel.find(query)
     // .populate('categories', 'name slug')
     .populate('audio', 'name author background')
     .skip(page * limit - limit)

@@ -46,6 +46,9 @@ const model = {
     type: Number,
     default: 0,
   },
+  privacy: {
+    like: { type: Boolean, default: true },
+  },
 };
 
 const index = { name: 'text', userName: 'text' };
