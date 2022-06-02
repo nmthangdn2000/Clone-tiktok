@@ -1,5 +1,6 @@
 import { ERROR, LIMIT, PAGE, RESPONSE } from '../common/constants';
 import UserModel from '../models/user.model';
+import VideoModel from '../models/video.model';
 import { deleteFile, pagination } from './base.service';
 import * as likeService from './like.service';
 import * as followService from './follow.service';
@@ -32,11 +33,12 @@ const getById = async (id) => {
   const getUser = UserModel.findById(id).lean();
   const getSumLike = likeService.getSumLikeByUser(id);
   const getFollow = followService.getByUser(id);
-  const [user, totalLike, follow] = await Promise.all([getUser, getSumLike, getFollow]);
+  const getTotalVideo = VideoModel.find({ author: id }).countDocuments();
+  const [user, totalLike, follow, totalVideo] = await Promise.all([getUser, getSumLike, getFollow, getTotalVideo]);
   if (!user) throw new Error(ERROR.CanNotGetUser);
   const follower = follow ? follow.follower : 0;
   const following = follow ? follow.following : 0;
-  return { ...user, totalLike, follower, following };
+  return { ...user, totalLike, follower, following, totalVideo };
 };
 
 const deleteById = async (id) => {
@@ -54,5 +56,7 @@ const updateById = async (id, data, avatar) => {
 
   deleteFile(user.avatar);
 };
+
+const getInforUser = async () => {};
 
 export { filter, getById, deleteById, updateById };

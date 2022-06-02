@@ -38,13 +38,19 @@ const getAll = async ({ q = '', page = PAGE, limit = LIMIT, sort }) => {
 };
 
 const getByUser = async (user, { page = PAGE, limit = LIMIT, sort }) => {
-  const videos = await VideoModel.find({ author: user })
+  const count = VideoModel.find({ author: user }).countDocuments();
+  const getVideos = VideoModel.find({ author: user })
     // .populate('categories', 'name slug')
     .populate('audio', 'name author background')
     .skip(page * limit - limit)
     .limit(Number(limit));
+  const [total, videos] = await Promise.all([count, getVideos]);
   if (!videos) throw new Error(ERROR.CanNotGetVideo);
-  return videos;
+  return {
+    data: videos,
+    currentPage: Number(page),
+    totalPage: pagination(total, limit),
+  };
 };
 
 const getById = async (id) => {
