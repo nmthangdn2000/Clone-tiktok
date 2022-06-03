@@ -66,7 +66,7 @@ const deleteById = async (req, res) => {
 
 const updateById = async (req, res) => {
   try {
-    await videoService.updateById(req.params.id, req.body, req.file.filename);
+    await videoService.updateById(req.params.id, req.body, req.file?.filename);
     responseSuccess(res);
   } catch (error) {
     console.log(error);

@@ -1,6 +1,5 @@
 import { Server } from 'socket.io';
 import { verifyUserSocket } from '../middlewares/authentic.middleware';
-import likeSocket from './like.socket';
 
 let io = null;
 let socket = null;

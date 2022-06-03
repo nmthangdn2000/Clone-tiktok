@@ -42,10 +42,12 @@ const getAll = async ({ q = '', page = PAGE, limit = LIMIT, sort }) => {
 //pri is private
 const getByUser = async ({ id, q: { page = PAGE, limit = LIMIT, sort, privacy = false }, user }) => {
   const query = { author: id };
+  // user in token
   if (user) {
     query.privacy = privacy;
     query.author = user;
   } else query.privacy = false;
+
   const count = VideoModel.find(query).countDocuments();
   const getVideos = VideoModel.find(query)
     // .populate('categories', 'name slug')
