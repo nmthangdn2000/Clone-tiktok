@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tabs } from 'react-native-collapsible-tab-view';
-import ItemVideo from '../../components/ItemVideo';
+import ItemVideo from '../../components/item/ItemVideo';
 
 const NUM_COLUMS = 3;
 

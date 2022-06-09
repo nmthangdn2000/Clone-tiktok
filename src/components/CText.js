@@ -8,15 +8,22 @@ const CText = ({
   color = COLOR.BLACK,
   text = TEXT.REGULAR,
   textAlign = 'left',
+  style = {},
+  numberOfLines = null,
 }) => {
   const fontSize = size ? { fontSize: size } : {};
   const textStyles = {
     color,
     textAlign,
     ...text,
-    fontSize: fontSize,
+    ...fontSize,
+    ...style,
   };
-  return <Text style={[textStyles, fontSize]}>{children}</Text>;
+  return (
+    <Text style={[textStyles, fontSize]} numberOfLines={numberOfLines}>
+      {children}
+    </Text>
+  );
 };
 
 export default CText;

@@ -7,8 +7,8 @@ import {
   Image,
 } from 'react-native';
 import React from 'react';
-import { LOGO_IMG, PLAY_ARROW_IMG } from '../configs/source';
-import { COLOR, TEXT } from '../configs/styles/index';
+import { LOGO_IMG, PLAY_ARROW_IMG } from '../../configs/source';
+import { COLOR, TEXT } from '../../configs/styles/index';
 
 const ItemVideo = ({ url, NUM_COLUMS }) => {
   const { width } = useWindowDimensions();

@@ -5,6 +5,9 @@ import CInput from '../../components/CInput';
 import { SEARCH_IMG } from '../../configs/source';
 import { COLOR, SPACING } from '../../configs/styles';
 import TopTab from './TopTab';
+import ItemSearchHistory from '../../components/item/ItemSearchHistory';
+import Title from './components/Title';
+import ItemSearchTrend from '../../components/item/ItemSearchTrend';
 
 const DiscoverScreen = () => {
   const [txtSearch, setTxtSearch] = useState('');
@@ -19,8 +22,21 @@ const DiscoverScreen = () => {
           onChangeText={text => setTxtSearch(text)}
         />
       </View>
-
-      <TopTab />
+      <ItemSearchHistory
+        text={'Thầy ông nội'}
+        onPress={() => console.log('aaa')}
+      />
+      <ItemSearchHistory
+        text={'Thầy ông nội'}
+        onPress={() => console.log('aaa')}
+      />
+      <Title lable={'Tìm kiếm được đề xuất'} />
+      <ItemSearchTrend
+        text={'Lịch thi đấu bóng đá U23 Việt Nam q wq eqwe qư e'}
+      />
+      <ItemSearchTrend text={'Lịch thi đấu bóng đá U23 Việt Nam'} />
+      <ItemSearchTrend text={'Lịch thi đấu bóng đá U23 Việt Nam'} />
+      {/* <TopTab /> */}
     </View>
   );
 };
