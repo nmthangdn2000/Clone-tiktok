@@ -12,6 +12,8 @@ import ItemUser from '../../components/item/ItemUser';
 import GridView from '../../components/GridView';
 
 import { AVATA_IMG, HEART_OUTLINE_IMG } from '../../configs/source';
+import ItemSearchAudio from '../../components/item/ItemSearchAudio';
+import IteamSearchHashTag from '../../components/item/IteamSearchHashTag';
 
 const DiscoverScreen = () => {
   const [txtSearch, setTxtSearch] = useState('');
@@ -65,13 +67,16 @@ const DiscoverScreen = () => {
       <ItemSearchTrend
         text={'Lịch thi đấu bóng đá U23 Việt Nam q wq eqwe qư e'}
       />
-      <ItemSearchTrend text={'Lịch thi đấu bóng đá U23 Việt Nam'} />
+      <ItemSearchAudio />
+      <ItemSearchAudio />
+      <IteamSearchHashTag />
+      {/* <ItemSearchTrend text={'Lịch thi đấu bóng đá U23 Việt Nam'} />
       <ItemSearchTrend text={'Lịch thi đấu bóng đá U23 Việt Nam'} />
 
       <ItemUser data={data} />
-      <ItemUser data={data} />
+      <ItemUser data={data} /> */}
 
-      <GridView dataList={dataList} />
+      {/* <GridView dataList={dataList} /> */}
       {/* <TopTab /> */}
     </View>
   );

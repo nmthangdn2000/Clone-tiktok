@@ -15,6 +15,7 @@ const TIMESTAMP_IMG = require('../assets/images/timestamp.png');
 const MUSIC_ICON_IMG = require('../assets/images/Music-icon.png');
 const TIME_IMG = require('../assets/images/time.png');
 const HEART_OUTLINE_IMG = require('../assets/images/Heart-outline.png');
+const PLAY_ICON_IMG = require('../assets/images/play-icon.png');
 
 const LOGO_IMG = require('../assets/images/TikTok-Logo.png');
 const Illustrations_BG_IMG = require('../assets/images/Illustrations.png');
@@ -75,4 +76,5 @@ export {
   MUSIC_ICON_IMG,
   TIME_IMG,
   HEART_OUTLINE_IMG,
+  PLAY_ICON_IMG,
 };
