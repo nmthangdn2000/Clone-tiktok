@@ -39,7 +39,7 @@ export default CInput;
 const styles = StyleSheet.create({
   container: {
     padding: SPACING.S1,
-    backgroundColor: COLOR.setOpacity(COLOR.BLACK, 0.1),
+    backgroundColor: COLOR.setOpacity(COLOR.GRAY, 0.15),
     alignItems: 'center',
     flexDirection: 'row',
     borderRadius: BORDER.SMALL,

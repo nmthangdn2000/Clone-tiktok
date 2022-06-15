@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import CInput from '../../components/CInput';
@@ -14,6 +14,7 @@ import GridView from '../../components/GridView';
 import { AVATA_IMG, HEART_OUTLINE_IMG } from '../../configs/source';
 import ItemSearchAudio from '../../components/item/ItemSearchAudio';
 import IteamSearchHashTag from '../../components/item/IteamSearchHashTag';
+import DefaultSearch from './components/DefaultSearch';
 
 const DiscoverScreen = () => {
   const [txtSearch, setTxtSearch] = useState('');
@@ -47,6 +48,11 @@ const DiscoverScreen = () => {
   ];
   return (
     <View style={styles.container}>
+      <StatusBar
+        barStyle={'dark-content'}
+        animated={true}
+        backgroundColor="white"
+      />
       <View style={styles.searchBar}>
         <CInput
           iconLeft={SEARCH_IMG}
@@ -55,21 +61,10 @@ const DiscoverScreen = () => {
           onChangeText={text => setTxtSearch(text)}
         />
       </View>
-      <ItemSearchHistory
-        text={'Thầy ông nội'}
-        onPress={() => console.log('aaa')}
-      />
-      <ItemSearchHistory
-        text={'Thầy ông nội'}
-        onPress={() => console.log('aaa')}
-      />
-      <Title lable={'Tìm kiếm được đề xuất'} />
-      <ItemSearchTrend
-        text={'Lịch thi đấu bóng đá U23 Việt Nam q wq eqwe qư e'}
-      />
+      <DefaultSearch />
+      {/* <ItemSearchAudio />
       <ItemSearchAudio />
-      <ItemSearchAudio />
-      <IteamSearchHashTag />
+      <IteamSearchHashTag /> */}
       {/* <ItemSearchTrend text={'Lịch thi đấu bóng đá U23 Việt Nam'} />
       <ItemSearchTrend text={'Lịch thi đấu bóng đá U23 Việt Nam'} />
 
@@ -88,9 +83,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLOR.WHITE,
-    // paddingHorizontal: SPACING.S4,
   },
   searchBar: {
     paddingVertical: SPACING.S4,
+    paddingHorizontal: SPACING.S4,
   },
 });

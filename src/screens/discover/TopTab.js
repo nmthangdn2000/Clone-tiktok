@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { COLOR, TEXT } from '../../configs/styles';
+import { COLOR, SPACING, TEXT } from '../../configs/styles';
 import Top from './tab/Top';
 import Hashtag from './tab/Hashtag';
 import Audio from './tab/Audio';
@@ -19,7 +19,7 @@ const TopTab = ({ txtSearch }) => {
           padding: 0,
           marginTop: -14,
           ...TEXT.REGULAR,
-          fontSize: 12,
+          // fontSize: 12,
         },
         tabBarItemStyle: {
           maxHeight: 30,
@@ -30,7 +30,6 @@ const TopTab = ({ txtSearch }) => {
         tabBarScrollEnabled: true,
         tabBarStyle: {
           elevation: 0,
-          //   backgroundColor: 'blue',
         },
         tabBarIndicatorStyle: {
           backgroundColor: COLOR.BLACK,
@@ -38,7 +37,13 @@ const TopTab = ({ txtSearch }) => {
         tabBarBounces: true,
         tabBarPressColor: COLOR.TRANSPARENT,
       }}>
-      <Tab.Screen name="Top" component={Top} />
+      <Tab.Screen
+        name="Top"
+        component={Top}
+        options={{
+          tabBarLabel: 'Top',
+        }}
+      />
       <Tab.Screen
         name="User"
         component={User}
@@ -61,6 +66,7 @@ const TopTab = ({ txtSearch }) => {
         }}
       />
       <Tab.Screen name="Hashtag" component={Hashtag} />
+      <Tab.Screen name="LIVE" component={Hashtag} />
     </Tab.Navigator>
   );
 };

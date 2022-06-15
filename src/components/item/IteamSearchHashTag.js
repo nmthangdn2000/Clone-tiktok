@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import CText from '../CText';
 import { BORDER, COLOR, SPACING, TEXT } from '../../configs/styles';
@@ -12,7 +12,11 @@ const IteamSearchHashTag = () => {
         </CText>
       </View>
       <View style={styles.content}>
-        <CText text={TEXT.REGULAR} color={COLOR.GRAY} numberOfLines={1}>
+        <CText
+          text={TEXT.REGULAR}
+          size={16}
+          color={COLOR.BLACK}
+          numberOfLines={1}>
           thangdeptrai thangdeptrai
         </CText>
         <CText text={TEXT.REGULAR} color={COLOR.GRAY}>
@@ -37,11 +41,12 @@ const styles = StyleSheet.create({
     height: 30,
     borderRadius: BORDER.PILL,
     borderWidth: 2,
-    borderColor: COLOR.BLACK,
+    borderColor: COLOR.LIGHT_GRAY,
     justifyContent: 'center',
     alignItems: 'center',
   },
   content: {
+    marginLeft: SPACING.S2,
     flexGrow: 1,
     flex: 1,
     flexDirection: 'row',

@@ -1,7 +1,7 @@
 import { StyleSheet, Pressable, View, Dimensions } from 'react-native';
 import React from 'react';
 
-import { CLOSE_IMG } from '../../configs/source';
+import { CLOSE_IMG, FIRE_IMG } from '../../configs/source';
 import Icon from '../Icon';
 import CText from '../CText';
 import { BORDER, COLOR, SPACING, TEXT } from '../../configs/styles';
@@ -23,7 +23,7 @@ const ItemSearchTrend = ({ text, onPress, dotColor = COLOR.GRAY }) => {
         size={16}>
         {text}
       </CText>
-      <Icon source={CLOSE_IMG} color={COLOR.GRAY} height={22} width={22} />
+      <Icon source={FIRE_IMG} color={COLOR.DANGER2} height={16} width={16} />
     </Pressable>
   );
 };
