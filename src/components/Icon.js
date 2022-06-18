@@ -1,4 +1,4 @@
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, Pressable } from 'react-native';
 import React from 'react';
 import { COLOR } from '../configs/styles';
 
@@ -8,6 +8,7 @@ const Icon = ({
   width = 24,
   color = COLOR.WHITE,
   style,
+  onPress,
 }) => {
   const styles = StyleSheet.create({
     icon: {
@@ -18,7 +19,11 @@ const Icon = ({
     },
   });
 
-  return <Image source={source} style={styles.icon} />;
+  return (
+    <Pressable onPress={onPress}>
+      <Image source={source} style={styles.icon} />
+    </Pressable>
+  );
 };
 
 export default Icon;

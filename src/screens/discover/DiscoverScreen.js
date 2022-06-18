@@ -16,8 +16,13 @@ import ItemSearchAudio from '../../components/item/ItemSearchAudio';
 import IteamSearchHashTag from '../../components/item/IteamSearchHashTag';
 import DefaultSearch from './components/DefaultSearch';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { setTxtSearch } from '../../store/searchSlice';
+
 const DiscoverScreen = () => {
-  const [txtSearch, setTxtSearch] = useState('');
+  const dispatch = useDispatch();
+  const txtSearch = useSelector(state => state.txtSearch);
+
   const data = {
     avatar: '',
     name: 'Thang321',
@@ -58,7 +63,7 @@ const DiscoverScreen = () => {
           iconLeft={SEARCH_IMG}
           placeholder={'Tìm kiếm'}
           value={txtSearch}
-          onChangeText={text => setTxtSearch(text)}
+          onChangeText={text => dispatch(setTxtSearch(text))}
         />
       </View>
       <DefaultSearch />

@@ -6,7 +6,12 @@ import Icon from '../Icon';
 import CText from '../CText';
 import { BORDER, COLOR, SPACING, TEXT } from '../../configs/styles';
 
+import { useDispatch } from 'react-redux';
+import { setTxtSearch } from '../../store/searchSlice';
+
 const ItemSearchSuggestions = ({ text, onPress }) => {
+  const dispatch = useDispatch();
+
   return (
     <Pressable style={styles.container} onPress={onPress}>
       <Icon
@@ -29,6 +34,7 @@ const ItemSearchSuggestions = ({ text, onPress }) => {
         color={COLOR.setOpacity(COLOR.BLACK, 0.6)}
         height={22}
         width={22}
+        onPress={() => dispatch(setTxtSearch(text))}
       />
     </Pressable>
   );
