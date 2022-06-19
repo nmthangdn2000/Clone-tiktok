@@ -12,6 +12,6 @@ const searchSlice = createSlice({
   },
 });
 
-export default searchSlice;
+export default searchSlice.reducer;
 
 export const { setTxtSearch } = searchSlice.actions;

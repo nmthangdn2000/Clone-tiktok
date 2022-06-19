@@ -1,4 +1,4 @@
-import { StyleSheet, Image, Pressable } from 'react-native';
+import { StyleSheet, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { COLOR } from '../configs/styles';
 
@@ -20,9 +20,9 @@ const Icon = ({
   });
 
   return (
-    <Pressable onPress={onPress}>
+    <TouchableOpacity onPress={onPress} activeOpacity={0.5}>
       <Image source={source} style={styles.icon} />
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 

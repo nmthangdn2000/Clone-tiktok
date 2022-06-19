@@ -17,7 +17,7 @@ const DefaultSearch = () => {
         text={'Thầy ông nội'}
         onPress={() => console.log('aaa')}
       />
-      <ItemSearchSuggestions />
+
       <Title lable={'Tìm kiếm được đề xuất'} />
       <ItemSearchTrend
         text={'Lịch thi đấu bóng đá U23 Việt Nam q wq eqwe qư e'}

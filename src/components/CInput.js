@@ -8,6 +8,8 @@ const CInput = ({
   placeholder,
   onChangeText,
   iconLeft,
+  iconRight,
+  onPressIconRight,
   iconColor = COLOR.BLACK,
   sizeIcon = 24,
   keyboardType = 'default',
@@ -30,6 +32,15 @@ const CInput = ({
         value={value}
         keyboardType={keyboardType}
       />
+      {iconRight && (
+        <Icon
+          source={iconRight}
+          color={iconColor}
+          width={sizeIcon}
+          height={sizeIcon}
+          onPress={onPressIconRight}
+        />
+      )}
     </View>
   );
 };

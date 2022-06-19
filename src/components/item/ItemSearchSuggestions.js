@@ -1,7 +1,7 @@
-import { StyleSheet, Text, Pressable, Image } from 'react-native';
+import { StyleSheet, Pressable, Image } from 'react-native';
 import React from 'react';
 
-import { AVATA_IMG, CALL_RECEIVED_IMG, SEARCH_IMG } from '../../configs/source';
+import { CALL_RECEIVED_IMG, SEARCH_IMG } from '../../configs/source';
 import Icon from '../Icon';
 import CText from '../CText';
 import { BORDER, COLOR, SPACING, TEXT } from '../../configs/styles';
@@ -9,7 +9,8 @@ import { BORDER, COLOR, SPACING, TEXT } from '../../configs/styles';
 import { useDispatch } from 'react-redux';
 import { setTxtSearch } from '../../store/searchSlice';
 
-const ItemSearchSuggestions = ({ text, onPress }) => {
+const ItemSearchSuggestions = ({ item }) => {
+  const { text, onPress, avatar } = item.item;
   const dispatch = useDispatch();
 
   return (
@@ -28,7 +29,7 @@ const ItemSearchSuggestions = ({ text, onPress }) => {
         numberOfLines={1}>
         {text}
       </CText>
-      <Image source={AVATA_IMG} style={styles.avatar} />
+      <Image source={avatar} style={styles.avatar} />
       <Icon
         source={CALL_RECEIVED_IMG}
         color={COLOR.setOpacity(COLOR.BLACK, 0.6)}

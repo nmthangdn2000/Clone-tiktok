@@ -3,6 +3,6 @@ import searchSlice from './searchSlice';
 
 export const store = configureStore({
   reducer: {
-    search: searchSlice.reducer,
+    search: searchSlice,
   },
 });

@@ -10,6 +10,7 @@ const CText = ({
   textAlign = 'left',
   style = {},
   numberOfLines = null,
+  onPress,
 }) => {
   const fontSize = size ? { fontSize: size } : {};
   const textStyles = {
@@ -20,7 +21,10 @@ const CText = ({
     ...style,
   };
   return (
-    <Text style={[textStyles, fontSize]} numberOfLines={numberOfLines}>
+    <Text
+      style={[textStyles, fontSize]}
+      numberOfLines={numberOfLines}
+      onPress={onPress}>
       {children}
     </Text>
   );
