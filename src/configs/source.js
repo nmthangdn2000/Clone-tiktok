@@ -18,6 +18,10 @@ const HEART_OUTLINE_IMG = require('../assets/images/Heart-outline.png');
 const PLAY_ICON_IMG = require('../assets/images/play-icon.png');
 const FIRE_IMG = require('../assets/images/fire.png');
 const CALL_RECEIVED_IMG = require('../assets/images/call_received.png');
+const BOOKMARK_IMG = require('../assets/images/Bookmark.png');
+const VIDEOCAMR_IMG = require('../assets/images/videocam.png');
+const REPLY_FILLED_IMG = require('../assets/images/reply-filled.png');
+const REPLY_IMG = require('../assets/images/reply.png');
 
 const LOGO_IMG = require('../assets/images/TikTok-Logo.png');
 const Illustrations_BG_IMG = require('../assets/images/Illustrations.png');
@@ -29,12 +33,10 @@ const MUSIC_NOTE_IMG = require('../assets/images/music-note.png');
 const NEW_VIDEO_IMG = require('../assets/images/new-video.png');
 const NEW_VIDEO_DART_IMG = require('../assets/images/new-video-dart.png');
 const PLUS_BUTTON_IMG = require('../assets/images/plus-button.png');
-const REPLY_IMG = require('../assets/images/reply.png');
 const SEARCH_IMG = require('../assets/images/search.png');
 const Effects_Illustration_IMG = require('../assets/images/Effects-Illustration.png');
 const AVATA_IMG = require('../assets/images/avata.jpg');
 const Illustration_IMG = require('../assets/images/Illustration.png');
-const Bookmark_IMG = require('../assets/images/Bookmark.png');
 const PLAY_ARROW_IMG = require('../assets/images/play_arrow.png');
 const ARROW_BACK_IMG = require('../assets/images/arrow_back.png');
 const ADD_ACCOUNT_ICON_IMG = require('../assets/images/AddAccountIcon.png');
@@ -53,14 +55,14 @@ export {
   MUSIC_NOTE_IMG,
   NEW_VIDEO_IMG,
   PLUS_BUTTON_IMG,
-  REPLY_IMG,
+  REPLY_FILLED_IMG,
   SEARCH_IMG,
   USER_IMG,
   Effects_Illustration_IMG,
   AVATA_IMG,
   Illustration_IMG,
   Illustrations_BG_IMG,
-  Bookmark_IMG,
+  BOOKMARK_IMG,
   SELECTED_IMG,
   HEARTICON_LOCK_IMG,
   PLAY_ARROW_IMG,
@@ -81,4 +83,6 @@ export {
   PLAY_ICON_IMG,
   FIRE_IMG,
   CALL_RECEIVED_IMG,
+  VIDEOCAMR_IMG,
+  REPLY_IMG,
 };

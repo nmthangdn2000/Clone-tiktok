@@ -6,8 +6,8 @@ import { AVATA_IMG } from '../../configs/source';
 import { BORDER, COLOR, SPACING, TEXT } from '../../configs/styles';
 import CButton from '../CButton';
 
-const ItemUser = ({ data }) => {
-  const { avatar, name, userName, follow, numVideo } = data;
+const ItemUser = ({ item }) => {
+  const { avatar, name, userName, follow, numVideo } = item.item;
   return (
     <View style={styles.container}>
       <Image source={AVATA_IMG} style={styles.avatar} />
@@ -15,10 +15,10 @@ const ItemUser = ({ data }) => {
         <CText text={TEXT.STRONG} numberOfLines={1}>
           {name}
         </CText>
-        <CText text={TEXT.REGULAR} numberOfLines={1} color={COLOR.GRAY}>
+        <CText text={TEXT.SUBTITLE} numberOfLines={1} color={COLOR.GRAY}>
           {userName}
         </CText>
-        <CText text={TEXT.REGULAR} color={COLOR.GRAY}>
+        <CText text={TEXT.SUBTITLE} color={COLOR.GRAY}>
           {follow} follower - {numVideo} Video
         </CText>
       </View>
@@ -26,7 +26,7 @@ const ItemUser = ({ data }) => {
         <CButton
           lable={'Follow'}
           onPress={() => console.log('Follow')}
-          width={80}
+          width={100}
         />
       </View>
     </View>

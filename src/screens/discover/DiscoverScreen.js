@@ -23,7 +23,6 @@ import CText from '../../components/CText';
 
 import Animated, {
   Easing,
-  interpolate,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
@@ -39,66 +38,32 @@ const DiscoverScreen = () => {
 
   const searchInputStyle = useAnimatedStyle(() => {
     return {
-      marginRight: marginRight.value,
+      marginRight: withTiming(marginRight.value, {
+        duration: 300,
+        easing: Easing.linear,
+      }),
     };
   }, []);
 
   const buttonSearchStyle = useAnimatedStyle(() => {
     return {
-      opacity: opacity.value,
+      opacity: withTiming(opacity.value, {
+        duration: 500,
+        easing: Easing.linear,
+      }),
     };
   }, []);
 
   useEffect(() => {
     if (txtSearch?.length > 0) {
-      marginRight.value = withTiming(SPACING.S10 + SPACING.S4, {
-        duration: 300,
-        easing: Easing.linear,
-      });
-      opacity.value = withTiming(1, {
-        duration: 500,
-        easing: Easing.linear,
-      });
+      marginRight.value = SPACING.S10 + SPACING.S4;
+      opacity.value = 1;
     } else {
-      marginRight.value = withTiming(0, {
-        duration: 500,
-        easing: Easing.linear,
-      });
-      opacity.value = withTiming(0, {
-        duration: 300,
-        easing: Easing.linear,
-      });
+      marginRight.value = 0;
+      opacity.value = 0;
     }
   }, [txtSearch]);
 
-  const data = {
-    avatar: '',
-    name: 'Thang321',
-    userName: 'Thang321',
-    follow: '14.9k',
-    numVideo: 60,
-  };
-
-  const dataList = [
-    {
-      caption: 'Là ai đã từ bỏ?',
-      background: AVATA_IMG,
-      author: { avatar: AVATA_IMG, name: 'Thang321' },
-      like: 120,
-    },
-    {
-      caption: 'Là ai đã từ bỏ?',
-      background: AVATA_IMG,
-      author: { avatar: AVATA_IMG, name: 'Thang321 qwe qwe qwe ' },
-      like: 120,
-    },
-    {
-      caption: 'Là ai đã từ bỏ?',
-      background: AVATA_IMG,
-      author: { avatar: AVATA_IMG, name: 'Thang321' },
-      like: 120,
-    },
-  ];
   return (
     <View style={styles.container}>
       <StatusBar
@@ -127,13 +92,13 @@ const DiscoverScreen = () => {
         </Animated.View>
       </View>
 
-      {txtSearch?.length > 0 ? <SuggestionsSearch /> : <DefaultSearch />}
+      {/* {txtSearch?.length > 0 ? <SuggestionsSearch /> : <DefaultSearch />} */}
 
       {/* <ItemUser data={data} />
       <ItemUser data={data} />  */}
 
       {/* <GridView dataList={dataList} /> */}
-      {/* <TopTab /> */}
+      <TopTab />
     </View>
   );
 };

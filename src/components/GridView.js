@@ -2,7 +2,13 @@ import { FlatList } from 'react-native';
 import React from 'react';
 import ItemSearchVideo from './item/ItemSearchVideo';
 
-const GridView = ({ dataList, scrollHandle, NUM_COLUMS = 2 }) => {
+const GridView = ({
+  data,
+  scrollHandle,
+  NUM_COLUMS = 2,
+  renderItem,
+  ListHeaderComponent,
+}) => {
   const formatData = (dataL, numColumns) => {
     const totalRows = Math.floor(dataL.length / numColumns);
     let totalLastRow = dataL.length - totalRows * numColumns;
@@ -19,10 +25,9 @@ const GridView = ({ dataList, scrollHandle, NUM_COLUMS = 2 }) => {
       scrollEventThrottle={16}
       // onScroll={scrollHandle}
       // contentContainerStyle={[styles.flatListOption]}
-      data={formatData(dataList, NUM_COLUMS)}
-      renderItem={(item, index) => (
-        <ItemSearchVideo item={item} index={index} />
-      )}
+      ListHeaderComponent={ListHeaderComponent}
+      data={formatData(data, NUM_COLUMS)}
+      renderItem={renderItem}
       numColumns={NUM_COLUMS}
       keyExtractor={(item, index) => index.toString()}
       showsHorizontalScrollIndicator={false}

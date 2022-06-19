@@ -14,6 +14,7 @@ const CInput = ({
   sizeIcon = 24,
   keyboardType = 'default',
   style,
+  onFocus,
 }) => {
   return (
     <View style={[styles.container, style]}>
@@ -31,6 +32,7 @@ const CInput = ({
         onChangeText={onChangeText}
         value={value}
         keyboardType={keyboardType}
+        onFocus={onFocus}
       />
       {iconRight && (
         <Icon

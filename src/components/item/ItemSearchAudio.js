@@ -1,18 +1,30 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  Pressable,
+} from 'react-native';
 import React from 'react';
 
 import { AVATA_IMG, PLAY_ICON_IMG } from '../../configs/source';
 import CText from '../CText';
 import { BORDER, COLOR, SPACING, TEXT } from '../../configs/styles';
 import Icon from '../Icon';
+import { useNavigation } from '@react-navigation/native';
 
 const ItemSearchAudio = () => {
+  const navigation = useNavigation();
+
   const handleClick = () => {
     console.log('aaa');
   };
 
   return (
-    <View style={styles.container}>
+    <Pressable
+      onPress={() => navigation.navigate('AudioScreen')}
+      style={styles.container}>
       <TouchableOpacity
         onPress={handleClick}
         activeOpacity={0.6}
@@ -36,7 +48,7 @@ const ItemSearchAudio = () => {
           </CText>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

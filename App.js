@@ -7,6 +7,7 @@ import NewVideoScreen from './src/screens/newVideo/NewVideoScreen';
 import PreviewVideoScreen from './src/screens/newVideo/PreviewVideoScreen';
 import { store } from './src/store/store';
 import { Provider } from 'react-redux';
+import AudioScreen from './src/screens/audio/AudioScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +36,7 @@ const App = () => {
             component={PreviewVideoScreen}
             options={{ headerShown: false }}
           />
+          <Stack.Screen name="AudioScreen" component={AudioScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
