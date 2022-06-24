@@ -22,12 +22,14 @@ const BOOKMARK_IMG = require('../assets/images/Bookmark.png');
 const VIDEOCAMR_IMG = require('../assets/images/videocam.png');
 const REPLY_FILLED_IMG = require('../assets/images/reply-filled.png');
 const REPLY_IMG = require('../assets/images/reply.png');
+const COMMENT_ICON_IMG = require('../assets/images/Comment-icon.png');
+const HEART_IMG = require('../assets/images/heart.png');
+const BOOKMARK_FILLED_IMG = require('../assets/images/bookmark-filled.png');
 
 const LOGO_IMG = require('../assets/images/TikTok-Logo.png');
 const Illustrations_BG_IMG = require('../assets/images/Illustrations.png');
 const DISC_IMG = require('../assets/images/disc.png');
 const FLOATING_MUSIC_NOTE_IMG = require('../assets/images/floating-music-note.png');
-const HEART_IMG = require('../assets/images/heart.png');
 const MESSAGE_CIRCLE_IMG = require('../assets/images/message-circle.png');
 const MUSIC_NOTE_IMG = require('../assets/images/music-note.png');
 const NEW_VIDEO_IMG = require('../assets/images/new-video.png');
@@ -85,4 +87,6 @@ export {
   CALL_RECEIVED_IMG,
   VIDEOCAMR_IMG,
   REPLY_IMG,
+  COMMENT_ICON_IMG,
+  BOOKMARK_FILLED_IMG,
 };

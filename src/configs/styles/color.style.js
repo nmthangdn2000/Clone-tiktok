@@ -8,6 +8,7 @@ const COLOR = {
   LIGHTER_DANGER: '#FFE8E3',
   GRAY: '#818181',
   LIGHT_GRAY: '#dadada',
+  LIGHT_GRAY2: '#f7f7f7',
   TRANSPARENT: 'transparent',
 
   setOpacity: (hexColor, opacity) => {

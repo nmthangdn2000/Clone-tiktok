@@ -19,7 +19,7 @@ const ItemSearchHistory = ({ text, onPress }) => {
         style={styles.txt}
         text={TEXT.REGULAR}
         color={COLOR.setOpacity(COLOR.BLACK, 0.8)}
-        size={16}>
+        fontSize={16}>
         {text}
       </CText>
       <Icon

@@ -33,7 +33,7 @@ const ItemSearchAudio = () => {
         <Icon source={PLAY_ICON_IMG} />
       </TouchableOpacity>
       <View style={styles.infor}>
-        <CText text={TEXT.STRONG} size={16} numberOfLines={1}>
+        <CText text={TEXT.STRONG} fontSize={16} numberOfLines={1}>
           Chỉ yêu mình anh Chỉ yêu mình anh Chỉ yêu mình anh
         </CText>
         <CText text={TEXT.REGULAR} color={COLOR.GRAY} numberOfLines={1}>

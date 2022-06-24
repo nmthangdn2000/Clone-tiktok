@@ -18,13 +18,13 @@ const ListHeaderComponent = () => {
       </View>
       <View style={styles.content}>
         <View style={styles.inforAudio}>
-          <CText text={TEXT.STRONG} size={20} numberOfLines={1}>
+          <CText text={TEXT.STRONG} fontSize={20} numberOfLines={1}>
             Chờ yêu chill
           </CText>
           <CText
             text={TEXT.SUBTITLE}
             color={COLOR.GRAY}
-            size={13}
+            fontSize={13}
             numberOfLines={1}
             style={styles.txt}>
             Dế choắc - Tiên Tiên
@@ -32,7 +32,7 @@ const ListHeaderComponent = () => {
           <CText
             text={TEXT.SUBTITLE}
             color={COLOR.GRAY}
-            size={13}
+            fontSize={13}
             numberOfLines={1}>
             14 videos
           </CText>

@@ -35,7 +35,7 @@ const CButton = ({
       activeOpacity={activeOpacity}
       onPress={onPress}>
       {lable ? (
-        <CText text={TEXT.REGULAR} color={colorLabel} size={sizeLabel}>
+        <CText text={TEXT.REGULAR} color={colorLabel} fontSize={sizeLabel}>
           {lable}
         </CText>
       ) : (

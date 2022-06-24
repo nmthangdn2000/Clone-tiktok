@@ -1,5 +1,12 @@
 import React from 'react';
-import { FlexAlignType, ViewStyle } from 'react-native';
+import {
+  FlexAlignType,
+  ImageSourcePropType,
+  ImageStyle,
+  StyleProp,
+  TextStyle,
+  ViewStyle,
+} from 'react-native';
 
 type JustifyContentType =
   | 'flex-start'
@@ -32,3 +39,18 @@ export interface PaddingCustomType {
 export interface ContainerType extends ViewStyle {
   children?: React.ReactNode;
 }
+
+export interface IconCustomType extends ImageStyle {
+  children?: React.ReactNode;
+  source: ImageSourcePropType;
+  onPress?: any;
+  style?: StyleProp<ImageStyle>;
+}
+
+export interface TextCustomType extends TextStyle {
+  children?: React.ReactNode;
+  onPress?: any;
+  numberOfLines?: number | undefined;
+  text?: any;
+}
+//TextStyle

@@ -5,7 +5,7 @@ import { SPACING, TEXT } from '../../../configs/styles';
 
 const Title = ({ lable }) => {
   return (
-    <CText text={TEXT.STRONG} size={16} style={styles.txt}>
+    <CText text={TEXT.STRONG} fontSize={16} style={styles.txt}>
       {lable}
     </CText>
   );

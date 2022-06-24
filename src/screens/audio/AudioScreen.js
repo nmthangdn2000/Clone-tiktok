@@ -90,7 +90,7 @@ const AudioScreen = () => {
             <Icon source={VIDEOCAMR_IMG} width={'100%'} height={'100%'} />
           </View>
           <View style={[styles.txtButton]}>
-            <CText color={COLOR.WHITE} text={TEXT.STRONG} size={18}>
+            <CText color={COLOR.WHITE} text={TEXT.STRONG} fontSize={18}>
               Dùng âm thanh này
             </CText>
           </View>

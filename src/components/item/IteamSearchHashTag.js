@@ -7,14 +7,14 @@ const IteamSearchHashTag = () => {
   return (
     <View style={styles.container}>
       <View style={styles.iconHashTag}>
-        <CText text={TEXT.STRONG} size={16}>
+        <CText text={TEXT.STRONG} fontSize={16}>
           #
         </CText>
       </View>
       <View style={styles.content}>
         <CText
           text={TEXT.REGULAR}
-          size={16}
+          fontSize={16}
           color={COLOR.BLACK}
           numberOfLines={1}>
           thangdeptrai thangdeptrai

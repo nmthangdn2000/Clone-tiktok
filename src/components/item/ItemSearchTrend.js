@@ -20,7 +20,7 @@ const ItemSearchTrend = ({ text, onPress, dotColor = COLOR.GRAY }) => {
         text={TEXT.REGULAR}
         color={COLOR.setOpacity(COLOR.BLACK, 0.8)}
         numberOfLines={1}
-        size={16}>
+        fontSize={16}>
         {text}
       </CText>
       <Icon source={FIRE_IMG} color={COLOR.DANGER2} height={16} width={16} />
