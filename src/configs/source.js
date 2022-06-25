@@ -25,11 +25,13 @@ const REPLY_IMG = require('../assets/images/reply.png');
 const COMMENT_ICON_IMG = require('../assets/images/Comment-icon.png');
 const HEART_IMG = require('../assets/images/heart.png');
 const BOOKMARK_FILLED_IMG = require('../assets/images/bookmark-filled.png');
+const FLOATING_MUSIC_IMG = require('../assets/images/floating-music.png');
+const FLOATING_MUSIC_1_IMG = require('../assets/images/floating-music-1.png');
+const FLOATING_MUSIC_2_IMG = require('../assets/images/floating-music-2.png');
 
 const LOGO_IMG = require('../assets/images/TikTok-Logo.png');
 const Illustrations_BG_IMG = require('../assets/images/Illustrations.png');
 const DISC_IMG = require('../assets/images/disc.png');
-const FLOATING_MUSIC_NOTE_IMG = require('../assets/images/floating-music-note.png');
 const MESSAGE_CIRCLE_IMG = require('../assets/images/message-circle.png');
 const MUSIC_NOTE_IMG = require('../assets/images/music-note.png');
 const NEW_VIDEO_IMG = require('../assets/images/new-video.png');
@@ -47,7 +49,7 @@ const MORE_VERT_IMG = require('../assets/images/more_vert.png');
 export {
   LOGO_IMG,
   DISC_IMG,
-  FLOATING_MUSIC_NOTE_IMG,
+  FLOATING_MUSIC_IMG,
   HEART_IMG,
   HOME_IMG,
   HOME_FILLED_IMG,
@@ -89,4 +91,6 @@ export {
   REPLY_IMG,
   COMMENT_ICON_IMG,
   BOOKMARK_FILLED_IMG,
+  FLOATING_MUSIC_1_IMG,
+  FLOATING_MUSIC_2_IMG,
 };

@@ -55,7 +55,7 @@ const AudioScreen = () => {
         />
       ),
     });
-  }, [navigation]);
+  }, [navigation, scaleValue]);
 
   const data = [
     { key: '1' },

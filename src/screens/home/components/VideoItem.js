@@ -15,7 +15,8 @@ const VideoItem = ({ isActive }) => {
   return (
     <Container
       width={width}
-      height={HEIGHT - bottomHeight - StatusBar.currentHeight}>
+      height={HEIGHT - bottomHeight - StatusBar.currentHeight}
+      backgroundColor="black">
       <Video
         source={{
           uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
@@ -27,7 +28,7 @@ const VideoItem = ({ isActive }) => {
       />
 
       {/* container bottom */}
-      <BottomSecction />
+      <BottomSecction isActive={isActive} />
 
       {/* container vertical */}
       <VerticalSecction />

@@ -39,7 +39,9 @@ const HomeScreen = () => {
       <FlatList
         data={data}
         pagingEnabled
-        renderItem={Item}
+        renderItem={({ index }) => {
+          return <VideoItem isActive={activeVideoIndex === index} />;
+        }}
         keyExtractor={(item, index) => index.toString()}
         onScroll={e => {
           const index = Math.round(
