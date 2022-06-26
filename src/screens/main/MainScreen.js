@@ -44,6 +44,7 @@ const MainScreen = ({ navigation }) => {
         animated={true}
         backgroundColor={theme === 'dart' ? 'black' : 'white'}
       />
+
       <Bottom.Navigator
         screenOptions={{
           tabBarStyle: {

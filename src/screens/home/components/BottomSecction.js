@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Container, CText, Icon, Row } from '../../../components';
 import {
   DISC_IMG,
@@ -109,37 +109,41 @@ const BottomSecction = ({ isActive }) => {
     };
   }, []);
 
-  useEffect(() => {
-    if (isActive) {
-      discAnimatedValue.value = withRepeat(
-        withTiming(360, {
-          duration: 3000,
-          easing: Easing.linear,
-        }),
-        -1,
-        false,
-      );
+  const triggerAnimation = useCallback(() => {
+    discAnimatedValue.value = withRepeat(
+      withTiming(360, {
+        duration: 3000,
+        easing: Easing.linear,
+      }),
+      -1,
+      false,
+    );
 
-      musicNote1AnimatedValue.value = withRepeat(
+    musicNote1AnimatedValue.value = withRepeat(
+      withTiming(1, {
+        duration: 2000,
+        easing: Easing.linear,
+      }),
+      -1,
+      false,
+    );
+
+    musicNote2AnimatedValue.value = withDelay(
+      1000,
+      withRepeat(
         withTiming(1, {
           duration: 2000,
           easing: Easing.linear,
         }),
         -1,
         false,
-      );
+      ),
+    );
+  }, [discAnimatedValue, musicNote1AnimatedValue, musicNote2AnimatedValue]);
 
-      musicNote2AnimatedValue.value = withDelay(
-        1000,
-        withRepeat(
-          withTiming(1, {
-            duration: 2000,
-            easing: Easing.linear,
-          }),
-          -1,
-          false,
-        ),
-      );
+  useEffect(() => {
+    if (isActive) {
+      triggerAnimation();
     } else {
       cancelAnimation(discAnimatedValue);
       cancelAnimation(musicNote1AnimatedValue);
@@ -151,6 +155,7 @@ const BottomSecction = ({ isActive }) => {
     }
   }, [
     isActive,
+    triggerAnimation,
     discAnimatedValue,
     musicNote1AnimatedValue,
     musicNote2AnimatedValue,
@@ -188,8 +193,8 @@ const BottomSecction = ({ isActive }) => {
             style={[styles.floatingMusicNote, musicNote1AnimatedStyle]}>
             <Icon
               source={FLOATING_MUSIC_1_IMG}
-              width={30}
-              height={30}
+              width={40}
+              height={40}
               tintColor={COLOR.WHITE}
             />
           </Animated.View>

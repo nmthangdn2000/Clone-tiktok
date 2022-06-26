@@ -1,5 +1,5 @@
-import { FlatList, View, StatusBar } from 'react-native';
-import React, { useCallback, useState } from 'react';
+import { FlatList, View, StatusBar, Text } from 'react-native';
+import React, { useCallback, useRef, useState } from 'react';
 import VideoItem from './components/VideoItem';
 import { HEIGHT } from '../../configs/constant';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
@@ -34,6 +34,15 @@ const HomeScreen = () => {
     [activeVideoIndex],
   );
 
+  const onViewableItemsChanged = useRef(props => {
+    const changed = props.changed;
+    const cell = changed.find(c => c.isViewable === true);
+    setActiveVideoIndex(cell?.index);
+  }).current;
+
+  const viewabilityConfig = useRef({
+    itemVisiblePercentThreshold: 80,
+  }).current;
   return (
     <View>
       <FlatList
@@ -43,13 +52,15 @@ const HomeScreen = () => {
           return <VideoItem isActive={activeVideoIndex === index} />;
         }}
         keyExtractor={(item, index) => index.toString()}
-        onScroll={e => {
-          const index = Math.round(
-            e.nativeEvent.contentOffset.y /
-              (HEIGHT - bottomHeight - StatusBar.currentHeight),
-          );
-          setActiveVideoIndex(index);
-        }}
+        scrollEventThrottle={16}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+        initialNumToRender={3}
+        maxToRenderPerBatch={3}
+        removeClippedSubviews={true}
+        windowSize={5}
+        onViewableItemsChanged={onViewableItemsChanged}
+        viewabilityConfig={viewabilityConfig}
       />
     </View>
   );
