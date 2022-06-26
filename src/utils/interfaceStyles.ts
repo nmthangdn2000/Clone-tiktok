@@ -45,6 +45,7 @@ export interface IconCustomType extends ImageStyle {
   source: ImageSourcePropType;
   onPress?: any;
   style?: StyleProp<ImageStyle>;
+  activeOpacity?: number | undefined;
 }
 
 export interface TextCustomType extends TextStyle {

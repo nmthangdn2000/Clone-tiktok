@@ -1,12 +1,14 @@
-import { FlatList, View, StatusBar, Text } from 'react-native';
-import React, { useCallback, useRef, useState } from 'react';
+import { FlatList, View, StatusBar } from 'react-native';
+import React, { useRef } from 'react';
 import VideoItem from './components/VideoItem';
 import { HEIGHT } from '../../configs/constant';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 const HomeScreen = () => {
   const bottomHeight = useBottomTabBarHeight();
-  const [activeVideoIndex, setActiveVideoIndex] = useState(0);
+
+  const HEIGHT_ITEM = HEIGHT - bottomHeight - StatusBar.currentHeight;
+  const cellRefs = useRef({});
 
   const data = [
     { key: '1' },
@@ -27,29 +29,36 @@ const HomeScreen = () => {
     { key: '10' },
   ];
 
-  const Item = useCallback(
-    ({ index }) => {
-      return <VideoItem isActive={activeVideoIndex === index} />;
-    },
-    [activeVideoIndex],
-  );
-
   const onViewableItemsChanged = useRef(props => {
     const changed = props.changed;
-    const cell = changed.find(c => c.isViewable === true);
-    setActiveVideoIndex(cell?.index);
+    changed.forEach(item => {
+      const cell = cellRefs.current[item.key];
+      if (cell) {
+        if (item.isViewable) {
+          cell.playVideo();
+        } else {
+          cell.pauseVideo();
+        }
+      }
+    });
   }).current;
 
   const viewabilityConfig = useRef({
     itemVisiblePercentThreshold: 80,
   }).current;
+
   return (
     <View>
       <FlatList
         data={data}
         pagingEnabled
         renderItem={({ index }) => {
-          return <VideoItem isActive={activeVideoIndex === index} />;
+          return (
+            <VideoItem
+              ref={ref => (cellRefs.current[index] = ref)}
+              index={index}
+            />
+          );
         }}
         keyExtractor={(item, index) => index.toString()}
         scrollEventThrottle={16}
@@ -61,6 +70,11 @@ const HomeScreen = () => {
         windowSize={5}
         onViewableItemsChanged={onViewableItemsChanged}
         viewabilityConfig={viewabilityConfig}
+        getItemLayout={(_data, index) => ({
+          length: HEIGHT_ITEM,
+          offset: HEIGHT_ITEM * index,
+          index,
+        })}
       />
     </View>
   );
