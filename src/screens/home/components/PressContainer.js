@@ -12,7 +12,7 @@ import { TapGestureHandler } from 'react-native-gesture-handler';
 
 const PressContainer = ({ isActive, pauseVideo, playVideo }) => {
   const [showIcon, setShowIcon] = useState(false);
-  //   const doubleTapRef = useRef();
+  const doubleTapRef = useRef();
 
   const iconPlayVideoValue = useSharedValue(1);
   const iconPlayVideoStyle = useAnimatedStyle(() => {
@@ -29,15 +29,11 @@ const PressContainer = ({ isActive, pauseVideo, playVideo }) => {
     }
   }, [isActive, iconPlayVideoValue]);
 
-  const onSingleTap = () => {
-    console.log('onSingleTap');
-  };
-
   const onDoubleTap = () => {
     console.log('onDoubleTap');
   };
 
-  const handleClick = () => {
+  const onSingleTap = () => {
     if (isActive) {
       pauseVideo();
       setShowIcon(true);
@@ -50,27 +46,40 @@ const PressContainer = ({ isActive, pauseVideo, playVideo }) => {
   };
 
   return (
-    <Pressable onPress={handleClick}>
-      <Container height="100%" justifyContent="center" alignItems="center">
-        {showIcon && (
-          <Animated.View style={[styles.iconPlay, iconPlayVideoStyle]}>
-            <Icon
-              source={PLAY_ICON_IMG}
-              width={'100%'}
-              height={'100%'}
-              activeOpacity={0}
-              onPress={handleClick}
-            />
-          </Animated.View>
-        )}
-      </Container>
-    </Pressable>
+    <TapGestureHandler waitFor={doubleTapRef} onActivated={onSingleTap}>
+      <TapGestureHandler
+        maxDelayMs={250}
+        ref={doubleTapRef}
+        numberOfTaps={2}
+        onActivated={onDoubleTap}>
+        <View>
+          <Container height="100%" justifyContent="center" alignItems="center">
+            {showIcon && (
+              <Animated.View style={[styles.iconPlay, iconPlayVideoStyle]}>
+                <Icon
+                  source={PLAY_ICON_IMG}
+                  width={'100%'}
+                  height={'100%'}
+                  activeOpacity={0.5}
+                  onPress={null}
+                />
+              </Animated.View>
+            )}
+          </Container>
+        </View>
+      </TapGestureHandler>
+    </TapGestureHandler>
   );
 };
 
 export default PressContainer;
 
 const styles = StyleSheet.create({
+  container: {
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   iconPlay: {
     width: 120,
     height: 120,
