@@ -1,11 +1,4 @@
-import {
-  Image,
-  StyleSheet,
-  Pressable,
-  StatusBar,
-  View,
-  Text,
-} from 'react-native';
+import { Image, StyleSheet, Pressable, StatusBar } from 'react-native';
 import React, { useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { COLOR, TEXT } from '../../configs/styles';
@@ -31,12 +24,30 @@ import {
 } from '../../configs/source';
 import BoxCreateVideo from './components/BoxCreateVideo';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentBottomTab } from '../../store/indexSlice';
+
 const Bottom = createBottomTabNavigator();
 
 const MainScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const currentBottomTab = useSelector(state => state.index.currentBottomTab);
+
   const [theme, setTheme] = useState('dart');
 
   const handleButtonBack = () => navigation.goBack();
+
+  const handleTapPress = myTheme => {
+    if (theme !== myTheme) {
+      setTheme(myTheme);
+    }
+  };
+
+  const handleCurrentBottomTab = tabName => {
+    if (currentBottomTab !== tabName) {
+      dispatch(setCurrentBottomTab({ currentBottomTab: tabName }));
+    }
+  };
   return (
     <>
       <StatusBar
@@ -75,8 +86,12 @@ const MainScreen = ({ navigation }) => {
             },
           }}
           listeners={{
+            focus: () => {
+              handleTapPress('dart');
+            },
             tabPress: e => {
-              setTheme('dart');
+              handleTapPress('dart');
+              handleCurrentBottomTab('Trang chủ');
             },
           }}
         />
@@ -96,7 +111,8 @@ const MainScreen = ({ navigation }) => {
           }}
           listeners={{
             tabPress: e => {
-              setTheme('dart');
+              handleTapPress('light');
+              handleCurrentBottomTab();
             },
           }}
         />
@@ -118,6 +134,7 @@ const MainScreen = ({ navigation }) => {
             tabPress: e => {
               e.preventDefault();
               navigation.navigate('NewVideo');
+              handleCurrentBottomTab();
             },
           }}
         />
@@ -137,13 +154,15 @@ const MainScreen = ({ navigation }) => {
           }}
           listeners={{
             tabPress: e => {
-              setTheme('light');
+              handleTapPress('light');
+              handleCurrentBottomTab();
             },
           }}
         />
         <Bottom.Screen
           name="Hồ sơ"
           component={ProfileScreen}
+          initialParams={{ showHeader: false }}
           options={{
             headerShown: true,
             headerTitleAlign: 'center',
@@ -169,7 +188,8 @@ const MainScreen = ({ navigation }) => {
           }}
           listeners={{
             tabPress: e => {
-              setTheme('light');
+              handleTapPress('light');
+              handleCurrentBottomTab();
             },
           }}
         />

@@ -43,14 +43,14 @@ const AudioScreen = () => {
       headerLeft: () => (
         <Icon
           source={ARROW_BACK_IMG}
-          color={COLOR.BLACK}
+          tintColor={COLOR.BLACK}
           onPress={() => navigation.goBack()}
         />
       ),
       headerRight: () => (
         <Icon
           source={REPLY_IMG}
-          color={COLOR.BLACK}
+          tintColor={COLOR.BLACK}
           onPress={() => console.log('ádkjalskd')}
         />
       ),

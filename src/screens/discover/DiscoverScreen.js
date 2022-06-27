@@ -1,24 +1,12 @@
-import { StatusBar, StyleSheet, Text, View } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { StatusBar, StyleSheet, View } from 'react-native';
+import React, { useEffect } from 'react';
 import CInput from '../../components/CInput';
 import { CLOSE_IMG, SEARCH_IMG } from '../../configs/source';
 import { COLOR, SPACING, TEXT } from '../../configs/styles';
 import TopTab from './TopTab';
-import ItemSearchHistory from '../../components/item/ItemSearchHistory';
-import Title from './components/Title';
-import ItemSearchTrend from '../../components/item/ItemSearchTrend';
-import ItemUser from '../../components/item/ItemUser';
-import GridView from '../../components/GridView';
-
-import { AVATA_IMG, HEART_OUTLINE_IMG } from '../../configs/source';
-import ItemSearchAudio from '../../components/item/ItemSearchAudio';
-import IteamSearchHashTag from '../../components/item/IteamSearchHashTag';
-import DefaultSearch from './components/DefaultSearch';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { setTxtSearch } from '../../store/searchSlice';
-import SuggestionsSearch from './components/SuggestionsSearch';
 import CText from '../../components/CText';
 
 import Animated, {
@@ -62,15 +50,10 @@ const DiscoverScreen = () => {
       marginRight.value = 0;
       opacity.value = 0;
     }
-  }, [txtSearch]);
+  }, [txtSearch, marginRight, opacity]);
 
   return (
     <View style={styles.container}>
-      <StatusBar
-        barStyle={'dark-content'}
-        animated={true}
-        backgroundColor="white"
-      />
       <View style={styles.searchBar}>
         <Animated.View style={[styles.searchInput, searchInputStyle]}>
           <CInput
@@ -92,12 +75,6 @@ const DiscoverScreen = () => {
         </Animated.View>
       </View>
 
-      {/* {txtSearch?.length > 0 ? <SuggestionsSearch /> : <DefaultSearch />} */}
-
-      {/* <ItemUser data={data} />
-      <ItemUser data={data} />  */}
-
-      {/* <GridView dataList={dataList} /> */}
       <TopTab />
     </View>
   );

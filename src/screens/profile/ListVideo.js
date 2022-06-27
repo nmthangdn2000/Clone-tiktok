@@ -19,8 +19,6 @@ const ListVideo = ({ dataList, scrollHandle }) => {
   return (
     <Tabs.FlatList
       scrollEventThrottle={16}
-      // onScroll={scrollHandle}
-      // contentContainerStyle={[styles.flatListOption]}
       data={formatData(dataList, NUM_COLUMS)}
       renderItem={(item, index) => (
         <ItemVideo item={item} index={index} NUM_COLUMS={NUM_COLUMS} />

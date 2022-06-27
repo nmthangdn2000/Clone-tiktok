@@ -21,7 +21,7 @@ const CInput = ({
       {iconLeft && (
         <Icon
           source={iconLeft}
-          color={iconColor}
+          tintColor={iconColor}
           width={sizeIcon}
           height={sizeIcon}
         />
@@ -37,7 +37,7 @@ const CInput = ({
       {iconRight && (
         <Icon
           source={iconRight}
-          color={iconColor}
+          tintColor={iconColor}
           width={sizeIcon}
           height={sizeIcon}
           onPress={onPressIconRight}

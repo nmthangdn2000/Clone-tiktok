@@ -17,14 +17,14 @@ const ItemSearchSuggestions = ({ item }) => {
     <Pressable style={styles.container} onPress={onPress}>
       <Icon
         source={SEARCH_IMG}
-        color={COLOR.setOpacity(COLOR.BLACK, 0.6)}
+        tintColor={COLOR.setOpacity(COLOR.BLACK, 0.6)}
         height={22}
         width={22}
       />
       <CText
         style={styles.txt}
         text={TEXT.REGULAR}
-        color={COLOR.setOpacity(COLOR.BLACK, 0.8)}
+        tintColor={COLOR.setOpacity(COLOR.BLACK, 0.8)}
         fontSize={16}
         numberOfLines={1}>
         {text}

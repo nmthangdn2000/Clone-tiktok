@@ -34,7 +34,7 @@ const ItemSearchVideo = ({ index, item }) => {
               source={HEART_OUTLINE_IMG}
               width={14}
               height={14}
-              color={COLOR.BLACK}
+              tintColor={COLOR.BLACK}
             />
             <CText text={TEXT.SMALL} color={COLOR.GRAY}>
               {like}

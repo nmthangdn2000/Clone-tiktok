@@ -40,7 +40,7 @@ const ListHeaderComponent = () => {
         <View style={styles.buttonFavorites}>
           <Icon
             source={BOOKMARK_IMG}
-            color={COLOR.BLACK}
+            tintColor={COLOR.BLACK}
             width={14}
             height={14}
           />

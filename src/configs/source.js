@@ -28,6 +28,7 @@ const BOOKMARK_FILLED_IMG = require('../assets/images/bookmark-filled.png');
 const FLOATING_MUSIC_IMG = require('../assets/images/floating-music.png');
 const FLOATING_MUSIC_1_IMG = require('../assets/images/floating-music-1.png');
 const FLOATING_MUSIC_2_IMG = require('../assets/images/floating-music-2.png');
+const HEART_TRUE_IMG = require('../assets/images/heart-true.png');
 
 const LOGO_IMG = require('../assets/images/TikTok-Logo.png');
 const Illustrations_BG_IMG = require('../assets/images/Illustrations.png');
@@ -93,4 +94,5 @@ export {
   BOOKMARK_FILLED_IMG,
   FLOATING_MUSIC_1_IMG,
   FLOATING_MUSIC_2_IMG,
+  HEART_TRUE_IMG,
 };

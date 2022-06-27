@@ -17,7 +17,7 @@ const PreviewVideoScreen = ({ navigation, route }) => {
 
   useEffect(() => {
     setPathVideo(route.params.pathVideo);
-  }, []);
+  }, [route]);
 
   const options = [
     { icon: SPEED_IMG, name: 'Tốc độ', onclick: () => console.log('a') },
@@ -46,7 +46,7 @@ const PreviewVideoScreen = ({ navigation, route }) => {
         <View style={styles.containerAudio}>
           <Icon
             source={MUSIC_ICON_IMG}
-            color={COLOR.WHITE}
+            tintColor={COLOR.WHITE}
             height={16}
             width={16}
           />

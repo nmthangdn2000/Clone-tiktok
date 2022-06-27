@@ -12,8 +12,10 @@ type JustifyContentType =
   | 'flex-start'
   | 'flex-end'
   | 'center'
-  | 'stretch'
-  | 'baseline';
+  | 'space-between'
+  | 'space-around'
+  | 'space-evenly'
+  | undefined;
 
 export interface FlexCustomType {
   children?: React.ReactNode;
@@ -53,5 +55,6 @@ export interface TextCustomType extends TextStyle {
   onPress?: any;
   numberOfLines?: number | undefined;
   text?: any;
+  style?: StyleProp<ImageStyle>;
 }
 //TextStyle

@@ -23,7 +23,12 @@ const ItemSearchTrend = ({ text, onPress, dotColor = COLOR.GRAY }) => {
         fontSize={16}>
         {text}
       </CText>
-      <Icon source={FIRE_IMG} color={COLOR.DANGER2} height={16} width={16} />
+      <Icon
+        source={FIRE_IMG}
+        tintColor={COLOR.DANGER2}
+        height={16}
+        width={16}
+      />
     </Pressable>
   );
 };

@@ -1,11 +1,15 @@
 import { FlatList, View, StatusBar } from 'react-native';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import VideoItem from './components/VideoItem';
 import { HEIGHT } from '../../configs/constant';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { useRoute, useIsFocused } from '@react-navigation/native';
 
 const HomeScreen = () => {
+  const router = useRoute();
+  const isFocused = useIsFocused();
   const bottomHeight = useBottomTabBarHeight();
+  const videoPlaying = useRef();
 
   const HEIGHT_ITEM = HEIGHT - bottomHeight - StatusBar.currentHeight;
   const cellRefs = useRef({});
@@ -36,6 +40,7 @@ const HomeScreen = () => {
       if (cell) {
         if (item.isViewable) {
           cell.playVideo();
+          videoPlaying.current = item.key;
         } else {
           cell.pauseVideo();
         }
@@ -46,6 +51,17 @@ const HomeScreen = () => {
   const viewabilityConfig = useRef({
     itemVisiblePercentThreshold: 80,
   }).current;
+
+  useEffect(() => {
+    const cell = cellRefs.current[videoPlaying.current];
+    if (cell) {
+      if (router.name === 'Trang chủ' && isFocused === true) {
+        cell.playVideo();
+      } else {
+        cell.pauseVideo();
+      }
+    }
+  }, [router, isFocused]);
 
   return (
     <View>

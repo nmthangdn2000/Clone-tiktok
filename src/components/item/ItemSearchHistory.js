@@ -11,7 +11,7 @@ const ItemSearchHistory = ({ text, onPress }) => {
     <Pressable style={styles.container} onPress={onPress}>
       <Icon
         source={TIME_IMG}
-        color={COLOR.setOpacity(COLOR.BLACK, 0.6)}
+        tintColor={COLOR.setOpacity(COLOR.BLACK, 0.6)}
         height={22}
         width={22}
       />
@@ -24,7 +24,7 @@ const ItemSearchHistory = ({ text, onPress }) => {
       </CText>
       <Icon
         source={CLOSE_IMG}
-        color={COLOR.setOpacity(COLOR.BLACK, 0.6)}
+        tintColor={COLOR.setOpacity(COLOR.BLACK, 0.6)}
         height={22}
         width={22}
       />
