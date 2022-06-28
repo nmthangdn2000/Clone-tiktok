@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React, { useCallback, useEffect } from 'react';
+import { StyleSheet } from 'react-native';
+import React, { useEffect } from 'react';
 import { Icon } from '../../../components';
 import { HEART_TRUE_IMG } from '../../../configs/source';
 import Animated, {
@@ -37,7 +37,7 @@ const ItemLikeDoubleTap = ({ item }) => {
         });
       },
     );
-  }, []);
+  }, [zoomValue]);
 
   const styles = StyleSheet.create({
     container: {
