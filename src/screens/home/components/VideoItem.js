@@ -1,5 +1,5 @@
 import { Dimensions, StatusBar, StyleSheet } from 'react-native';
-import React, { useImperativeHandle, useState } from 'react';
+import React, { useImperativeHandle, useRef, useState } from 'react';
 import VerticalSecction from './VerticalSecction';
 import BottomSecction from './BottomSecction';
 import Video from 'react-native-video';
@@ -11,6 +11,7 @@ import PressContainer from './PressContainer';
 const { width, height } = Dimensions.get('window');
 
 const VideoItem = React.forwardRef(({ index }, ref) => {
+  const verticalRef = useRef();
   const bottomHeight = useBottomTabBarHeight();
 
   const [isActive, setIsActive] = useState(false);
@@ -51,13 +52,14 @@ const VideoItem = React.forwardRef(({ index }, ref) => {
         isActive={isActive}
         pauseVideo={pauseVideo}
         playVideo={playVideo}
+        verticalRef={verticalRef}
       />
 
       {/* container bottom */}
       <BottomSecction isActive={isActive} />
 
       {/* container vertical */}
-      <VerticalSecction />
+      <VerticalSecction ref={verticalRef} />
     </Container>
   );
 });

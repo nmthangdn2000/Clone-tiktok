@@ -11,7 +11,7 @@ import { PLAY_ICON_IMG } from '../../../configs/source';
 import { TapGestureHandler } from 'react-native-gesture-handler';
 import ItemLikeDoubleTap from './ItemLikeDoubleTap';
 
-const PressContainer = ({ isActive, pauseVideo, playVideo }) => {
+const PressContainer = ({ isActive, pauseVideo, playVideo, verticalRef }) => {
   const [showIcon, setShowIcon] = useState(false);
   const [listLikeDoubleTap, setListLikeDoubleTap] = useState([]);
 
@@ -34,10 +34,11 @@ const PressContainer = ({ isActive, pauseVideo, playVideo }) => {
 
   const onDoubleTap = useCallback(
     e => {
+      verticalRef.current.handleClickHeart(true);
       const { x, y } = e.nativeEvent;
-      setListLikeDoubleTap([...listLikeDoubleTap, { x, y, status: true }]);
+      setListLikeDoubleTap([...listLikeDoubleTap, { x, y }]);
     },
-    [listLikeDoubleTap],
+    [listLikeDoubleTap, verticalRef],
   );
 
   const onSingleTap = useCallback(() => {

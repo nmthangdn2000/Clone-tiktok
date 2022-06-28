@@ -174,7 +174,7 @@ const BottomSecction = ({ isActive }) => {
             @Thang
           </CText>
           <CText color={COLOR.LIGHT_GRAY2}>Video này méc cười quá ae</CText>
-          <Container backgroundColor={'red'} width="100%">
+          <Container width="100%">
             <Row alignItems="center">
               <Icon
                 source={MUSIC_ICON_IMG}

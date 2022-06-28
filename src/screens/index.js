@@ -11,8 +11,6 @@ const { Navigator, Screen } = createMaterialTopTabNavigator();
 const Index = () => {
   const currentBottomTab = useSelector(state => state.index.currentBottomTab);
 
-  const handleButtonBack = () => console.log('adadadad');
-
   return (
     <Navigator tabBar={() => <></>} initialRouteName="MainScreen">
       <Screen name="MainScreen" component={MainScreen} />
