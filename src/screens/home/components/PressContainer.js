@@ -1,5 +1,5 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-import React, { useEffect, useRef, useState } from 'react';
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Animated, {
   cancelAnimation,
   useAnimatedStyle,
@@ -9,9 +9,12 @@ import Animated, {
 import { Container, Icon } from '../../../components';
 import { PLAY_ICON_IMG } from '../../../configs/source';
 import { TapGestureHandler } from 'react-native-gesture-handler';
+import ItemLikeDoubleTap from './ItemLikeDoubleTap';
 
 const PressContainer = ({ isActive, pauseVideo, playVideo }) => {
   const [showIcon, setShowIcon] = useState(false);
+  const [listLikeDoubleTap, setListLikeDoubleTap] = useState([]);
+
   const doubleTapRef = useRef();
 
   const iconPlayVideoValue = useSharedValue(1);
@@ -29,11 +32,15 @@ const PressContainer = ({ isActive, pauseVideo, playVideo }) => {
     }
   }, [isActive, iconPlayVideoValue]);
 
-  const onDoubleTap = () => {
-    console.log('onDoubleTap');
-  };
+  const onDoubleTap = useCallback(
+    e => {
+      const { x, y } = e.nativeEvent;
+      setListLikeDoubleTap([...listLikeDoubleTap, { x, y, status: true }]);
+    },
+    [listLikeDoubleTap],
+  );
 
-  const onSingleTap = () => {
+  const onSingleTap = useCallback(() => {
     if (isActive) {
       pauseVideo();
       setShowIcon(true);
@@ -43,12 +50,12 @@ const PressContainer = ({ isActive, pauseVideo, playVideo }) => {
       setShowIcon(false);
       cancelAnimation(iconPlayVideoValue);
     }
-  };
+  }, [isActive, iconPlayVideoValue, pauseVideo, playVideo]);
 
   return (
     <TapGestureHandler waitFor={doubleTapRef} onActivated={onSingleTap}>
       <TapGestureHandler
-        maxDelayMs={250}
+        maxDelayMs={150}
         ref={doubleTapRef}
         numberOfTaps={2}
         onActivated={onDoubleTap}>
@@ -65,6 +72,11 @@ const PressContainer = ({ isActive, pauseVideo, playVideo }) => {
                 />
               </Animated.View>
             )}
+            {listLikeDoubleTap.map((item, index) => {
+              return (
+                <ItemLikeDoubleTap key={JSON.stringify(item)} item={item} />
+              );
+            })}
           </Container>
         </View>
       </TapGestureHandler>
