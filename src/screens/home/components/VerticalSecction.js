@@ -115,7 +115,11 @@ const VerticalSecction = React.forwardRef(({}, ref) => {
           />
         </Animated.View>
       </Container>
-      <ItemVertical source={COMMENT_ICON_IMG} text={25} />
+      <ItemVertical
+        source={COMMENT_ICON_IMG}
+        text={25}
+        onPress={() => console.log('adadad')}
+      />
       <ItemVertical
         source={BOOKMARK_FILLED_IMG}
         text={'25'}

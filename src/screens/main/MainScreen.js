@@ -26,6 +26,7 @@ import BoxCreateVideo from './components/BoxCreateVideo';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentBottomTab } from '../../store/indexSlice';
+import CBottomSheet from '../../components/bottomSheets/BottomSheetComment';
 
 const Bottom = createBottomTabNavigator();
 
@@ -210,6 +211,7 @@ const MainScreen = ({ navigation }) => {
           }}
         />
       </Bottom.Navigator>
+      <CBottomSheet />
       <BoxCreateVideo />
     </>
   );

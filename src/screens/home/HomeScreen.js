@@ -1,4 +1,4 @@
-import { FlatList, View, StatusBar } from 'react-native';
+import { FlatList, StatusBar } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import VideoItem from './components/VideoItem';
 import { HEIGHT } from '../../configs/constant';
@@ -88,33 +88,34 @@ const HomeScreen = () => {
       {isLoading ? (
         <Icon source={TIKTOK_LOADER_GIF} width={50} height={50} />
       ) : (
-        <FlatList
-          data={data}
-          pagingEnabled
-          renderItem={({ index }) => {
-            return (
-              <VideoItem
-                ref={ref => (cellRefs.current[index] = ref)}
-                index={index}
-              />
-            );
-          }}
-          keyExtractor={(item, index) => index.toString()}
-          scrollEventThrottle={16}
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          initialNumToRender={3}
-          maxToRenderPerBatch={3}
-          removeClippedSubviews={true}
-          windowSize={5}
-          onViewableItemsChanged={onViewableItemsChanged}
-          viewabilityConfig={viewabilityConfig}
-          getItemLayout={(_data, index) => ({
-            length: HEIGHT_ITEM,
-            offset: HEIGHT_ITEM * index,
-            index,
-          })}
-        />
+        <></>
+        // <FlatList
+        //   data={data}
+        //   pagingEnabled
+        //   renderItem={({ index }) => {
+        //     return (
+        //       <VideoItem
+        //         ref={ref => (cellRefs.current[index] = ref)}
+        //         index={index}
+        //       />
+        //     );
+        //   }}
+        //   keyExtractor={(item, index) => index.toString()}
+        //   scrollEventThrottle={16}
+        //   showsHorizontalScrollIndicator={false}
+        //   showsVerticalScrollIndicator={false}
+        //   initialNumToRender={3}
+        //   maxToRenderPerBatch={3}
+        //   removeClippedSubviews={true}
+        //   windowSize={5}
+        //   onViewableItemsChanged={onViewableItemsChanged}
+        //   viewabilityConfig={viewabilityConfig}
+        //   getItemLayout={(_data, index) => ({
+        //     length: HEIGHT_ITEM,
+        //     offset: HEIGHT_ITEM * index,
+        //     index,
+        //   })}
+        // />
       )}
     </Container>
   );
