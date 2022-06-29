@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StatusBar, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect } from 'react';
 import GridView from '../../components/GridView';
 import ItemVideo from '../../components/item/ItemVideo';
@@ -78,6 +78,11 @@ const AudioScreen = () => {
 
   return (
     <View style={styles.container}>
+      <StatusBar
+        barStyle={'dark-content'}
+        backgroundColor={COLOR.WHITE}
+        translucent={false}
+      />
       <GridView
         data={data}
         renderItem={item => <ItemVideo item={item} NUM_COLUMS={NUM_COLUMS} />}
@@ -87,7 +92,12 @@ const AudioScreen = () => {
       <View style={styles.containerButton}>
         <Animated.View style={[styles.button, scaleStyle]}>
           <View style={styles.iconButton}>
-            <Icon source={VIDEOCAMR_IMG} width={'100%'} height={'100%'} />
+            <Icon
+              source={VIDEOCAMR_IMG}
+              tintColor={COLOR.WHITE}
+              width={'100%'}
+              height={'100%'}
+            />
           </View>
           <View style={[styles.txtButton]}>
             <CText color={COLOR.WHITE} text={TEXT.STRONG} fontSize={18}>

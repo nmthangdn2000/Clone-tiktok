@@ -1,4 +1,4 @@
-import { StyleSheet, SafeAreaView } from 'react-native';
+import { StyleSheet, SafeAreaView, StatusBar } from 'react-native';
 import React, { useEffect } from 'react';
 import User from './User';
 import { Tabs } from 'react-native-collapsible-tab-view';
@@ -7,6 +7,8 @@ import { Container, CText, Icon, Row } from '../../components';
 import { COLOR, SPACING } from '../../configs/styles';
 import { ARROW_BACK_IMG, MORE_VERT_IMG } from '../../configs/source';
 import { useNavigation, useRoute } from '@react-navigation/native';
+
+const statusbarHeight = StatusBar.currentHeight;
 
 const data = [
   { key: '1' },
@@ -34,20 +36,35 @@ const ProfileScreen = () => {
   //   setTheme('light');
   // });
   return (
-    <SafeAreaView style={styles.container}>
+    <Container
+      flex={1}
+      paddingBottom={!showHeader ? 49.1 : 0}
+      backgroundColor={COLOR.WHITE}>
       {showHeader ? (
-        <Container
-          zIndex={1}
-          backgroundColor={COLOR.WHITE}
-          height={48}
-          justifyContent="center"
-          paddingHorizontal={SPACING.S4}
-          elevation={1}>
-          <Row justifyContent="space-between">
-            <Icon source={ARROW_BACK_IMG} onPress={() => navigation.goBack()} />
-            <Icon source={MORE_VERT_IMG} />
-          </Row>
-        </Container>
+        <>
+          <Container
+            zIndex={1}
+            height={statusbarHeight}
+            backgroundColor={COLOR.WHITE}
+          />
+
+          <Container
+            zIndex={1}
+            backgroundColor={COLOR.WHITE}
+            height={48}
+            justifyContent="center"
+            paddingHorizontal={SPACING.S4}
+            borderBottomColor={COLOR.LIGHT_GRAY}
+            borderBottomWidth={0.19}>
+            <Row justifyContent="space-between">
+              <Icon
+                source={ARROW_BACK_IMG}
+                onPress={() => navigation.goBack()}
+              />
+              <Icon source={MORE_VERT_IMG} />
+            </Row>
+          </Container>
+        </>
       ) : null}
       <Tabs.Container renderHeader={User}>
         <Tabs.Tab name="SELECTED_IMG">
@@ -57,7 +74,7 @@ const ProfileScreen = () => {
           <ListVideo dataList={data} />
         </Tabs.Tab>
       </Tabs.Container>
-    </SafeAreaView>
+    </Container>
   );
 };
 

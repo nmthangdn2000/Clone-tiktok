@@ -1,14 +1,22 @@
 import { FlatList, View, StatusBar } from 'react-native';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import VideoItem from './components/VideoItem';
 import { HEIGHT } from '../../configs/constant';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useRoute, useIsFocused } from '@react-navigation/native';
+import { Container, Icon } from '../../components';
+import { COLOR } from '../../configs/styles';
+import { TIKTOK_LOADER_GIF } from '../../configs/source';
+
+const statusbarHeight = StatusBar.currentHeight;
 
 const HomeScreen = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
   const router = useRoute();
   const isFocused = useIsFocused();
   const bottomHeight = useBottomTabBarHeight();
+
   const videoPlaying = useRef();
 
   const HEIGHT_ITEM = HEIGHT - bottomHeight - StatusBar.currentHeight;
@@ -63,36 +71,52 @@ const HomeScreen = () => {
     }
   }, [router, isFocused]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+  }, []);
+
   return (
-    <View>
-      <FlatList
-        data={data}
-        pagingEnabled
-        renderItem={({ index }) => {
-          return (
-            <VideoItem
-              ref={ref => (cellRefs.current[index] = ref)}
-              index={index}
-            />
-          );
-        }}
-        keyExtractor={(item, index) => index.toString()}
-        scrollEventThrottle={16}
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-        initialNumToRender={3}
-        maxToRenderPerBatch={3}
-        removeClippedSubviews={true}
-        windowSize={5}
-        onViewableItemsChanged={onViewableItemsChanged}
-        viewabilityConfig={viewabilityConfig}
-        getItemLayout={(_data, index) => ({
-          length: HEIGHT_ITEM,
-          offset: HEIGHT_ITEM * index,
-          index,
-        })}
-      />
-    </View>
+    <Container
+      flex={1}
+      paddingTop={statusbarHeight}
+      paddingBottom={bottomHeight}
+      backgroundColor={isLoading ? COLOR.BACKGROUND_LOADING : COLOR.BLACK}
+      justifyContent="center"
+      alignItems="center">
+      {isLoading ? (
+        <Icon source={TIKTOK_LOADER_GIF} width={50} height={50} />
+      ) : (
+        <FlatList
+          data={data}
+          pagingEnabled
+          renderItem={({ index }) => {
+            return (
+              <VideoItem
+                ref={ref => (cellRefs.current[index] = ref)}
+                index={index}
+              />
+            );
+          }}
+          keyExtractor={(item, index) => index.toString()}
+          scrollEventThrottle={16}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          initialNumToRender={3}
+          maxToRenderPerBatch={3}
+          removeClippedSubviews={true}
+          windowSize={5}
+          onViewableItemsChanged={onViewableItemsChanged}
+          viewabilityConfig={viewabilityConfig}
+          getItemLayout={(_data, index) => ({
+            length: HEIGHT_ITEM,
+            offset: HEIGHT_ITEM * index,
+            index,
+          })}
+        />
+      )}
+    </Container>
   );
 };
 

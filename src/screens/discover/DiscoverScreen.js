@@ -15,8 +15,13 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import { Container } from '../../components';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+
+const statusbarHeight = StatusBar.currentHeight;
 
 const DiscoverScreen = () => {
+  const bottomHeight = useBottomTabBarHeight();
   const dispatch = useDispatch();
 
   const txtSearch = useSelector(state => state.search.txtSearch);
@@ -53,7 +58,11 @@ const DiscoverScreen = () => {
   }, [txtSearch, marginRight, opacity]);
 
   return (
-    <View style={styles.container}>
+    <Container
+      flex={1}
+      paddingTop={statusbarHeight}
+      paddingBottom={bottomHeight}
+      backgroundColor={COLOR.WHITE}>
       <View style={styles.searchBar}>
         <Animated.View style={[styles.searchInput, searchInputStyle]}>
           <CInput
@@ -76,7 +85,7 @@ const DiscoverScreen = () => {
       </View>
 
       <TopTab />
-    </View>
+    </Container>
   );
 };
 

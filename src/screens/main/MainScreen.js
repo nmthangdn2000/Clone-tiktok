@@ -51,22 +51,25 @@ const MainScreen = ({ navigation }) => {
   return (
     <>
       <StatusBar
-        barStyle={theme === 'dart' ? 'light-content' : 'dark-content'}
-        animated={true}
-        backgroundColor={theme === 'dart' ? 'black' : 'white'}
+        barStyle={'light-content'}
+        backgroundColor={COLOR.TRANSPARENT}
+        translucent={true}
       />
 
       <Bottom.Navigator
         screenOptions={{
           tabBarStyle: {
-            backgroundColor: theme === 'dart' ? COLOR.BLACK : COLOR.WHITE,
-            zIndex: 100,
+            backgroundColor: COLOR.TRANSPARENT,
+            position: 'absolute',
+            elevation: 0,
           },
           tabBarLabelStyle: {
             marginTop: -10,
             ...TEXT.SMALL_STRONG,
             fontSize: 10,
+            marginBottom: 5,
           },
+
           headerShown: false,
           tabBarActiveTintColor: theme === 'dart' ? COLOR.WHITE : COLOR.BLACK,
           tabBarInactiveTintColor: COLOR.GRAY,
@@ -88,6 +91,7 @@ const MainScreen = ({ navigation }) => {
           listeners={{
             focus: () => {
               handleTapPress('dart');
+              StatusBar.setBarStyle('light-content');
             },
             tabPress: e => {
               handleTapPress('dart');
@@ -110,6 +114,9 @@ const MainScreen = ({ navigation }) => {
             },
           }}
           listeners={{
+            focus: () => {
+              StatusBar.setBarStyle('dark-content');
+            },
             tabPress: e => {
               handleTapPress('light');
               handleCurrentBottomTab();
@@ -131,6 +138,9 @@ const MainScreen = ({ navigation }) => {
             },
           }}
           listeners={{
+            focus: () => {
+              StatusBar.setBarStyle('dark-content');
+            },
             tabPress: e => {
               e.preventDefault();
               navigation.navigate('NewVideo');
@@ -153,6 +163,9 @@ const MainScreen = ({ navigation }) => {
             },
           }}
           listeners={{
+            focus: () => {
+              StatusBar.setBarStyle('dark-content');
+            },
             tabPress: e => {
               handleTapPress('light');
               handleCurrentBottomTab();
@@ -187,6 +200,9 @@ const MainScreen = ({ navigation }) => {
             },
           }}
           listeners={{
+            focus: () => {
+              StatusBar.setBarStyle('dark-content');
+            },
             tabPress: e => {
               handleTapPress('light');
               handleCurrentBottomTab();

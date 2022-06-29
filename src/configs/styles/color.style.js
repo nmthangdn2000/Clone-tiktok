@@ -10,6 +10,7 @@ const COLOR = {
   LIGHT_GRAY: '#dadada',
   LIGHT_GRAY2: '#f7f7f7',
   TRANSPARENT: 'transparent',
+  BACKGROUND_LOADING: '#171925',
 
   setOpacity: (hexColor, opacity) => {
     const hexOpacity = Math.floor(opacity * 255).toString(16);

@@ -1,11 +1,20 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { Container } from '../../components';
+import { COLOR } from '../../configs/styles';
+const statusbarHeight = StatusBar.currentHeight;
 
 const InboxScreen = () => {
+  const bottomHeight = useBottomTabBarHeight();
   return (
-    <View>
+    <Container
+      flex={1}
+      paddingTop={statusbarHeight}
+      paddingBottom={bottomHeight}
+      backgroundColor={COLOR.WHITE}>
       <Text>InboxScreen</Text>
-    </View>
+    </Container>
   );
 };
 

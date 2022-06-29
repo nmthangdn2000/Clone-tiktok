@@ -1,6 +1,6 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { Image, Pressable, StyleSheet } from 'react-native';
+import { Image, Pressable, StatusBar, StyleSheet } from 'react-native';
 import MainScreen from './main/MainScreen';
 import ProfileScreen from './profile/ProfileScreen';
 import { ADD_ACCOUNT_ICON_IMG, MORE_VERT_IMG } from '../configs/source';
@@ -19,6 +19,11 @@ const Index = () => {
           name="ProfileScreenTab"
           component={ProfileScreen}
           initialParams={{ showHeader: true }}
+          listeners={{
+            focus: () => {
+              StatusBar.setBarStyle('dark-content');
+            },
+          }}
         />
       ) : (
         <></>

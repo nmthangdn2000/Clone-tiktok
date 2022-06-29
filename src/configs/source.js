@@ -46,6 +46,8 @@ const PLAY_ARROW_IMG = require('../assets/images/play_arrow.png');
 const ARROW_BACK_IMG = require('../assets/images/arrow_back.png');
 const ADD_ACCOUNT_ICON_IMG = require('../assets/images/AddAccountIcon.png');
 const MORE_VERT_IMG = require('../assets/images/more_vert.png');
+// gifs
+const TIKTOK_LOADER_GIF = require('../assets/gifs/tiktok-loader.gif');
 
 export {
   LOGO_IMG,
@@ -95,4 +97,5 @@ export {
   FLOATING_MUSIC_1_IMG,
   FLOATING_MUSIC_2_IMG,
   HEART_TRUE_IMG,
+  TIKTOK_LOADER_GIF,
 };

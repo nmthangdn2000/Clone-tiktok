@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar, StyleSheet, Text, View } from 'react-native';
 import React, { useRef, useState } from 'react';
 
 import CircularProgress from './components/CircularProgress';
 import Effect from './components/Effect';
 import Upload from './components/Upload';
-import { SPACING } from '../../configs/styles';
+import { COLOR, SPACING } from '../../configs/styles';
 import Camera from './components/Camera';
 import CloseButton from './components/CloseButton';
 
@@ -28,6 +28,12 @@ const NewVideoScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar
+        barStyle={'light-content'}
+        animated={true}
+        backgroundColor={COLOR.BLACK}
+        translucent={false}
+      />
       <Camera camera={camera} navigation={navigation} isRecord={isRecord} />
       {isRecord && <CloseButton navigation={navigation} />}
       <View style={styles.containerBottom}>
