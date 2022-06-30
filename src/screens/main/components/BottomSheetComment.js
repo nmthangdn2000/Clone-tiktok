@@ -1,4 +1,3 @@
-import { StyleSheet } from 'react-native';
 import React, { useCallback, useEffect, useRef } from 'react';
 import BottomSheet from '../../../components/bottomSheets/BottomSheet';
 import HeaderBottomSheetComment from './HeaderBottomSheetComment';
@@ -8,8 +7,7 @@ import { HEIGHT } from '../../../configs/constant';
 import { SPACING } from '../../../configs/styles';
 import { FlatList } from 'react-native-gesture-handler';
 import ItemComment from '../../../components/item/ItemComment';
-import { useSelector, useDispatch } from 'react-redux';
-import { setIsShowComment } from '../../../store/mainScreenSlice';
+import { useSelector } from 'react-redux';
 
 const data = [
   { key: '1' },
