@@ -1,4 +1,4 @@
-import { FlatList, StatusBar } from 'react-native';
+import { FlatList, StatusBar, StyleSheet } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import VideoItem from './components/VideoItem';
 import { HEIGHT } from '../../configs/constant';
@@ -7,11 +7,30 @@ import { useRoute, useIsFocused } from '@react-navigation/native';
 import { Container, Icon } from '../../components';
 import { COLOR } from '../../configs/styles';
 import { TIKTOK_LOADER_GIF } from '../../configs/source';
+import Animated, {
+  interpolate,
+  interpolateColor,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 
 const statusbarHeight = StatusBar.currentHeight;
 
 const HomeScreen = () => {
   const [isLoading, setIsLoading] = useState(true);
+
+  const containerValue = useSharedValue(0);
+
+  const containerStyle = useAnimatedStyle(() => {
+    return {
+      backgroundColor: interpolateColor(
+        containerValue.value,
+        [0, 1],
+        [COLOR.BACKGROUND_LOADING, COLOR.BLACK],
+      ),
+    };
+  }, []);
 
   const router = useRoute();
   const isFocused = useIsFocused();
@@ -74,17 +93,23 @@ const HomeScreen = () => {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
+      containerValue.value = withTiming(1, { duration: 1000 });
     }, 3000);
-  }, []);
+  }, [containerValue]);
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      paddingTop: statusbarHeight,
+      paddingBottom: bottomHeight,
+      backgroundColor: COLOR.BACKGROUND_LOADING,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  });
 
   return (
-    <Container
-      flex={1}
-      paddingTop={statusbarHeight}
-      paddingBottom={bottomHeight}
-      backgroundColor={isLoading ? COLOR.BACKGROUND_LOADING : COLOR.BLACK}
-      justifyContent="center"
-      alignItems="center">
+    <Animated.View style={[styles.container, containerStyle]}>
       {isLoading ? (
         <Icon source={TIKTOK_LOADER_GIF} width={50} height={50} />
       ) : (
@@ -116,7 +141,7 @@ const HomeScreen = () => {
           })}
         />
       )}
-    </Container>
+    </Animated.View>
   );
 };
 
