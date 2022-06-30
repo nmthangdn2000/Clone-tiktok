@@ -17,8 +17,13 @@ import {
   REPLY_FILLED_IMG,
 } from '../../../configs/source';
 import { BORDER, COLOR, SPACING } from '../../../configs/styles';
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsShowComment } from '../../../store/mainScreenSlice';
 
 const VerticalSecction = React.forwardRef(({}, ref) => {
+  const dispatch = useDispatch();
+  const isShowComment = useSelector(state => state.mainScreen.isShowComment);
+
   const navigation = useNavigation();
 
   const heartValue = useSharedValue(0);
@@ -74,6 +79,9 @@ const VerticalSecction = React.forwardRef(({}, ref) => {
     navigation.navigate('ProfileScreenTab');
   };
 
+  const handleShowComment = useCallback(() => {
+    dispatch(setIsShowComment(!isShowComment));
+  }, [isShowComment, dispatch]);
   return (
     <Container position="absolute" right={SPACING.S2} bottom={72}>
       <Container marginBottom={SPACING.S5} alignItems="center">
@@ -118,7 +126,7 @@ const VerticalSecction = React.forwardRef(({}, ref) => {
       <ItemVertical
         source={COMMENT_ICON_IMG}
         text={25}
-        onPress={() => console.log('adadad')}
+        onPress={handleShowComment}
       />
       <ItemVertical
         source={BOOKMARK_FILLED_IMG}

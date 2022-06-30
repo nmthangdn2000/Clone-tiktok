@@ -1,11 +1,9 @@
 import React from 'react';
-import Container from '../Container';
-import { COLOR, SPACING, TEXT } from '../../configs/styles';
-import CText from '../CText';
-import Icon from '../Icon';
-import { CLOSE_IMG } from '../../configs/source';
+import { Container, CText, Icon } from '../../../components';
+import { CLOSE_IMG } from '../../../configs/source';
+import { COLOR, SPACING, TEXT } from '../../../configs/styles';
 
-const HeaderBottomSheet = ({ handleClickClose }) => {
+const HeaderBottomSheetComment = ({ handleClickClose }) => {
   return (
     <Container
       justifyContent="center"
@@ -22,4 +20,4 @@ const HeaderBottomSheet = ({ handleClickClose }) => {
   );
 };
 
-export default HeaderBottomSheet;
+export default HeaderBottomSheetComment;

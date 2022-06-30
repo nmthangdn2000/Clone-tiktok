@@ -1,16 +1,16 @@
 import { View, StyleSheet } from 'react-native';
 import React, { useState } from 'react';
-import Container from '../Container';
-import { BORDER, COLOR, SPACING } from '../../configs/styles';
-import Icon from '../Icon';
+import Container from '../../../components/Container';
+import { BORDER, COLOR, SPACING } from '../../../configs/styles';
+import Icon from '../../../components/Icon';
 import {
   AVATA_IMG,
   A_CONG_ICON_IMG,
   EMOJI_ICON_IMG,
-} from '../../configs/source';
-import CInput from '../CInput';
+} from '../../../configs/source';
+import CInput from '../../../components/CInput';
 
-const FooterBottomSheet = () => {
+const FooterBottomSheetComment = () => {
   const [txtComment, setTxtComment] = useState('');
   return (
     <Container
@@ -66,7 +66,7 @@ const FooterBottomSheet = () => {
   );
 };
 
-export default FooterBottomSheet;
+export default FooterBottomSheetComment;
 
 const styles = StyleSheet.create({
   inputComment: {
