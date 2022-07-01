@@ -1,4 +1,4 @@
-import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Modal } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Container, Icon, CText } from '../';
 import { CLOSE_IMG, TIKTOK_ICON_IMG } from '../../configs/source';
@@ -7,18 +7,16 @@ import { BORDER, COLOR, SPACING, TEXT } from '../../configs/styles';
 const ModalSignIn = ({ isShow = false }) => {
   const [visible, setVisible] = useState(isShow);
   const handleClickClose = () => {
-    console.log('cc');
     setVisible(false);
   };
 
-  useEffect(() => {
-    console.log(visible);
-    console.log(isShow);
-  }, [visible, isShow]);
-
   return (
     <Modal visible={visible} transparent={true}>
-      <Container flex={1} alignItems="center" justifyContent="center">
+      <Container
+        flex={1}
+        alignItems="center"
+        justifyContent="center"
+        backgroundColor={COLOR.setOpacity(COLOR.BLACK, 0.6)}>
         <Container
           flexDirection="column"
           alignItems="center"
@@ -71,11 +69,3 @@ const ModalSignIn = ({ isShow = false }) => {
 };
 
 export default ModalSignIn;
-
-const styles = StyleSheet.create({
-  modal: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'red',
-  },
-});

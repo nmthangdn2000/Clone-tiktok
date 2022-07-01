@@ -7,7 +7,8 @@ import { HEIGHT } from '../../../configs/constant';
 import { SPACING } from '../../../configs/styles';
 import { FlatList } from 'react-native-gesture-handler';
 import ItemComment from '../../../components/item/ItemComment';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setIsShowComment } from '../../../store/mainScreenSlice';
 
 const data = [
   { key: '1' },
@@ -29,18 +30,25 @@ const data = [
 ];
 
 const BottomSheetComment = () => {
+  const dispatch = useDispatch();
   const bottomSheetRef = useRef();
 
   const isShowComment = useSelector(state => state.mainScreen.isShowComment);
 
   useEffect(() => {
-    const heightLayout = bottomSheetRef?.current?.heightLayoutCurrent();
-    bottomSheetRef?.current?.scrollTo(-heightLayout);
+    if (isShowComment) {
+      const heightLayout = bottomSheetRef?.current?.heightLayoutCurrent();
+      bottomSheetRef?.current?.scrollTo(-heightLayout);
+    }
   }, [isShowComment]);
 
   const handleClickClose = useCallback(() => {
     bottomSheetRef?.current?.scrollTo(0);
   }, []);
+
+  const closeBottomSheet = () => {
+    dispatch(setIsShowComment(false));
+  };
 
   return (
     <BottomSheet
@@ -48,7 +56,8 @@ const BottomSheetComment = () => {
       HeaderComponent={
         <HeaderBottomSheetComment handleClickClose={handleClickClose} />
       }
-      FooterComponent={<FooterBottomSheetComment />}>
+      FooterComponent={<FooterBottomSheetComment />}
+      closeBottomSheet={closeBottomSheet}>
       <Container padding={SPACING.S3} height={HEIGHT / 2} marginBottom={68}>
         <FlatList
           scrollEventThrottle={16}

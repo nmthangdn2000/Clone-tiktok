@@ -19,6 +19,7 @@ import {
 import { BORDER, COLOR, SPACING } from '../../../configs/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsShowComment } from '../../../store/mainScreenSlice';
+import { setBottomSheetSignIn } from '../../../store/indexSlice';
 
 const VerticalSecction = React.forwardRef(({}, ref) => {
   const dispatch = useDispatch();
@@ -82,6 +83,11 @@ const VerticalSecction = React.forwardRef(({}, ref) => {
   const handleShowComment = useCallback(() => {
     dispatch(setIsShowComment(!isShowComment));
   }, [isShowComment, dispatch]);
+
+  const handleShowBottomSheetSignIn = useCallback(() => {
+    dispatch(setBottomSheetSignIn(true));
+  }, [dispatch]);
+
   return (
     <Container position="absolute" right={SPACING.S2} bottom={72}>
       <Container marginBottom={SPACING.S5} alignItems="center">
@@ -132,6 +138,7 @@ const VerticalSecction = React.forwardRef(({}, ref) => {
         source={BOOKMARK_FILLED_IMG}
         text={'25'}
         tinColor="#f7f7f7"
+        onPress={handleShowBottomSheetSignIn}
       />
       <ItemVertical source={REPLY_FILLED_IMG} text={'25'} tinColor="#f7f7f7" />
     </Container>

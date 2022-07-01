@@ -1,11 +1,11 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { Image, Pressable, StatusBar, StyleSheet } from 'react-native';
+import { StatusBar } from 'react-native';
 import MainScreen from './main/MainScreen';
 import ProfileScreen from './profile/ProfileScreen';
-import { ADD_ACCOUNT_ICON_IMG, MORE_VERT_IMG } from '../configs/source';
 import { useSelector } from 'react-redux';
 import ModalSignIn from '../components/modal/ModalSignIn';
+import BottomSheetSignIn from '../components/bottomSheets/BottomSheetSignIn';
 
 const { Navigator, Screen } = createMaterialTopTabNavigator();
 
@@ -32,6 +32,7 @@ const Index = () => {
         )}
       </Navigator>
       <ModalSignIn isShow={true} />
+      <BottomSheetSignIn />
     </>
   );
 };

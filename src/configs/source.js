@@ -33,6 +33,14 @@ const EMOJI_ICON_IMG = require('../assets/images/Emoji-icon.png');
 const A_CONG_ICON_IMG = require('../assets/images/@-icon.png');
 const TIKTOK_ICON_IMG = require('../assets/images/icon-tiktok.png');
 
+const FACEBOOK_ICON = require('../assets/icon-social/facebook.png');
+const INSTAGRAM_ICON = require('../assets/icon-social/instagram.png');
+const GOOGLE_ICON = require('../assets/icon-social/google.png');
+const APPLE_ICON = require('../assets/icon-social/apple-logo.png');
+const KAKAOTALK_ICON = require('../assets/icon-social/kakao-talk.png');
+const LINE_ICON = require('../assets/icon-social/line.png');
+const TWITTER_ICON = require('../assets/icon-social/twitter.png');
+
 const LOGO_IMG = require('../assets/images/TikTok-Logo.png');
 const Illustrations_BG_IMG = require('../assets/images/Illustrations.png');
 const DISC_IMG = require('../assets/images/disc.png');
@@ -104,4 +112,11 @@ export {
   EMOJI_ICON_IMG,
   A_CONG_ICON_IMG,
   TIKTOK_ICON_IMG,
+  FACEBOOK_ICON,
+  APPLE_ICON,
+  GOOGLE_ICON,
+  INSTAGRAM_ICON,
+  KAKAOTALK_ICON,
+  LINE_ICON,
+  TWITTER_ICON,
 };

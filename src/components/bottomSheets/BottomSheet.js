@@ -1,31 +1,21 @@
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import React, {
-  useCallback,
-  useEffect,
-  useImperativeHandle,
-  useState,
-} from 'react';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import React, { useCallback, useImperativeHandle, useState } from 'react';
 import { BORDER, COLOR, SPACING } from '../../configs/styles';
 import { HEIGHT } from '../../configs/constant';
 
-import { Container, ListView } from '..';
+import { Container } from '..';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   interpolate,
   interpolateColor,
+  runOnJS,
   useAnimatedStyle,
   useSharedValue,
-  withSpring,
+  withTiming,
 } from 'react-native-reanimated';
 
 const BottomSheet = React.forwardRef(
-  ({ HeaderComponent, FooterComponent, children }, ref) => {
+  ({ HeaderComponent, FooterComponent, children, closeBottomSheet }, ref) => {
     const [heightLayout, setHeightLayout] = useState(0);
 
     const translateY = useSharedValue(0);
@@ -36,7 +26,11 @@ const BottomSheet = React.forwardRef(
       'worklet';
       active.value = destination !== 0;
 
-      translateY.value = withSpring(destination, { damping: 50 });
+      translateY.value = withTiming(destination);
+
+      if (destination === 0 && closeBottomSheet) {
+        runOnJS(closeBottomSheet)();
+      }
     }, []);
 
     const isActive = useCallback(() => {
@@ -62,7 +56,7 @@ const BottomSheet = React.forwardRef(
         translateY.value = Math.max(translateY.value, -heightLayout);
       })
       .onEnd(() => {
-        if (translateY.value > -heightLayout + 100) {
+        if (translateY.value > -heightLayout + heightLayout / 3) {
           scrollTo(0);
         } else {
           scrollTo(-heightLayout);
@@ -80,7 +74,7 @@ const BottomSheet = React.forwardRef(
         backgroundColor: interpolateColor(
           translateY.value,
           [-heightLayout, 0],
-          ['#00000060', COLOR.TRANSPARENT],
+          ['#00000080', COLOR.TRANSPARENT],
         ),
         zIndex: interpolate(translateY.value, [-heightLayout, 0], [100, -1]),
       };
@@ -98,17 +92,13 @@ const BottomSheet = React.forwardRef(
           <Container width={'100%'} height={'100%'} />
         </Pressable>
         <Animated.View style={[styles.bottomSheetContainer, rBottomSheetStyle]}>
-          <View onLayout={getHeightLayout}>
-            {HeaderComponent ? (
-              <GestureDetector gesture={gesture}>
-                {HeaderComponent}
-              </GestureDetector>
-            ) : (
-              <></>
-            )}
-            {children}
-            {FooterComponent}
-          </View>
+          <GestureDetector gesture={gesture}>
+            <View onLayout={getHeightLayout}>
+              {HeaderComponent}
+              {children}
+              {FooterComponent}
+            </View>
+          </GestureDetector>
         </Animated.View>
       </Animated.View>
     );

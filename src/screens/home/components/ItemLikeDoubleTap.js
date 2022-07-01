@@ -8,19 +8,26 @@ import Animated, {
   withTiming,
   Easing,
   interpolate,
+  withDelay,
 } from 'react-native-reanimated';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+
+const rotates = ['10deg', '0deg', '-10deg'];
 
 const ItemLikeDoubleTap = ({ item }) => {
   const bottomHeight = useBottomTabBarHeight();
   const { x, y } = item;
   const zoomValue = useSharedValue(1);
+  const rotateValue = useSharedValue(
+    rotates[Math.floor(Math.random() * rotates.length)],
+  );
 
   const zoomStyle = useAnimatedStyle(() => {
     return {
       transform: [
         { scale: zoomValue.value },
         { translateY: interpolate(zoomValue.value, [0.6, 1.5], [0, -30]) },
+        { rotate: rotateValue.value },
       ],
       opacity: interpolate(zoomValue.value, [0.6, 1.5], [1, 0]),
     };
@@ -31,10 +38,13 @@ const ItemLikeDoubleTap = ({ item }) => {
       0.6,
       { duration: 250, easing: Easing.bounce },
       () => {
-        zoomValue.value = withTiming(2, {
-          duration: 500,
-          easing: Easing.linear,
-        });
+        zoomValue.value = withDelay(
+          300,
+          withTiming(2, {
+            duration: 500,
+            easing: Easing.linear,
+          }),
+        );
       },
     );
   }, [zoomValue]);
