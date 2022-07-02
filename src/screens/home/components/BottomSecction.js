@@ -21,7 +21,7 @@ import Animated, {
 import { StyleSheet } from 'react-native';
 import { getTranslateX } from '../../../utils/utils';
 
-const BottomSecction = ({ isActive }) => {
+const BottomSecction = ({ isActive, caption, authorName, audio }) => {
   const discAnimatedValue = useSharedValue(0);
   const musicNote1AnimatedValue = useSharedValue(0);
   const musicNote2AnimatedValue = useSharedValue(0);
@@ -141,6 +141,25 @@ const BottomSecction = ({ isActive }) => {
     );
   }, [discAnimatedValue, musicNote1AnimatedValue, musicNote2AnimatedValue]);
 
+  const CaptionView = () => {
+    const listText = caption.split(' ');
+
+    return (
+      <CText color={COLOR.LIGHT_GRAY2}>
+        {listText.map((item, index) => {
+          if (item.trim()[0] === '#') {
+            return (
+              <CText key={index} color={COLOR.LIGHT_GRAY2} text={TEXT.STRONG}>
+                {item.trim()}{' '}
+              </CText>
+            );
+          }
+          return item.trim() + ' ';
+        })}
+      </CText>
+    );
+  };
+
   useEffect(() => {
     if (isActive) {
       triggerAnimation();
@@ -171,9 +190,9 @@ const BottomSecction = ({ isActive }) => {
       <Row>
         <Container flex={4}>
           <CText text={TEXT.STRONG} color={COLOR.WHITE} fontSize={16}>
-            @Thang
+            @{authorName}
           </CText>
-          <CText color={COLOR.LIGHT_GRAY2}>Video này méc cười quá ae</CText>
+          <CaptionView />
           <Container width="100%">
             <Row alignItems="center">
               <Icon
@@ -183,7 +202,7 @@ const BottomSecction = ({ isActive }) => {
                 marginRight={SPACING.S2}
               />
               <CText color={COLOR.WHITE} numberOfLines={1}>
-                Chờ yêu chill - Dế Choắc - Tiên Tiên
+                {audio.name}
               </CText>
             </Row>
           </Container>

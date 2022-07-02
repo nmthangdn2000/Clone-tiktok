@@ -7,10 +7,12 @@ import { Container } from '../../../components';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { HEIGHT } from '../../../configs/constant';
 import PressContainer from './PressContainer';
+import { SERVER_DOMAIN } from '../../../constants/constants';
 
 const { width, height } = Dimensions.get('window');
 
-const VideoItem = React.forwardRef(({ index }, ref) => {
+const VideoItem = React.forwardRef(({ item }, ref) => {
+  const { caption, url, author, audio, like, comment } = item;
   const verticalRef = useRef();
   const bottomHeight = useBottomTabBarHeight();
 
@@ -40,7 +42,7 @@ const VideoItem = React.forwardRef(({ index }, ref) => {
       backgroundColor="black">
       <Video
         source={{
-          uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+          uri: `${SERVER_DOMAIN}/${url}`,
         }}
         style={styles.video}
         resizeMode="cover"
@@ -56,10 +58,20 @@ const VideoItem = React.forwardRef(({ index }, ref) => {
       />
 
       {/* container bottom */}
-      <BottomSecction isActive={isActive} />
+      <BottomSecction
+        isActive={isActive}
+        caption={caption}
+        authorName={author.name}
+        audio={audio}
+      />
 
       {/* container vertical */}
-      <VerticalSecction ref={verticalRef} />
+      <VerticalSecction
+        ref={verticalRef}
+        like={like}
+        comment={comment}
+        authorAvatar={author.avatar}
+      />
     </Container>
   );
 });
