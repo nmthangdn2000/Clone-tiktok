@@ -28,7 +28,7 @@ const getAll = async ({ q = '', page = PAGE, limit = LIMIT, sort }) => {
   const count = VideoModel.find(query).countDocuments();
   // chưa làm sort
   const getVideos = VideoModel.find(query)
-    // .populate('categories', 'name slug')
+    .populate('author', 'name userName avatar')
     .populate('audio', 'name author background')
     .skip(page * limit - limit)
     .limit(Number(limit));
