@@ -10,6 +10,8 @@ const getByQuery = async (q) => {
 
 const create = async (name) => {
   if (!name) throw new Error(ERROR.CanNotCreateHashtag);
+  const isHashtag = await HashTagModel.findOne({ name }).lean();
+  if (isHashtag) return;
   const newHashtag = new HashTagModel({
     name,
   });

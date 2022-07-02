@@ -106,10 +106,12 @@ const create = async (data, user, fileName) => {
   const video = await newVideo.save();
   if (!video) throw new Error(ERROR.CanNotCreateVideo);
 
-  const arrayHashtag = data.captionSlug.match(/(^|\s)(#[a-z\d-]+)/gi);
-  arrayHashtag.forEach((element) => {
-    hashtagService.create(element.split('#')[1].trim()).catch((err) => console.log(err));
-  });
+  const arrayHashtag = data.captionSlug.match(/(#[a-z\d-]+)/gi);
+  if (arrayHashtag) {
+    arrayHashtag.forEach((element) => {
+      hashtagService.create(element.split('#')[1].trim()).catch((err) => console.log(err));
+    });
+  }
 
   likeService.create(video._id, user._id).catch((err) => console.log(err));
 };
