@@ -40,7 +40,6 @@ const model = {
     type: Number,
     default: 0,
   },
-  hashtag: [String],
   privacy: {
     type: Boolean,
     default: false,

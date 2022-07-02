@@ -5,7 +5,7 @@ import errorMessageMongoose from '../common/errorMessage';
 
 const Schema = mongoose.Schema;
 
-const createSchema = (name, model, index) => {
+const createSchema = (name, model, index, option) => {
   const commonFields = {
     createdAt: {
       type: Number,
@@ -21,6 +21,7 @@ const createSchema = (name, model, index) => {
   const schema = new Schema(myModel, {
     collection: name,
     versionKey: false,
+    ...option,
   });
 
   if (index) {
@@ -52,8 +53,8 @@ const validator = (schema) => {
   });
 };
 
-const createModel = ({ name = '', model = {}, index = null }) => {
-  const schema = createSchema(name, model, index);
+const createModel = ({ name = '', model = {}, index = null, option = {} }) => {
+  const schema = createSchema(name, model, index, option);
   validator(schema);
   const myModel = mongoose.model(name, schema);
 

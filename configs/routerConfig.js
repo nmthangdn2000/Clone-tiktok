@@ -8,6 +8,7 @@ import wishvideosRouter from '../router/wishvideos.router';
 import likeRouter from '../router/like.router';
 import notificationRouter from '../router/notification.router';
 import audioRouter from '../router/audio.router';
+import hashtagRouter from '../router/hashtag.router';
 
 const initRouter = (app) => {
   app.use('/api', authRouter);
@@ -20,6 +21,7 @@ const initRouter = (app) => {
   app.use('/api/like', likeRouter);
   app.use('/api/notification', notificationRouter);
   app.use('/api/audio', audioRouter);
+  app.use('/api/hashtag', hashtagRouter);
 };
 
 export default initRouter;

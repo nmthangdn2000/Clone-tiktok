@@ -99,6 +99,11 @@ const ERROR = {
   CanNotDeleteAudio: 213,
   CanNotUpdateAudio: 214,
   AudioIsRequired: 116,
+  // Hashtag 221
+  CanNotGetHashtag: 221,
+  CanNotCreateHashtag: 222,
+  CanNotDeleteHashtag: 223,
+  CanNotUpdateHashtag: 224,
 };
 
 const TYPE_ACCOUNT = {

@@ -52,13 +52,13 @@ const unFollower = async (user, id) => {
 };
 
 const unFollowing = async (user, id) => {
-  console.log(id);
   if (!id) throw new Error(ERROR.CanNotUnfollowing);
   const follow = await FollowModel.updateOne(
     { user },
     { $pull: { following: id }, updatedAt: new Date() },
     { multi: true }
   );
+
   if (follow.modifiedCount < 1) throw new Error(ERROR.CanNotUnfollowing);
 
   await unFollower(id, user);

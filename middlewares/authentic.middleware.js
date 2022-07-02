@@ -11,6 +11,7 @@ const verifyUser = (req, res, next) => {
     next();
     // res.send('ok');
   } catch (error) {
+    console.log(error.message);
     return res.status(403).json({
       message: 'Authorization failed',
     });

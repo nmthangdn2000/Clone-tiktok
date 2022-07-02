@@ -2,6 +2,7 @@ import { ERROR, LIMIT, PAGE } from '../common/constants';
 import VideoModel from '../models/video.model';
 import * as audioService from './audio.service';
 import * as likeService from './like.service';
+import * as hashtagService from './hashtag.service';
 import { textToSlug, pagination, deleteFile, takeScreenshorts, takeAudio } from './base.service';
 
 const getAll = async ({ q = '', page = PAGE, limit = LIMIT, sort }) => {
@@ -73,13 +74,13 @@ const create = async (data, user, fileName) => {
   //|| data.categories?.length == 0
   if (!user._id || !fileName) throw new Error(ERROR.CanNotCreateVideo);
   // if (!Array.isArray(data.categories)) data.categories = data.categories.split(',').map((category) => category.trim());
-  if (!data.hashtag) data.hashtag = [];
-  else {
-    data.hashtag = data.hashtag
-      .split('#')
-      .map((h) => h.trim())
-      .filter((f) => f);
-  }
+  // if (!data.hashtag) data.hashtag = [];
+  // else {
+  //   data.hashtag = data.hashtag
+  //     .split('#')
+  //     .map((h) => h.trim())
+  //     .filter((f) => f);
+  // }
   if (data.caption) data.captionSlug = textToSlug(data.caption, false);
   const background = await takeScreenshorts(fileName);
 
@@ -104,6 +105,11 @@ const create = async (data, user, fileName) => {
   });
   const video = await newVideo.save();
   if (!video) throw new Error(ERROR.CanNotCreateVideo);
+
+  const arrayHashtag = data.captionSlug.match(/(^|\s)(#[a-z\d-]+)/gi);
+  arrayHashtag.forEach((element) => {
+    hashtagService.create(element.split('#')[1].trim()).catch((err) => console.log(err));
+  });
 
   likeService.create(video._id, user._id).catch((err) => console.log(err));
 };
