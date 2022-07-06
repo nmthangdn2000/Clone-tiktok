@@ -9,6 +9,7 @@ import * as authApi from '../../apis/auth.api';
 import ModalLoading from '../modal/ModalLoading';
 
 const BottomSheetSignIn = () => {
+  const [txtName, setTxtName] = useState('');
   const [txtEmail, setTxtEmail] = useState('');
   const [txtPassword, setTxtPassword] = useState('');
 
@@ -16,7 +17,7 @@ const BottomSheetSignIn = () => {
 
   const handleClickLogin = async () => {
     try {
-      const result = await authApi.signIn(txtEmail, txtPassword);
+      const result = await authApi.signUp(txtName, txtEmail, txtPassword);
       console.log(result);
     } catch (error) {
       console.log(error);
@@ -33,6 +34,7 @@ const BottomSheetSignIn = () => {
       alignItems="center">
       {showModal && <ModalLoading visible={showModal} />}
       <CText>Login</CText>
+      <CInput iconLeft={HEART_IMG} onChangeText={text => setTxtName(text)} />
       <CInput
         iconLeft={HEART_IMG}
         onChangeText={text => setTxtEmail(text)}

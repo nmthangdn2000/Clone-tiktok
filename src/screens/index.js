@@ -5,12 +5,13 @@ import MainScreen from './main/MainScreen';
 import ProfileScreen from './profile/ProfileScreen';
 import { useSelector } from 'react-redux';
 import ModalSignIn from '../components/modal/ModalSignIn';
-import BottomSheetSignIn from '../components/bottomSheets/BottomSheetSignIn';
+import BottomSheetSignIn from '../components/bottomSheets/BottomSheetSocialAuth';
 
 const { Navigator, Screen } = createMaterialTopTabNavigator();
 
 const Index = () => {
   const currentBottomTab = useSelector(state => state.index.currentBottomTab);
+  const currentUser = useSelector(state => state.index.currentUser);
 
   return (
     <>
@@ -20,7 +21,7 @@ const Index = () => {
           <Screen
             name="ProfileScreenTab"
             component={ProfileScreen}
-            initialParams={{ showHeader: true }}
+            initialParams={{ showHeader: true, id: currentUser }}
             listeners={{
               focus: () => {
                 StatusBar.setBarStyle('dark-content');

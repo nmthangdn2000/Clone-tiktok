@@ -1,9 +1,14 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { SPACING, TEXT, COLOR, BORDER } from '../../configs/styles/index';
-import { AVATA_IMG, Bookmark_IMG } from '../../configs/source';
+import { AVATA_IMG, BOOKMARK_IMG } from '../../configs/source';
+import { UserModel } from '../../models/User.model';
 
-const User = () => {
+export type Props = {
+  user: UserModel;
+};
+
+const User: React.FC<Props> = ({ user }) => {
   const EditProfile = () => {
     return (
       <View style={[styles.buttonStyle, { height: 50 }]}>
@@ -15,25 +20,25 @@ const User = () => {
   return (
     <View style={styles.container}>
       <Image source={AVATA_IMG} style={styles.avata} />
-      <Text style={styles.txtUserName}>@thang_1ldac</Text>
+      <Text style={styles.txtUserName}>@{user.name}</Text>
       <View style={styles.containerFollow}>
         <View style={styles.itemFollow}>
-          <Text style={styles.txtAmountFollow}>14</Text>
+          <Text style={styles.txtAmountFollow}>{user.following}</Text>
           <Text style={styles.txtTitleFollow}>Đang Follow</Text>
         </View>
         <View style={styles.itemFollow}>
-          <Text style={styles.txtAmountFollow}>14</Text>
+          <Text style={styles.txtAmountFollow}>{user.follower}</Text>
           <Text style={styles.txtTitleFollow}>Follow</Text>
         </View>
         <View style={styles.itemFollow}>
-          <Text style={styles.txtAmountFollow}>14</Text>
+          <Text style={styles.txtAmountFollow}>{user.totalLike}</Text>
           <Text style={styles.txtTitleFollow}>Thích</Text>
         </View>
       </View>
       <View style={styles.containerButton}>
         <EditProfile />
         <View style={[styles.buttonStyle, { height: 50 }]}>
-          <Image source={Bookmark_IMG} style={styles.iconButton} />
+          <Image source={BOOKMARK_IMG} style={styles.iconButton} />
         </View>
       </View>
       <View style={styles.containerBio}>

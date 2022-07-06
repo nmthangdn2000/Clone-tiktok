@@ -70,7 +70,7 @@ const VideoItem = React.forwardRef(({ item }, ref) => {
         ref={verticalRef}
         like={like}
         comment={comment}
-        authorAvatar={author.avatar}
+        author={author}
       />
     </Container>
   );

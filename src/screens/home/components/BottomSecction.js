@@ -160,6 +160,8 @@ const BottomSecction = ({ isActive, caption, authorName, audio }) => {
     );
   };
 
+  const fecthData = async () => {};
+
   useEffect(() => {
     if (isActive) {
       triggerAnimation();

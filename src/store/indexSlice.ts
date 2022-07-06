@@ -5,11 +5,13 @@ export type CurrentBottomTab = 'Trang chủ' | undefined;
 interface InitialState {
   currentBottomTab: CurrentBottomTab;
   bottomSheetSignIn: boolean;
+  currentUser: string;
 }
 
 const initialState: InitialState = {
   currentBottomTab: 'Trang chủ',
   bottomSheetSignIn: false,
+  currentUser: '',
 };
 
 const indexSlice = createSlice({
@@ -22,9 +24,13 @@ const indexSlice = createSlice({
     setBottomSheetSignIn: (state, action: PayloadAction<InitialState>) => {
       state.bottomSheetSignIn = action.payload;
     },
+    setCurrentUser: (state, action: PayloadAction<InitialState>) => {
+      state.currentUser = action.payload;
+    },
   },
 });
 
 export default indexSlice.reducer;
 
-export const { setCurrentBottomTab, setBottomSheetSignIn } = indexSlice.actions;
+export const { setCurrentBottomTab, setBottomSheetSignIn, setCurrentUser } =
+  indexSlice.actions;
