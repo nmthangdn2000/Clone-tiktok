@@ -15,7 +15,9 @@ const CInput = ({
   keyboardType = 'default',
   style,
   onFocus,
+  secureTextEntry = false,
 }) => {
+  console.log('secureTextEntry', secureTextEntry);
   return (
     <View style={[styles.container, style]}>
       {iconLeft && (
@@ -33,6 +35,7 @@ const CInput = ({
         value={value}
         keyboardType={keyboardType}
         onFocus={onFocus}
+        secureTextEntry={secureTextEntry}
       />
       {iconRight && (
         <Icon

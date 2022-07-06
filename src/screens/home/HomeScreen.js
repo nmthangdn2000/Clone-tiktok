@@ -15,10 +15,14 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import * as VideoApi from '../../apis/video.api';
+import { useDispatch } from 'react-redux';
+import { setCurrentUser } from '../../store/indexSlice';
 
 const statusbarHeight = StatusBar.currentHeight;
 
 const HomeScreen = () => {
+  const dispatch = useDispatch();
+
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -66,8 +70,10 @@ const HomeScreen = () => {
     const changed = props.changed;
     changed.forEach(item => {
       const cell = cellRefs.current[item.key];
+
       if (cell) {
         if (item.isViewable) {
+          dispatch(setCurrentUser(item.item.author._id));
           cell.playVideo();
           videoPlaying.current = item.key;
         } else {

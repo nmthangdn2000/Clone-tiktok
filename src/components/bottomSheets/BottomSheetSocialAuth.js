@@ -16,6 +16,8 @@ import { BORDER, COLOR, SPACING, TEXT } from '../../configs/styles';
 import BottomSheet from './BottomSheet';
 import { HEIGHT } from '../../configs/constant';
 import { setBottomSheetSignIn } from '../../store/indexSlice';
+import BottomSheetSignIn from './BottomSheetSignIn';
+import BottomSheetSignUp from './BottomSheetSignUp';
 
 const dataSignInWithSocial = [
   {
@@ -137,7 +139,9 @@ const BottomSheetSocialAuth = () => {
               </CText>
             </Container>
             <Container marginTop={SPACING.S5}>
-              <ItemSignIn
+              <BottomSheetSignIn />
+              <BottomSheetSignUp />
+              {/* <ItemSignIn
                 icon={USER_IMG}
                 using={'Sử dụng số điện thoại hoặc email'}
                 color={COLOR.BLACK}
@@ -150,7 +154,7 @@ const BottomSheetSocialAuth = () => {
                     using={item.using}
                   />
                 );
-              })}
+              })} */}
             </Container>
           </Container>
           <Container>

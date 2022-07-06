@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { StatusBar } from 'react-native';
 import MainScreen from './main/MainScreen';
@@ -11,7 +11,6 @@ const { Navigator, Screen } = createMaterialTopTabNavigator();
 
 const Index = () => {
   const currentBottomTab = useSelector(state => state.index.currentBottomTab);
-  const currentUser = useSelector(state => state.index.currentUser);
 
   return (
     <>
@@ -21,7 +20,7 @@ const Index = () => {
           <Screen
             name="ProfileScreenTab"
             component={ProfileScreen}
-            initialParams={{ showHeader: true, id: currentUser }}
+            initialParams={{ showHeader: true }}
             listeners={{
               focus: () => {
                 StatusBar.setBarStyle('dark-content');

@@ -9,8 +9,10 @@ import {
 import React from 'react';
 import { LOGO_IMG, PLAY_ARROW_IMG } from '../../configs/source';
 import { COLOR, TEXT } from '../../configs/styles/index';
+import { urlSourceMedia } from '../../utils/utils';
 
-const ItemVideo = ({ url, NUM_COLUMS }) => {
+const ItemVideo = ({ item, NUM_COLUMS }) => {
+  const { background, like } = item;
   const { width } = useWindowDimensions();
 
   const styles = StyleSheet.create({
@@ -33,10 +35,12 @@ const ItemVideo = ({ url, NUM_COLUMS }) => {
   });
 
   return (
-    <ImageBackground source={LOGO_IMG} style={styles.container}>
+    <ImageBackground
+      source={{ uri: urlSourceMedia(background) }}
+      style={styles.container}>
       <View style={styles.containerView}>
         <Image source={PLAY_ARROW_IMG} tintColor={COLOR.WHITE} />
-        <Text style={styles.txtView}>6548</Text>
+        <Text style={styles.txtView}>{like}</Text>
       </View>
     </ImageBackground>
   );

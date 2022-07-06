@@ -20,18 +20,18 @@ const User: React.FC<Props> = ({ user }) => {
   return (
     <View style={styles.container}>
       <Image source={AVATA_IMG} style={styles.avata} />
-      <Text style={styles.txtUserName}>@{user.name}</Text>
+      <Text style={styles.txtUserName}>@{user?.name}</Text>
       <View style={styles.containerFollow}>
         <View style={styles.itemFollow}>
-          <Text style={styles.txtAmountFollow}>{user.following}</Text>
+          <Text style={styles.txtAmountFollow}>{user?.following}</Text>
           <Text style={styles.txtTitleFollow}>Đang Follow</Text>
         </View>
         <View style={styles.itemFollow}>
-          <Text style={styles.txtAmountFollow}>{user.follower}</Text>
+          <Text style={styles.txtAmountFollow}>{user?.follower}</Text>
           <Text style={styles.txtTitleFollow}>Follow</Text>
         </View>
         <View style={styles.itemFollow}>
-          <Text style={styles.txtAmountFollow}>{user.totalLike}</Text>
+          <Text style={styles.txtAmountFollow}>{user?.totalLike}</Text>
           <Text style={styles.txtTitleFollow}>Thích</Text>
         </View>
       </View>

@@ -1,5 +1,6 @@
 import { interpolate } from 'react-native-reanimated';
 import React from 'react';
+import { SERVER_DOMAIN } from '../constants/constants';
 
 const getTranslateX = () => {
   const range = 1;
@@ -55,4 +56,8 @@ const getMusicAnimated = (value, inputRange, outputRange) => {
   };
 };
 
-export { getTranslateX, getTranslateY, getMusicAnimated };
+const urlSourceMedia = url => {
+  return `${SERVER_DOMAIN}/${url}`;
+};
+
+export { getTranslateX, getTranslateY, getMusicAnimated, urlSourceMedia };

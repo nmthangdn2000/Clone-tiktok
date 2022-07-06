@@ -8,6 +8,7 @@ import GridView from './GridView';
 import Row from './Row';
 import Icon from './Icon';
 import Padding from './Padding';
+import Loading from './Loading';
 
 export {
   CButton,
@@ -20,4 +21,5 @@ export {
   ListView,
   Padding,
   Row,
+  Loading,
 };
