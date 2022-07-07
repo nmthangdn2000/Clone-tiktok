@@ -32,6 +32,10 @@ const HEART_TRUE_IMG = require('../assets/images/heart-true.png');
 const EMOJI_ICON_IMG = require('../assets/images/Emoji-icon.png');
 const A_CONG_ICON_IMG = require('../assets/images/@-icon.png');
 const TIKTOK_ICON_IMG = require('../assets/images/icon-tiktok.png');
+const MAIL_OUTLINE_ICON_IMG = require('../assets/images/mail_outline.png');
+const LOCK_OUTLINE_ICON = require('../assets/images/lock_outline.png');
+const REMOVE_EYE_ICON = require('../assets/images/remove_red_eye.png');
+const CLOSE_EYE_ICON = require('../assets/images/close_eye.png');
 
 const FACEBOOK_ICON = require('../assets/icon-social/facebook.png');
 const INSTAGRAM_ICON = require('../assets/icon-social/instagram.png');
@@ -119,4 +123,8 @@ export {
   KAKAOTALK_ICON,
   LINE_ICON,
   TWITTER_ICON,
+  LOCK_OUTLINE_ICON,
+  REMOVE_EYE_ICON,
+  MAIL_OUTLINE_ICON_IMG,
+  CLOSE_EYE_ICON,
 };
