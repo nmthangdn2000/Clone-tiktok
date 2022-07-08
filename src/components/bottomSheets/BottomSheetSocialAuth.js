@@ -223,7 +223,10 @@ const BottomSheetSocialAuth = () => {
               </Container>
             </Animated.View>
           ) : currentForm === 1 ? (
-            <FormSignIn setCurrentForm={setCurrentForm} />
+            <FormSignIn
+              setCurrentForm={setCurrentForm}
+              handleClickClose={handleClickClose}
+            />
           ) : (
             <FormSignUp
               setCurrentForm={setCurrentForm}
@@ -239,7 +242,9 @@ const BottomSheetSocialAuth = () => {
           left={0}
           right={0}>
           <CText textAlign="center" fontSize={16}>
-            Bạn đã có tài khoảng?{' '}
+            {currentForm === 1
+              ? 'Bạn chưa có tài khoảng?'
+              : 'Bạn đã có tài khoảng?'}{' '}
             <CText
               text={TEXT.STRONG}
               color={COLOR.DANGER2}

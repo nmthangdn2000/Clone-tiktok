@@ -9,7 +9,6 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Container, CText, Icon } from '../../../components';
 import {
-  AVATA_IMG,
   BOOKMARK_FILLED_IMG,
   COMMENT_ICON_IMG,
   HEART_IMG,
@@ -19,11 +18,12 @@ import {
 import { BORDER, COLOR, SPACING } from '../../../configs/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsShowComment } from '../../../store/mainScreenSlice';
-import { setBottomSheetSignIn } from '../../../store/indexSlice';
-import { SERVER_DOMAIN } from '../../../constants/constants';
+import { KEY_STORAGE, SERVER_DOMAIN } from '../../../constants/constants';
+import * as likeApi from '../../../apis/like.api';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const VerticalSecction = React.forwardRef(
-  ({ like = 0, comment = 0, author }, ref) => {
+  ({ idVideo, like = 0, comment = 0, author }, ref) => {
     const dispatch = useDispatch();
     const [amountLike, setAmountLike] = useState(Number(like));
 
@@ -40,7 +40,7 @@ const VerticalSecction = React.forwardRef(
     }, []);
 
     const handleClickHeart = useCallback(
-      doubleTap => {
+      async doubleTap => {
         if (doubleTap && heartValue.value !== 0) {
         } else {
           heartValue.value =
@@ -54,17 +54,25 @@ const VerticalSecction = React.forwardRef(
                   easing: Easing.linear,
                 });
         }
-        setAmountLike(
+        const currentAmountLike =
           doubleTap && heartValue.value !== 0
             ? amountLike
             : heartValue.value < 0.3
             ? amountLike + 1
             : amountLike === 0
             ? 0
-            : amountLike - 1,
-        );
+            : amountLike - 1;
+
+        const TOKEN = await AsyncStorage.getItem(KEY_STORAGE.TOKEN);
+
+        if (currentAmountLike > amountLike) {
+          likeApi.like(idVideo, 'like', TOKEN);
+        } else {
+          likeApi.like(idVideo, 'dislike', TOKEN);
+        }
+        setAmountLike(currentAmountLike);
       },
-      [heartValue, amountLike],
+      [heartValue, amountLike, idVideo],
     );
 
     useImperativeHandle(ref, () => ({
@@ -100,8 +108,8 @@ const VerticalSecction = React.forwardRef(
     }, [isShowComment, dispatch]);
 
     const handleShowBottomSheetSignIn = useCallback(() => {
-      dispatch(setBottomSheetSignIn(true));
-    }, [dispatch]);
+      // dispatch(setBottomSheetSignIn(true));
+    }, []);
 
     return (
       <Container position="absolute" right={SPACING.S2} bottom={72}>

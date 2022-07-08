@@ -2,7 +2,7 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import CText from '../CText';
 import Container from '../Container';
-import { COLOR, SPACING, TEXT } from '../../configs/styles';
+import { BORDER, COLOR, SPACING, TEXT } from '../../configs/styles';
 import CInput from '../CInput';
 import {
   CLOSE_EYE_ICON,
@@ -23,7 +23,7 @@ const BottomSheetSignUp = ({ setCurrentForm, backToScreenSocial }) => {
 
   const [showModal, setShowModal] = useState(false);
 
-  const handleClickLogin = async () => {
+  const handleClickSignUp = async () => {
     try {
       setShowModal(true);
       const result = await authApi.signUp(txtName, txtEmail, txtPassword);
@@ -79,13 +79,26 @@ const BottomSheetSignUp = ({ setCurrentForm, backToScreenSocial }) => {
           />
         </Container>
 
-        <TouchableOpacity onPress={handleClickLogin}>
-          <Container padding={SPACING.S2} width="100%">
-            <CText>Đăng ký</CText>
-          </Container>
-        </TouchableOpacity>
+        <Container
+          marginTop={SPACING.S5}
+          borderRadius={BORDER.SMALL}
+          padding={SPACING.S3}
+          backgroundColor={COLOR.DANGER2}
+          width="100%">
+          <TouchableOpacity onPress={handleClickSignUp}>
+            <CText
+              color={COLOR.WHITE}
+              text={TEXT.STRONG}
+              width="100%"
+              textAlign="center"
+              fontSize={16}>
+              Đăng ký
+            </CText>
+          </TouchableOpacity>
+        </Container>
         <Container padding={SPACING.S2} width="100%" paddingTop={SPACING.S10}>
           <CText
+            textAlign="center"
             onPress={() => {
               setCurrentForm(0);
               backToScreenSocial();

@@ -5,7 +5,7 @@ import { SPACING, TEXT } from '../../../configs/styles';
 
 const Title = ({ lable }) => {
   return (
-    <CText text={TEXT.STRONG} fontSize={16} style={styles.txt}>
+    <CText text={TEXT.STRONG} fontSize={16} marginVertical={SPACING.S1}>
       {lable}
     </CText>
   );
@@ -13,8 +13,4 @@ const Title = ({ lable }) => {
 
 export default Title;
 
-const styles = StyleSheet.create({
-  txt: {
-    marginVertical: SPACING.S1,
-  },
-});
+const styles = StyleSheet.create({});

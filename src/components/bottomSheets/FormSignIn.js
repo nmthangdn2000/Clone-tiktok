@@ -1,8 +1,8 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import CText from '../CText';
 import Container from '../Container';
-import { COLOR, SPACING, TEXT } from '../../configs/styles';
+import { COLOR, SPACING, TEXT, BORDER } from '../../configs/styles';
 import CInput from '../CInput';
 import {
   CLOSE_EYE_ICON,
@@ -13,23 +13,29 @@ import {
 import * as authApi from '../../apis/auth.api';
 import ModalLoading from '../modal/ModalLoading';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { KEY_STORAGE } from '../../constants/constants';
 
-const BottomSheetSignIn = () => {
+const BottomSheetSignIn = ({ handleClickClose }) => {
   const [txtEmail, setTxtEmail] = useState('');
   const [txtPassword, setTxtPassword] = useState('');
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [showModal, setShowModal] = useState(false);
 
-  const handleClickLogin = async () => {
-    try {
-      setShowModal(false);
-      const result = await authApi.signIn(txtEmail, txtPassword);
-      console.log(result);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setShowModal(true);
-    }
+  const handleClickLogin = () => {
+    setShowModal(true);
+    setTimeout(async () => {
+      try {
+        const result = await authApi.signIn(txtEmail, txtPassword);
+        await AsyncStorage.setItem(KEY_STORAGE.TOKEN, result.data.token);
+        await AsyncStorage.setItem(KEY_STORAGE.ID_USER, result.data._id);
+        handleClickClose();
+      } catch (error) {
+        Alert.alert(error.message);
+      } finally {
+        setShowModal(false);
+      }
+    }, 2000);
   };
 
   return (
@@ -73,11 +79,23 @@ const BottomSheetSignIn = () => {
           />
         </Container>
 
-        <TouchableOpacity onPress={handleClickLogin}>
-          <Container padding={SPACING.S2} width="100%">
-            <CText>Đăng nhập</CText>
-          </Container>
-        </TouchableOpacity>
+        <Container
+          marginTop={SPACING.S5}
+          borderRadius={BORDER.SMALL}
+          padding={SPACING.S3}
+          backgroundColor={COLOR.DANGER2}
+          width="100%">
+          <TouchableOpacity onPress={handleClickLogin}>
+            <CText
+              color={COLOR.WHITE}
+              text={TEXT.STRONG}
+              width="100%"
+              textAlign="center"
+              fontSize={16}>
+              Đăng nhập
+            </CText>
+          </TouchableOpacity>
+        </Container>
       </Container>
     </Animated.View>
   );

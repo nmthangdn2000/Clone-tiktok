@@ -14,6 +14,8 @@ import {
 import * as userApi from '../../apis/user.api';
 import * as videoApi from '../../apis/video.api';
 import { useSelector } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { KEY_STORAGE } from '../../constants/constants';
 
 const statusbarHeight = StatusBar.currentHeight;
 
@@ -46,27 +48,55 @@ const ProfileScreen = () => {
 
   const [user, setUser] = useState(null);
   const [videos, setVideos] = useState([]);
+  const [videosLike, setVideosLike] = useState([]);
+  const [videoPrivate, setVideoPrivate] = useState([]);
 
   const fetchData = useCallback(async () => {
     try {
-      const id = route.params.id ? route.params.id : currentUser;
+      let dataVideo = null;
+      let id = null;
+      let token = null;
+      // user id và privacy.like true thì get 2 loại
+      // user id và privacy.like false thì get 1 loại
+      // user auth thì lấy hết
+      if (!showHeader) {
+        token = await AsyncStorage.getItem(KEY_STORAGE.TOKEN);
+        id = await AsyncStorage.getItem(KEY_STORAGE.ID_USER);
+        dataVideo = videoApi.getVideoByUserAuth(token);
+      } else {
+        id = route.params.id ? route.params.id : currentUser;
+        dataVideo = videoApi.getVideoByUserId(id);
+      }
       const dataUser = userApi.getUserById(id);
-      const dataVideo = videoApi.getVideoByUserId(id);
 
       const [userInfor, listVideo] = await Promise.all([dataUser, dataVideo]);
+
       setUser(userInfor.data);
-      setVideos(listVideo.data.data);
+      setVideos(listVideo.data.data || []);
+
+      let getVidesLike = [];
+      if (!showHeader && userInfor.data.privacy.like) {
+        getVidesLike = await videoApi.getVideoLikeByUserAuth(token);
+      } else {
+        getVidesLike = await videoApi.getVideoLikeByIdUser(userInfor.data._id);
+      }
+
+      setVideosLike(getVidesLike.data || []);
+
+      if (!showHeader) {
+        const videoP = await videoApi.getVideoByUserAuth(token, true);
+        setVideoPrivate(videoP.data.data || []);
+      }
     } catch (error) {
       console.log(error);
     }
-  }, [currentUser, route]);
+  }, [currentUser, route, showHeader]);
 
   useEffect(() => {
-    console.log(isFocused);
     if (isFocused) {
       fetchData();
     }
-  }, [isFocused, fetchData]);
+  }, [isFocused, fetchData, showHeader]);
 
   return (
     <Container
@@ -103,8 +133,18 @@ const ProfileScreen = () => {
         <Tabs.Tab name="SELECTED_IMG">
           <ListVideo dataList={videos} />
         </Tabs.Tab>
-        <Tabs.Tab name="HEARTICON_LOCK_IMG">
-          {/* <ListVideo dataList={[]} /> */}
+
+        {!showHeader ? (
+          <Tabs.Tab name={'LOCK_OUTLINE_ICON'}>
+            <ListVideo dataList={videoPrivate} />
+          </Tabs.Tab>
+        ) : null}
+
+        <Tabs.Tab
+          name={
+            user?.privacy.like ? 'HEARTICON_LOCK_IMG' : 'HEART_OUTLINE_IMG'
+          }>
+          <ListVideo dataList={videosLike} />
         </Tabs.Tab>
       </Tabs.Container>
     </Container>

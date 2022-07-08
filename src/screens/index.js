@@ -31,7 +31,7 @@ const Index = () => {
           <></>
         )}
       </Navigator>
-      <ModalSignIn isShow={true} />
+      <ModalSignIn />
       <BottomSheetSignIn />
     </>
   );

@@ -1,14 +1,22 @@
-import { Modal } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import { Modal, Pressable } from 'react-native';
+import React, { useCallback, useState } from 'react';
 import { Container, Icon, CText } from '../';
 import { CLOSE_IMG, TIKTOK_ICON_IMG } from '../../configs/source';
 import { BORDER, COLOR, SPACING, TEXT } from '../../configs/styles';
+import { useDispatch, useSelector } from 'react-redux';
+import { setBottomSheetSignIn, setModalSignIn } from '../../store/indexSlice';
 
-const ModalSignIn = ({ isShow = false }) => {
-  const [visible, setVisible] = useState(isShow);
+const ModalSignIn = () => {
+  const dispatch = useDispatch();
+  const visible = useSelector(state => state.index.modalSignIn);
   const handleClickClose = () => {
-    setVisible(false);
+    dispatch(setModalSignIn(false));
   };
+
+  const handleShowBottomSheetSignIn = useCallback(() => {
+    dispatch(setModalSignIn(false));
+    dispatch(setBottomSheetSignIn(true));
+  }, [dispatch]);
 
   return (
     <Modal visible={visible} transparent={true}>
@@ -60,7 +68,9 @@ const ModalSignIn = ({ isShow = false }) => {
             justifyContent="center"
             alignItems="center"
             marginTop={SPACING.S3}>
-            <CText color={COLOR.WHITE}>Đăng nhập hoặc đăng ký</CText>
+            <Pressable onPress={handleShowBottomSheetSignIn}>
+              <CText color={COLOR.WHITE}>Đăng nhập hoặc đăng ký</CText>
+            </Pressable>
           </Container>
         </Container>
       </Container>

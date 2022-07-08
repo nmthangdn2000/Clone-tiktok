@@ -19,7 +19,7 @@ const getVideoByUserId = async id => {
   return result.data;
 };
 
-const getVideoByUserAuth = async (page = 1, token, privacy = false) => {
+const getVideoByUserAuth = async (token, privacy = false, page = 1) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
@@ -29,4 +29,27 @@ const getVideoByUserAuth = async (page = 1, token, privacy = false) => {
   return result.data;
 };
 
-export { getVideo, getVideoById, getVideoByUserId, getVideoByUserAuth };
+const getVideoLikeByUserAuth = async (token, page = 1, limit = 40) => {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  const url = `${SERVER_API_URL}/like?page=${page}&q=${limit}`;
+  const result = await axios.get(url, config);
+  return result.data;
+};
+
+const getVideoLikeByIdUser = async (idUser, page = 1, limit = 40) => {
+  const url = `${SERVER_API_URL}/like/${idUser}?page=${page}&q=${limit}`;
+  const result = await axios.get(url);
+  return result.data;
+};
+
+export {
+  getVideo,
+  getVideoById,
+  getVideoByUserId,
+  getVideoByUserAuth,
+  getVideoLikeByIdUser,
+  getVideoLikeByUserAuth,
+};

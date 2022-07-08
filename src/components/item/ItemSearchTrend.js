@@ -16,7 +16,8 @@ const ItemSearchTrend = ({ text, onPress, dotColor = COLOR.GRAY }) => {
         <View style={[styles.dot, color]} />
       </View>
       <CText
-        style={styles.txt}
+        flmaxWidthex={width - 22 * 2 - SPACING.S4 * 2}
+        paddingHorizontal={SPACING.S2}
         text={TEXT.REGULAR}
         color={COLOR.setOpacity(COLOR.BLACK, 0.8)}
         numberOfLines={1}
@@ -51,9 +52,5 @@ const styles = StyleSheet.create({
     height: 8,
     borderRadius: BORDER.PILL,
     backgroundColor: 'red',
-  },
-  txt: {
-    maxWidth: width - 22 * 2 - SPACING.S4 * 2,
-    paddingHorizontal: SPACING.S2,
   },
 });

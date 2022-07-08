@@ -6,12 +6,14 @@ interface InitialState {
   currentBottomTab: CurrentBottomTab;
   bottomSheetSignIn: boolean;
   currentUser: string;
+  modalSignIn: boolean;
 }
 
 const initialState: InitialState = {
   currentBottomTab: 'Trang chủ',
   bottomSheetSignIn: false,
   currentUser: '',
+  modalSignIn: true,
 };
 
 const indexSlice = createSlice({
@@ -27,10 +29,17 @@ const indexSlice = createSlice({
     setCurrentUser: (state, action: PayloadAction<InitialState>) => {
       state.currentUser = action.payload;
     },
+    setModalSignIn: (state, action: PayloadAction<InitialState>) => {
+      state.modalSignIn = action.payload;
+    },
   },
 });
 
 export default indexSlice.reducer;
 
-export const { setCurrentBottomTab, setBottomSheetSignIn, setCurrentUser } =
-  indexSlice.actions;
+export const {
+  setCurrentBottomTab,
+  setBottomSheetSignIn,
+  setCurrentUser,
+  setModalSignIn,
+} = indexSlice.actions;

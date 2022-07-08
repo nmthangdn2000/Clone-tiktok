@@ -8,13 +8,16 @@ import { BORDER, COLOR, SPACING, TEXT } from '../../configs/styles';
 
 import { useDispatch } from 'react-redux';
 import { setTxtSearch } from '../../store/searchSlice';
+import { urlSourceMedia } from '../../utils/utils';
 
 const ItemSearchSuggestions = ({ item }) => {
-  const { text, onPress, avatar } = item.item;
+  const { text, avatar } = item.item;
   const dispatch = useDispatch();
 
   return (
-    <Pressable style={styles.container} onPress={onPress}>
+    <Pressable
+      style={styles.container}
+      onPress={() => dispatch(setTxtSearch(text))}>
       <Icon
         source={SEARCH_IMG}
         tintColor={COLOR.setOpacity(COLOR.BLACK, 0.6)}
@@ -22,17 +25,18 @@ const ItemSearchSuggestions = ({ item }) => {
         width={22}
       />
       <CText
-        style={styles.txt}
+        flex={1}
+        marginLeft={SPACING.S2}
         text={TEXT.REGULAR}
-        tintColor={COLOR.setOpacity(COLOR.BLACK, 0.8)}
+        color={COLOR.setOpacity(COLOR.BLACK, 0.8)}
         fontSize={16}
         numberOfLines={1}>
         {text}
       </CText>
-      <Image source={avatar} style={styles.avatar} />
+      <Image source={{ uri: urlSourceMedia(avatar) }} style={styles.avatar} />
       <Icon
         source={CALL_RECEIVED_IMG}
-        color={COLOR.setOpacity(COLOR.BLACK, 0.6)}
+        tintColor={COLOR.setOpacity(COLOR.BLACK, 0.6)}
         height={22}
         width={22}
         onPress={() => dispatch(setTxtSearch(text))}

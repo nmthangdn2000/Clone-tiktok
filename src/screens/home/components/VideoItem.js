@@ -12,7 +12,7 @@ import { SERVER_DOMAIN } from '../../../constants/constants';
 const { width, height } = Dimensions.get('window');
 
 const VideoItem = React.forwardRef(({ item }, ref) => {
-  const { caption, url, author, audio, like, comment } = item;
+  const { _id, caption, url, author, audio, like, comment } = item;
   const verticalRef = useRef();
   const bottomHeight = useBottomTabBarHeight();
 
@@ -71,6 +71,7 @@ const VideoItem = React.forwardRef(({ item }, ref) => {
         like={like}
         comment={comment}
         author={author}
+        idVideo={_id}
       />
     </Container>
   );

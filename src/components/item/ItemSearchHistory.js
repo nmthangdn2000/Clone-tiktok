@@ -16,7 +16,8 @@ const ItemSearchHistory = ({ text, onPress }) => {
         width={22}
       />
       <CText
-        style={styles.txt}
+        flex={1}
+        marginLeft={SPACING.S2}
         text={TEXT.REGULAR}
         color={COLOR.setOpacity(COLOR.BLACK, 0.8)}
         fontSize={16}>
@@ -39,9 +40,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingVertical: SPACING.S1,
     alignItems: 'center',
-  },
-  txt: {
-    flex: 1,
-    marginLeft: SPACING.S2,
   },
 });

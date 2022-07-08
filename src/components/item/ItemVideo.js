@@ -12,7 +12,7 @@ import { COLOR, TEXT } from '../../configs/styles/index';
 import { urlSourceMedia } from '../../utils/utils';
 
 const ItemVideo = ({ item, NUM_COLUMS }) => {
-  const { background, like } = item;
+  const { background, like, empty } = item;
   const { width } = useWindowDimensions();
 
   const styles = StyleSheet.create({
@@ -33,17 +33,22 @@ const ItemVideo = ({ item, NUM_COLUMS }) => {
       color: COLOR.WHITE,
     },
   });
-
-  return (
-    <ImageBackground
-      source={{ uri: urlSourceMedia(background) }}
-      style={styles.container}>
-      <View style={styles.containerView}>
-        <Image source={PLAY_ARROW_IMG} tintColor={COLOR.WHITE} />
-        <Text style={styles.txtView}>{like}</Text>
-      </View>
-    </ImageBackground>
-  );
+  if (!empty) {
+    return (
+      <ImageBackground
+        source={{ uri: urlSourceMedia(background) }}
+        style={styles.container}>
+        <View style={styles.containerView}>
+          <Image source={PLAY_ARROW_IMG} tintColor={COLOR.WHITE} />
+          <Text style={styles.txtView}>{like}</Text>
+        </View>
+      </ImageBackground>
+    );
+  } else {
+    return (
+      <View style={[styles.container, { backgroundColor: COLOR.WHITE }]} />
+    );
+  }
 };
 
 export default ItemVideo;

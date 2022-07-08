@@ -1,28 +1,45 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { COLOR, SPACING } from '../../../configs/styles';
 import ListView from '../../../components/ListView';
 import { AVATA_IMG } from '../../../configs/source';
 import ItemSearchSuggestions from '../../../components/item/ItemSearchSuggestions';
+import { useSelector } from 'react-redux';
+import * as userApi from '../../../apis/user.api';
 
 const SuggestionsSearch = () => {
-  const data = [
-    {
-      text: 'thang dep trai',
-      onPress: () => console.log('thang dep trai'),
-      avatar: AVATA_IMG,
-    },
-    {
-      text: 'thang dep trai',
-      onPress: () => console.log('thang dep trai'),
-      avatar: AVATA_IMG,
-    },
-    {
-      text: 'thang dep trai',
-      onPress: () => console.log('thang dep trai'),
-      avatar: AVATA_IMG,
-    },
-  ];
+  const txtSearch = useSelector(state => state.search.txtSearch);
+  const typingTimeoutRef = useRef(null);
+
+  const [data, setData] = useState([]);
+
+  const fetchData = async text => {
+    try {
+      const search = await userApi.getUser(text);
+      const result = search.data.data.map(e => {
+        return {
+          text: e.name,
+          avatar: e.avatar,
+        };
+      });
+      setData(result || []);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (txtSearch?.length > 0) {
+      if (typingTimeoutRef.current) {
+        clearTimeout(typingTimeoutRef.current);
+      }
+
+      typingTimeoutRef.current = setTimeout(() => {
+        fetchData(txtSearch);
+      }, 500);
+    }
+  }, [txtSearch]);
+
   return (
     <View style={styles.container}>
       <ListView

@@ -1,9 +1,11 @@
 import { StatusBar, StyleSheet, View } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import CInput from '../../components/CInput';
 import { CLOSE_IMG, SEARCH_IMG } from '../../configs/source';
 import { COLOR, SPACING, TEXT } from '../../configs/styles';
 import TopTab from './TopTab';
+import SuggestionsSearch from './components/SuggestionsSearch';
+import DefaultSearch from './components/DefaultSearch';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { setTxtSearch } from '../../store/searchSlice';
@@ -17,6 +19,8 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Container } from '../../components';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import Asyncstorage from '@react-native-async-storage/async-storage';
+import { KEY_STORAGE } from '../../constants/constants';
 
 const statusbarHeight = StatusBar.currentHeight;
 
@@ -57,6 +61,12 @@ const DiscoverScreen = () => {
     }
   }, [txtSearch, marginRight, opacity]);
 
+  const handleSearch = async () => {
+    let searchHis = await Asyncstorage.getItem(KEY_STORAGE.SEARCH_HIS);
+    searchHis = JSON.parse(searchHis);
+    searchHis.push(txtSearch);
+  };
+
   return (
     <Container
       flex={1}
@@ -84,7 +94,9 @@ const DiscoverScreen = () => {
         </Animated.View>
       </View>
 
-      <TopTab />
+      <SuggestionsSearch />
+      {/* <DefaultSearch /> */}
+      {/* <TopTab /> */}
     </Container>
   );
 };

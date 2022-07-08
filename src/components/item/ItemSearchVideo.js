@@ -26,7 +26,11 @@ const ItemSearchVideo = ({ index, item }) => {
           <View style={styles.avatar}>
             <Image source={author.avatar} style={styles.avatar} />
           </View>
-          <CText numberOfLines={1} style={styles.txtName}>
+          <CText
+            numberOfLines={1}
+            flexGrow={1}
+            maxWidth={'60%'}
+            paddingHorizontal={SPACING.S1}>
             {author.name}
           </CText>
           <View style={styles.numHeart}>
@@ -74,10 +78,5 @@ const styles = StyleSheet.create({
   numHeart: {
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  txtName: {
-    flexGrow: 1,
-    maxWidth: '60%',
-    paddingHorizontal: SPACING.S1,
   },
 });
