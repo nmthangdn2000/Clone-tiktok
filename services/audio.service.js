@@ -1,11 +1,25 @@
-import { ERROR } from '../common/constants';
+import { ERROR, LIMIT, PAGE } from '../common/constants';
 import AudioModel from '../models/audio.model';
-import { deleteFile } from './base.service';
+import { deleteFile, pagination } from './base.service';
 
-const getAll = async (query) => {
-  const audio = await AudioModel.find({});
-  if (!audio) throw new Error(ERROR.CanNotGetAudio);
-  return audio;
+const getAll = async ({ q = '', page = PAGE, limit = LIMIT, sort }) => {
+  const query = q
+    ? {
+        $text: { $search: q },
+      }
+    : {};
+
+  const count = AudioModel.find(query).countDocuments();
+  const getAudio = AudioModel.find(query);
+
+  const [total, audios] = await Promise.all([count, getAudio]);
+  if (!audios) throw new Error(ERROR.CanNotGetAudio);
+
+  return {
+    data: audios,
+    currentPage: Number(page),
+    totalPage: pagination(total, limit),
+  };
 };
 
 const getById = async (id) => {

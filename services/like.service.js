@@ -46,7 +46,8 @@ const dislike = async (user, id) => {
   );
   if (!like) throw new Error(ERROR.CanNotDislike);
 
-  await videoService.updateById(id, { $inc: { like: -1 } });
+  const numberLike = like.users.length > 0 ? ike.users.length - 1 : like.users.length;
+  await videoService.updateById(id, { like: numberLike });
 };
 
 const like = async (user, id) => {

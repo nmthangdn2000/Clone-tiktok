@@ -14,4 +14,6 @@ const model = {
   url: String,
 };
 
-export default BaseModel.createModel({ name, model });
+const index = { name: 'text', author: 'text' };
+
+export default BaseModel.createModel({ name, model, index });
