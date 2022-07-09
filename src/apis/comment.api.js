@@ -7,4 +7,17 @@ const getComment = async (idComment, page = 1) => {
   return result.data;
 };
 
-export { getComment };
+const postComment = async (video, comment, token) => {
+  const data = {
+    video,
+    comment,
+  };
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const url = `${SERVER_API_URL}/comment`;
+  const result = await axios.post(url, data, config);
+  return result.data;
+};
+
+export { getComment, postComment };

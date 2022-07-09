@@ -1,18 +1,23 @@
 import React from 'react';
 import Container from '../Container';
 import Icon from '../Icon';
-import { AVATA_IMG, HEART_OUTLINE_IMG } from '../../configs/source';
+import { HEART_OUTLINE_IMG } from '../../configs/source';
 import CText from '../CText';
 import { BORDER, COLOR, SPACING, TEXT } from '../../configs/styles';
+import { urlSourceMedia } from '../../utils/utils';
+import moment from 'moment';
+import 'moment/locale/vi';
 
-const ItemComment = () => {
+const ItemComment = ({ item }) => {
+  const { _id, comment, user, updatedAt } = item;
+
   return (
     <Container
       flexDirection="row"
       alignItems="flex-start"
       marginVertical={SPACING.S1}>
       <Icon
-        source={AVATA_IMG}
+        source={{ uri: urlSourceMedia(user.avatar) }}
         width={32}
         height={32}
         borderRadius={BORDER.PILL}
@@ -27,15 +32,14 @@ const ItemComment = () => {
           color={COLOR.GRAY}
           fontSize={13}
           lineHeight={13}>
-          nmthang
+          {user.name}
         </CText>
         <CText numberOfLines={2} color={COLOR.BLACK} fontSize={15}>
-          akldj ksajdkl jaskljd lkasjdkl jqwklje klqwjkljas kldjklas jkldj
-          aklsdj klasjkld jaskld jklasd qwe qwe qweqw e
+          {comment}
         </CText>
         <Container flexDirection="row" alignItems="center">
           <CText color={COLOR.GRAY} fontSize={13} marginRight={SPACING.S2}>
-            5h
+            {moment(updatedAt).fromNow()}
           </CText>
           <CText text={TEXT.SMALL_STRONG} color={COLOR.GRAY} fontSize={12}>
             Reply

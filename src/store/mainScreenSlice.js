@@ -18,4 +18,4 @@ const mainScreenSlice = createSlice({
 
 export default mainScreenSlice.reducer;
 
-export const { setIsShowComment } = mainScreenSlice.actions;
+export const { setIsShowComment, setCurrentComment } = mainScreenSlice.actions;

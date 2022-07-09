@@ -17,7 +17,10 @@ import {
 } from '../../../configs/source';
 import { BORDER, COLOR, SPACING } from '../../../configs/styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsShowComment } from '../../../store/mainScreenSlice';
+import {
+  setCurrentComment,
+  setIsShowComment,
+} from '../../../store/mainScreenSlice';
 import { KEY_STORAGE, SERVER_DOMAIN } from '../../../constants/constants';
 import * as likeApi from '../../../apis/like.api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -105,8 +108,9 @@ const VerticalSecction = React.forwardRef(
     };
 
     const handleShowComment = useCallback(() => {
-      dispatch(setIsShowComment(!isShowComment));
-    }, [isShowComment, dispatch]);
+      dispatch(setIsShowComment(true));
+      dispatch(setCurrentComment(idVideo));
+    }, [dispatch, idVideo]);
 
     const handleShowBottomSheetSignIn = useCallback(() => {
       // dispatch(setBottomSheetSignIn(true));

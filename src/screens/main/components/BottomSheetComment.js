@@ -11,24 +11,24 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setIsShowComment } from '../../../store/mainScreenSlice';
 import * as commentApi from '../../../apis/comment.api';
 
-const data = [
-  { key: '1' },
-  { key: '2' },
-  { key: '3' },
-  { key: '4' },
-  { key: '5' },
-  { key: '6' },
-  { key: '7' },
-  { key: '8' },
-  { key: '9' },
-  { key: '10' },
-  { key: '11' },
-  { key: '6' },
-  { key: '7' },
-  { key: '8' },
-  { key: '9' },
-  { key: '10' },
-];
+// const data = [
+//   { key: '1' },
+//   { key: '2' },
+//   { key: '3' },
+//   { key: '4' },
+//   { key: '5' },
+//   { key: '6' },
+//   { key: '7' },
+//   { key: '8' },
+//   { key: '9' },
+//   { key: '10' },
+//   { key: '11' },
+//   { key: '6' },
+//   { key: '7' },
+//   { key: '8' },
+//   { key: '9' },
+//   { key: '10' },
+// ];
 
 const BottomSheetComment = () => {
   const dispatch = useDispatch();
@@ -42,7 +42,8 @@ const BottomSheetComment = () => {
 
   const fetchData = useCallback(async () => {
     try {
-      const result = commentApi.getComment(currentComment);
+      const result = await commentApi.getComment(currentComment);
+
       setData(result.data);
     } catch (error) {
       console.log(error);
@@ -61,7 +62,8 @@ const BottomSheetComment = () => {
 
   const handleClickClose = useCallback(() => {
     bottomSheetRef?.current?.scrollTo(0);
-  }, []);
+    dispatch(setIsShowComment(false));
+  }, [dispatch]);
 
   const closeBottomSheet = () => {
     dispatch(setIsShowComment(false));
@@ -73,7 +75,12 @@ const BottomSheetComment = () => {
       HeaderComponent={
         <HeaderBottomSheetComment handleClickClose={handleClickClose} />
       }
-      FooterComponent={<FooterBottomSheetComment />}
+      FooterComponent={
+        <FooterBottomSheetComment
+          idVideo={currentComment}
+          fetchData={fetchData}
+        />
+      }
       closeBottomSheet={closeBottomSheet}>
       <Container padding={SPACING.S3} height={HEIGHT / 2} marginBottom={68}>
         {isLoading ? (

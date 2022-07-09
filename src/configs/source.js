@@ -36,6 +36,7 @@ const MAIL_OUTLINE_ICON_IMG = require('../assets/images/mail_outline.png');
 const LOCK_OUTLINE_ICON = require('../assets/images/lock_outline.png');
 const REMOVE_EYE_ICON = require('../assets/images/remove_red_eye.png');
 const CLOSE_EYE_ICON = require('../assets/images/close_eye.png');
+const BUTTON_POST_COMMENT_ICON = require('../assets/images/button_post_comment.png');
 
 const FACEBOOK_ICON = require('../assets/icon-social/facebook.png');
 const INSTAGRAM_ICON = require('../assets/icon-social/instagram.png');
@@ -127,4 +128,5 @@ export {
   REMOVE_EYE_ICON,
   MAIL_OUTLINE_ICON_IMG,
   CLOSE_EYE_ICON,
+  BUTTON_POST_COMMENT_ICON,
 };
