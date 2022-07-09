@@ -37,6 +37,13 @@ const LOCK_OUTLINE_ICON = require('../assets/images/lock_outline.png');
 const REMOVE_EYE_ICON = require('../assets/images/remove_red_eye.png');
 const CLOSE_EYE_ICON = require('../assets/images/close_eye.png');
 const BUTTON_POST_COMMENT_ICON = require('../assets/images/button_post_comment.png');
+const PLACE_ICON = require('../assets/images/place.png');
+const MESSAGE_OUTLINE_ICON = require('../assets/images/message_icon_outline.png');
+const ARROW_FORWARD_IOS_ICON = require('../assets/images/arrow_forward_ios.png');
+const ARROW_BACK_IOS_ICON = require('../assets/images/arrow_back_ios.png');
+const MORE_HORIZ_ICON = require('../assets/images/more_horiz.png');
+const FIBER_SMART_RECORD_ICON = require('../assets/images/fiber_smart_record.png');
+const STITCH_ICON = require('../assets/images/stitch.png');
 
 const FACEBOOK_ICON = require('../assets/icon-social/facebook.png');
 const INSTAGRAM_ICON = require('../assets/icon-social/instagram.png');
@@ -49,7 +56,6 @@ const TWITTER_ICON = require('../assets/icon-social/twitter.png');
 const LOGO_IMG = require('../assets/images/TikTok-Logo.png');
 const Illustrations_BG_IMG = require('../assets/images/Illustrations.png');
 const DISC_IMG = require('../assets/images/disc.png');
-const MESSAGE_CIRCLE_IMG = require('../assets/images/message-circle.png');
 const MUSIC_NOTE_IMG = require('../assets/images/music-note.png');
 const NEW_VIDEO_IMG = require('../assets/images/new-video.png');
 const NEW_VIDEO_DART_IMG = require('../assets/images/new-video-dart.png');
@@ -72,7 +78,6 @@ export {
   HEART_IMG,
   HOME_IMG,
   HOME_FILLED_IMG,
-  MESSAGE_CIRCLE_IMG,
   MESSAGE_IMG,
   MESSAGE_FILLED_IMG,
   MUSIC_NOTE_IMG,
@@ -129,4 +134,11 @@ export {
   MAIL_OUTLINE_ICON_IMG,
   CLOSE_EYE_ICON,
   BUTTON_POST_COMMENT_ICON,
+  PLACE_ICON,
+  MESSAGE_OUTLINE_ICON,
+  ARROW_FORWARD_IOS_ICON,
+  ARROW_BACK_IOS_ICON,
+  MORE_HORIZ_ICON,
+  FIBER_SMART_RECORD_ICON,
+  STITCH_ICON,
 };

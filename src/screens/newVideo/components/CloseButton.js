@@ -3,11 +3,11 @@ import React from 'react';
 import { CLOSE_IMG } from '../../../configs/source';
 import { COLOR, SPACING } from '../../../configs/styles';
 
-const CloseButton = ({ navigation }) => {
+const CloseButton = ({ navigation, icon = CLOSE_IMG }) => {
   const handleClick = () => navigation.goBack();
   return (
     <Pressable onPress={handleClick} style={styles.container}>
-      <Image source={CLOSE_IMG} style={styles.icon} />
+      <Image source={icon} style={styles.icon} />
     </Pressable>
   );
 };

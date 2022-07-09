@@ -1,18 +1,28 @@
-import { StyleSheet, Text, View, Pressable, Image } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Pressable,
+  Image,
+  StatusBar,
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Video from 'react-native-video';
 import { BORDER, COLOR, SPACING, TEXT } from '../../configs/styles';
 import {
+  ARROW_BACK_IMG,
   FLASH_OFF_IMG,
   FLIP_IMG,
   MUSIC_ICON_IMG,
   SPEED_IMG,
   TIMESTAMP_IMG,
 } from '../../configs/source';
-import Icon from '../../components/Icon';
+import { CText, Icon } from '../../components';
 import CloseButton from './components/CloseButton';
+import { useNavigation } from '@react-navigation/native';
 
-const PreviewVideoScreen = ({ navigation, route }) => {
+const PreviewVideoScreen = ({ route }) => {
+  const navigation = useNavigation();
   const [pathVideo, setPathVideo] = useState(null);
 
   useEffect(() => {
@@ -31,6 +41,12 @@ const PreviewVideoScreen = ({ navigation, route }) => {
   ];
   return (
     <View style={styles.container}>
+      <StatusBar
+        barStyle={'light-content'}
+        animated={true}
+        backgroundColor={COLOR.BLACK}
+        translucent={false}
+      />
       {pathVideo && (
         <Video
           style={styles.video}
@@ -41,7 +57,7 @@ const PreviewVideoScreen = ({ navigation, route }) => {
         />
       )}
 
-      <CloseButton navigation={navigation} />
+      <CloseButton navigation={navigation} icon={ARROW_BACK_IMG} />
       <View style={styles.audioTop}>
         <View style={styles.containerAudio}>
           <Icon
@@ -68,10 +84,15 @@ const PreviewVideoScreen = ({ navigation, route }) => {
       </View>
       <View style={styles.actionBottom}>
         <Pressable style={[styles.button, { backgroundColor: COLOR.WHITE }]}>
-          <Text>Quay lại</Text>
+          <CText onPress={() => navigation.goBack()}>Quay lại</CText>
         </Pressable>
         <Pressable style={[styles.button, { backgroundColor: COLOR.DANGER }]}>
-          <Text>Tiếp tục</Text>
+          <CText
+            onPress={() =>
+              navigation.navigate('PostVideoScreen', { pathVideo })
+            }>
+            Tiếp tục
+          </CText>
         </Pressable>
       </View>
     </View>

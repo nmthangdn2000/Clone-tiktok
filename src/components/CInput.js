@@ -18,6 +18,9 @@ const CInput = ({
   secureTextEntry = false,
   returnKeyType,
   onSubmitEditing,
+  multiline = false,
+  placeholderTextColor,
+  textAlignVertical = 'center',
 }) => {
   return (
     <View style={[styles.container, style]}>
@@ -32,6 +35,7 @@ const CInput = ({
       <TextInput
         style={styles.input}
         placeholder={placeholder}
+        placeholderTextColor={placeholderTextColor}
         onChangeText={onChangeText}
         value={value}
         keyboardType={keyboardType}
@@ -39,6 +43,8 @@ const CInput = ({
         secureTextEntry={secureTextEntry}
         returnKeyType={returnKeyType}
         onSubmitEditing={onSubmitEditing}
+        multiline={multiline}
+        textAlignVertical={textAlignVertical}
       />
       {iconRight && (
         <Icon
@@ -66,6 +72,8 @@ const styles = StyleSheet.create({
   },
   input: {
     marginLeft: SPACING.S1,
+    width: '100%',
+    height: '100%',
     flex: 1,
     padding: SPACING.S1,
   },

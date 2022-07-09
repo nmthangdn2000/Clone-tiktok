@@ -19,6 +19,8 @@ const COLOR = {
 
   TOMATO: '#FF6347',
   ORANGE: '#FFA500',
+  GREEN: '#23FF67',
+  LIGHT_GREEN: '#A7FFC2',
 };
 
 Object.freeze(COLOR);

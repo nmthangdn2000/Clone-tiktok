@@ -10,6 +10,7 @@ import AudioScreen from './src/screens/audio/AudioScreen';
 import Index from './src/screens';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import ProfileScreen from './src/screens/profile/ProfileScreen';
+import PostVideoScreen from './src/screens/newVideo/PostVideoScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,6 +42,7 @@ const App = () => {
             />
 
             <Stack.Screen name="AudioScreen" component={AudioScreen} />
+            <Stack.Screen name="PostVideoScreen" component={PostVideoScreen} />
             <Stack.Screen
               name="ProfileScreen"
               component={ProfileScreen}
