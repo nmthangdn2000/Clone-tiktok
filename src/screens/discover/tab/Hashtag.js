@@ -1,8 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { COLOR, SPACING } from '../../../configs/styles';
 import IteamSearchHashTag from '../../../components/item/IteamSearchHashTag';
 import ListView from '../../../components/ListView';
+import { useIsFocused } from '@react-navigation/native';
 
 const Hashtag = () => {
   const data = [
@@ -24,6 +25,11 @@ const Hashtag = () => {
     { key: '10' },
   ];
 
+  const isFocusTab = useIsFocused();
+
+  useEffect(() => {
+    console.log('hashtag', isFocusTab);
+  }, [isFocusTab]);
   return (
     <View style={styles.container}>
       <ListView

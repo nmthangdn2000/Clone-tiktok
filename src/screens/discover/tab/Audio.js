@@ -1,8 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { COLOR, SPACING } from '../../../configs/styles';
 import ListView from '../../../components/ListView';
 import ItemSearchAudio from '../../../components/item/ItemSearchAudio';
+import { useIsFocused } from '@react-navigation/native';
 
 const Audio = () => {
   const data = [
@@ -23,7 +24,11 @@ const Audio = () => {
     { key: '9' },
     { key: '10' },
   ];
+  const isFocusTab = useIsFocused();
 
+  useEffect(() => {
+    console.log('audio', isFocusTab);
+  }, [isFocusTab]);
   return (
     <View style={styles.container}>
       <ListView data={data} renderItem={item => <ItemSearchAudio />} />

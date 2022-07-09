@@ -38,6 +38,12 @@ const SuggestionsSearch = () => {
         fetchData(txtSearch);
       }, 500);
     }
+
+    return () => {
+      if (typingTimeoutRef.current) {
+        clearTimeout(typingTimeoutRef.current);
+      }
+    };
   }, [txtSearch]);
 
   return (

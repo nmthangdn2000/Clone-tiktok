@@ -8,6 +8,7 @@ import Icon from '../../components/Icon';
 import { ARROW_BACK_IMG, REPLY_IMG, VIDEOCAMR_IMG } from '../../configs/source';
 import CText from '../../components/CText';
 import { useNavigation } from '@react-navigation/native';
+import { useHeaderHeight } from '@react-navigation/elements';
 
 import Animated, {
   withTiming,
@@ -20,6 +21,7 @@ const NUM_COLUMS = 3;
 
 const AudioScreen = () => {
   const navigation = useNavigation();
+  const headerHeight = useHeaderHeight();
 
   const scaleValue = useSharedValue(1);
 
@@ -77,7 +79,7 @@ const AudioScreen = () => {
   ];
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { marginTop: headerHeight }]}>
       <StatusBar
         barStyle={'dark-content'}
         backgroundColor={COLOR.WHITE}
@@ -116,6 +118,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLOR.WHITE,
+    marginTop: StatusBar.currentHeight,
   },
   containerButton: {
     position: 'absolute',

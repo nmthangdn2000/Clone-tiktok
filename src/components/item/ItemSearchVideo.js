@@ -5,6 +5,7 @@ import { HEART_OUTLINE_IMG } from '../../configs/source';
 import CText from '../CText';
 import { BORDER, COLOR, SPACING, TEXT } from '../../configs/styles';
 import Icon from '../Icon';
+import { urlSourceMedia } from '../../utils/utils';
 
 const { width } = Dimensions.get('window');
 
@@ -17,14 +18,20 @@ const ItemSearchVideo = ({ index, item }) => {
     <View style={styles.container}>
       <>
         <View style={styles.video}>
-          <Image source={background} style={styles.video} />
+          <Image
+            source={{ uri: urlSourceMedia(background) }}
+            style={styles.video}
+          />
         </View>
         <CText text={TEXT.STRONG} numberOfLines={2}>
           {caption}
         </CText>
         <View style={styles.infor}>
           <View style={styles.avatar}>
-            <Image source={author.avatar} style={styles.avatar} />
+            <Image
+              source={{ uri: urlSourceMedia(author.avatar) }}
+              style={styles.avatar}
+            />
           </View>
           <CText
             numberOfLines={1}

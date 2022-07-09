@@ -1,10 +1,16 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { COLOR, SPACING } from '../../../configs/styles';
 import ItemUser from '../../../components/item/ItemUser';
 import ListView from '../../../components/ListView';
+import { useIsFocused } from '@react-navigation/native';
 
 const User = () => {
+  const isFocusTab = useIsFocused();
+
+  useEffect(() => {
+    console.log('user', isFocusTab);
+  }, [isFocusTab]);
   const data = [
     {
       avatar: '',

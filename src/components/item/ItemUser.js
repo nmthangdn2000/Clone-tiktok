@@ -5,12 +5,13 @@ import CText from '../../components/CText';
 import { AVATA_IMG } from '../../configs/source';
 import { BORDER, COLOR, SPACING, TEXT } from '../../configs/styles';
 import CButton from '../CButton';
+import { urlSourceMedia } from '../../utils/utils';
 
 const ItemUser = ({ item }) => {
-  const { avatar, name, userName, follow, numVideo } = item.item;
+  const { avatar, name, userName, follow, numVideo } = item;
   return (
     <View style={styles.container}>
-      <Image source={AVATA_IMG} style={styles.avatar} />
+      <Image source={{ uri: urlSourceMedia(avatar) }} style={styles.avatar} />
       <View style={styles.content}>
         <CText text={TEXT.STRONG} numberOfLines={1}>
           {name}

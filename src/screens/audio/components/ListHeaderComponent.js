@@ -26,7 +26,7 @@ const ListHeaderComponent = () => {
             color={COLOR.GRAY}
             fontSize={13}
             numberOfLines={1}
-            style={styles.txt}>
+            marginTop={SPACING.S2}>
             Dế choắc - Tiên Tiên
           </CText>
           <CText
@@ -48,7 +48,7 @@ const ListHeaderComponent = () => {
             text={TEXT.STRONG}
             numberOfLines={1}
             color={COLOR.BLACK}
-            style={styles.txtButton}>
+            marginLeft={SPACING.S1}>
             Thêm vào ưa thích
           </CText>
         </View>
@@ -84,9 +84,6 @@ const styles = StyleSheet.create({
   inforAudio: {
     flexDirection: 'column',
   },
-  txt: {
-    marginTop: SPACING.S2,
-  },
   buttonFavorites: {
     borderRadius: BORDER.SMALL,
     borderWidth: 1,
@@ -97,8 +94,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  txtButton: {
-    marginLeft: SPACING.S1,
   },
 });

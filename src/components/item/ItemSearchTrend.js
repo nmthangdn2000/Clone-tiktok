@@ -1,7 +1,7 @@
 import { StyleSheet, Pressable, View, Dimensions } from 'react-native';
 import React from 'react';
 
-import { CLOSE_IMG, FIRE_IMG } from '../../configs/source';
+import { FIRE_IMG } from '../../configs/source';
 import Icon from '../Icon';
 import CText from '../CText';
 import { BORDER, COLOR, SPACING, TEXT } from '../../configs/styles';
@@ -16,7 +16,7 @@ const ItemSearchTrend = ({ text, onPress, dotColor = COLOR.GRAY }) => {
         <View style={[styles.dot, color]} />
       </View>
       <CText
-        flmaxWidthex={width - 22 * 2 - SPACING.S4 * 2}
+        maxWidth={width - 22 * 2 - SPACING.S4 * 2}
         paddingHorizontal={SPACING.S2}
         text={TEXT.REGULAR}
         color={COLOR.setOpacity(COLOR.BLACK, 0.8)}

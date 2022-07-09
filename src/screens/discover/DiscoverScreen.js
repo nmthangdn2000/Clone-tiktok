@@ -1,5 +1,5 @@
 import { StatusBar, StyleSheet, View } from 'react-native';
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import CInput from '../../components/CInput';
 import { CLOSE_IMG, SEARCH_IMG } from '../../configs/source';
 import { COLOR, SPACING, TEXT } from '../../configs/styles';
@@ -19,7 +19,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Container } from '../../components';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
-import Asyncstorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { KEY_STORAGE } from '../../constants/constants';
 
 const statusbarHeight = StatusBar.currentHeight;
@@ -28,6 +28,7 @@ const DiscoverScreen = () => {
   const bottomHeight = useBottomTabBarHeight();
   const dispatch = useDispatch();
 
+  const [isFocus, setIsFocus] = useState(false);
   const txtSearch = useSelector(state => state.search.txtSearch);
 
   const marginRight = useSharedValue(0);
@@ -61,11 +62,27 @@ const DiscoverScreen = () => {
     }
   }, [txtSearch, marginRight, opacity]);
 
-  const handleSearch = async () => {
-    let searchHis = await Asyncstorage.getItem(KEY_STORAGE.SEARCH_HIS);
-    searchHis = JSON.parse(searchHis);
-    searchHis.push(txtSearch);
-  };
+  const handleSearch = useCallback(async () => {
+    try {
+      let searchHis = await AsyncStorage.getItem(KEY_STORAGE.SEARCH_HIS);
+      if (!searchHis) {
+        searchHis = [];
+      } else {
+        searchHis = JSON.parse(searchHis);
+      }
+      if (!searchHis.includes(txtSearch) || txtSearch.trim().length === 0) {
+        console.log(txtSearch.trim().length);
+        searchHis.push(txtSearch);
+        await AsyncStorage.setItem(
+          KEY_STORAGE.SEARCH_HIS,
+          JSON.stringify(searchHis),
+        );
+      }
+      setIsFocus(false);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [txtSearch]);
 
   return (
     <Container
@@ -73,30 +90,42 @@ const DiscoverScreen = () => {
       paddingTop={statusbarHeight}
       paddingBottom={bottomHeight}
       backgroundColor={COLOR.WHITE}>
+      <StatusBar
+        barStyle={'dark-content'}
+        backgroundColor={COLOR.WHITE}
+        translucent={true}
+      />
       <View style={styles.searchBar}>
         <Animated.View style={[styles.searchInput, searchInputStyle]}>
           <CInput
+            onFocus={() => setIsFocus(true)}
             iconLeft={SEARCH_IMG}
             placeholder={'Tìm kiếm'}
             value={txtSearch}
             iconRight={txtSearch?.length > 0 ? CLOSE_IMG : null}
             onPressIconRight={() => dispatch(setTxtSearch(''))}
             onChangeText={text => dispatch(setTxtSearch(text))}
+            returnKeyType={'search'}
+            onSubmitEditing={handleSearch}
           />
         </Animated.View>
         <Animated.View style={[styles.buttonSearch, buttonSearchStyle]}>
           <CText
             text={TEXT.REGULAR}
             color={COLOR.DANGER2}
-            onPress={() => console.log('text')}>
+            onPress={handleSearch}>
             Tìm kiếm
           </CText>
         </Animated.View>
       </View>
 
-      <SuggestionsSearch />
-      {/* <DefaultSearch /> */}
-      {/* <TopTab /> */}
+      {txtSearch?.length < 1 ? (
+        <DefaultSearch />
+      ) : isFocus ? (
+        <SuggestionsSearch />
+      ) : (
+        <TopTab />
+      )}
     </Container>
   );
 };

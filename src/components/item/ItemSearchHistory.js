@@ -6,7 +6,7 @@ import Icon from '../../components/Icon';
 import CText from '../../components/CText';
 import { COLOR, SPACING, TEXT } from '../../configs/styles';
 
-const ItemSearchHistory = ({ text, onPress }) => {
+const ItemSearchHistory = ({ text, onPress, handleRemoveSearchHis }) => {
   return (
     <Pressable style={styles.container} onPress={onPress}>
       <Icon
@@ -28,6 +28,7 @@ const ItemSearchHistory = ({ text, onPress }) => {
         tintColor={COLOR.setOpacity(COLOR.BLACK, 0.6)}
         height={22}
         width={22}
+        onPress={handleRemoveSearchHis}
       />
     </Pressable>
   );

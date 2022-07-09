@@ -16,6 +16,8 @@ const CInput = ({
   style,
   onFocus,
   secureTextEntry = false,
+  returnKeyType,
+  onSubmitEditing,
 }) => {
   return (
     <View style={[styles.container, style]}>
@@ -35,6 +37,8 @@ const CInput = ({
         keyboardType={keyboardType}
         onFocus={onFocus}
         secureTextEntry={secureTextEntry}
+        returnKeyType={returnKeyType}
+        onSubmitEditing={onSubmitEditing}
       />
       {iconRight && (
         <Icon
