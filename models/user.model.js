@@ -24,7 +24,7 @@ const model = {
   },
   avatar: {
     type: String,
-    default: 'avatar-default.png',
+    default: 'avatars/avatar-default.png',
   },
   bio: String,
   password: {

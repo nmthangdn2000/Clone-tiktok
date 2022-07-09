@@ -17,9 +17,27 @@ const filter = async (q = '', page = PAGE, limit = LIMIT, sort) => {
     : {};
   const count = UserModel.find(query).countDocuments();
   // chưa làm sort
-  const getUsers = UserModel.find(query)
-    .skip(page * limit - limit)
-    .limit(Number(limit));
+  const getUsers = UserModel.aggregate([
+    { $match: query },
+    {
+      $lookup: {
+        from: 'videos',
+        localField: '_id',
+        foreignField: 'author',
+        as: 'videos',
+      },
+    },
+    {
+      $addFields: {
+        totalVideo: {
+          $size: '$videos',
+        },
+      },
+    },
+    { $project: { videos: 0 } },
+    { $skip: page * limit - limit },
+    { $limit: Number(limit) },
+  ]);
   const [total, users] = await Promise.all([count, getUsers]);
   if (!users) throw new Error(ERROR.CanNotGetUser);
   return {
