@@ -9,7 +9,7 @@ import { BORDER, COLOR, SPACING, TEXT } from '../../configs/styles';
 const { width } = Dimensions.get('window');
 
 const ItemSearchTrend = ({ text, onPress, dotColor = COLOR.GRAY }) => {
-  const color = { background: dotColor };
+  const color = { backgroundColor: dotColor };
   return (
     <Pressable style={styles.container} onPress={onPress}>
       <View style={styles.containerDot}>
@@ -21,7 +21,8 @@ const ItemSearchTrend = ({ text, onPress, dotColor = COLOR.GRAY }) => {
         text={TEXT.REGULAR}
         color={COLOR.setOpacity(COLOR.BLACK, 0.8)}
         numberOfLines={1}
-        fontSize={16}>
+        fontSize={16}
+        textTransform="capitalize">
         {text}
       </CText>
       <Icon
@@ -51,6 +52,5 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: BORDER.PILL,
-    backgroundColor: 'red',
   },
 });

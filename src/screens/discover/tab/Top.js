@@ -53,6 +53,7 @@ const Top = () => {
       console.log(error);
     }
   }, [txtSearch]);
+
   useEffect(() => {
     if (isFocusTab) {
       fetchData();
@@ -67,7 +68,7 @@ const Top = () => {
             <>
               <Title lable={'Người dùng'} />
               {users.map((item, index) => {
-                return <ItemUser item={item} />;
+                return <ItemUser key={index} item={item} />;
               })}
 
               <View style={styles.hr} />
@@ -85,7 +86,7 @@ const Top = () => {
     <View style={styles.container}>
       <GridView
         data={videos}
-        renderItem={item => <ItemSearchVideo item={item} />}
+        renderItem={({ item }) => <ItemSearchVideo item={item} />}
         NUM_COLUMS={2}
         ListHeaderComponent={ListHeaderComponent}
       />

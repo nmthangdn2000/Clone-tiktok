@@ -1,72 +1,49 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { COLOR, SPACING } from '../../../configs/styles';
 import GridView from '../../../components/GridView';
 import ItemSearchVideo from '../../../components/item/ItemSearchVideo';
-import { AVATA_IMG } from '../../../configs/source';
 import { useIsFocused } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
+import * as videoApi from '../../../apis/video.api';
 
 const Video = () => {
   const isFocusTab = useIsFocused();
+  const txtSearch = useSelector(state => state.search.txtSearch);
+
+  const [videos, setVideos] = useState([]);
+
+  const fetchData = useCallback(async () => {
+    try {
+      const getVideo = await videoApi.getVideo(txtSearch);
+
+      const listVideo = getVideo.data.data.map(e => {
+        const v = {
+          caption: e.caption,
+          background: e.background,
+          author: { avatar: e.author.avatar, name: e.author.name },
+          like: e.like,
+        };
+        return v;
+      });
+
+      setVideos(listVideo);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [txtSearch]);
 
   useEffect(() => {
-    console.log('video', isFocusTab);
-  }, [isFocusTab]);
-  const data = [
-    {
-      caption: 'Là ai đã từ bỏ?',
-      background: AVATA_IMG,
-      author: { avatar: AVATA_IMG, name: 'Thang321' },
-      like: 120,
-    },
-    {
-      caption: 'Là ai đã từ bỏ?',
-      background: AVATA_IMG,
-      author: { avatar: AVATA_IMG, name: 'Thang321 qwe qwe qwe ' },
-      like: 120,
-    },
-    {
-      caption: 'Là ai đã từ bỏ?',
-      background: AVATA_IMG,
-      author: { avatar: AVATA_IMG, name: 'Thang321' },
-      like: 120,
-    },
-    {
-      caption: 'Là ai đã từ bỏ?',
-      background: AVATA_IMG,
-      author: { avatar: AVATA_IMG, name: 'Thang321' },
-      like: 120,
-    },
-    {
-      caption: 'Là ai đã từ bỏ?',
-      background: AVATA_IMG,
-      author: { avatar: AVATA_IMG, name: 'Thang321' },
-      like: 120,
-    },
-    {
-      caption: 'Là ai đã từ bỏ?',
-      background: AVATA_IMG,
-      author: { avatar: AVATA_IMG, name: 'Thang321' },
-      like: 120,
-    },
-    {
-      caption: 'Là ai đã từ bỏ?',
-      background: AVATA_IMG,
-      author: { avatar: AVATA_IMG, name: 'Thang321' },
-      like: 120,
-    },
-    {
-      caption: 'Là ai đã từ bỏ?',
-      background: AVATA_IMG,
-      author: { avatar: AVATA_IMG, name: 'Thang321' },
-      like: 120,
-    },
-  ];
+    if (isFocusTab) {
+      fetchData();
+    }
+  }, [isFocusTab, fetchData]);
+
   return (
     <View style={styles.container}>
       <GridView
-        data={data}
-        renderItem={item => <ItemSearchVideo item={item} />}
+        data={videos}
+        renderItem={({ item }) => <ItemSearchVideo item={item} />}
         NUM_COLUMS={2}
       />
     </View>

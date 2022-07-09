@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import AudioScreen from './src/screens/audio/AudioScreen';
 import Index from './src/screens';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import ProfileScreen from './src/screens/profile/ProfileScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,7 +39,13 @@ const App = () => {
               component={PreviewVideoScreen}
               options={{ headerShown: false }}
             />
+
             <Stack.Screen name="AudioScreen" component={AudioScreen} />
+            <Stack.Screen
+              name="ProfileScreen"
+              component={ProfileScreen}
+              options={{ headerShown: false }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>

@@ -90,11 +90,6 @@ const DiscoverScreen = () => {
       paddingTop={statusbarHeight}
       paddingBottom={bottomHeight}
       backgroundColor={COLOR.WHITE}>
-      <StatusBar
-        barStyle={'dark-content'}
-        backgroundColor={COLOR.WHITE}
-        translucent={true}
-      />
       <View style={styles.searchBar}>
         <Animated.View style={[styles.searchInput, searchInputStyle]}>
           <CInput

@@ -3,7 +3,8 @@ import React from 'react';
 import CText from '../CText';
 import { BORDER, COLOR, SPACING, TEXT } from '../../configs/styles';
 
-const IteamSearchHashTag = () => {
+const ItemSearchHashTag = ({ item }) => {
+  const { name, view } = item;
   return (
     <View style={styles.container}>
       <View style={styles.iconHashTag}>
@@ -17,17 +18,17 @@ const IteamSearchHashTag = () => {
           fontSize={16}
           color={COLOR.BLACK}
           numberOfLines={1}>
-          thangdeptrai thangdeptrai
+          {name}
         </CText>
         <CText text={TEXT.REGULAR} color={COLOR.GRAY}>
-          123 lượt xem
+          {view > 0 ? view : 123} lượt xem
         </CText>
       </View>
     </View>
   );
 };
 
-export default IteamSearchHashTag;
+export default ItemSearchHashTag;
 
 const styles = StyleSheet.create({
   container: {

@@ -21,6 +21,7 @@ import { setIsShowComment } from '../../../store/mainScreenSlice';
 import { KEY_STORAGE, SERVER_DOMAIN } from '../../../constants/constants';
 import * as likeApi from '../../../apis/like.api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { urlSourceMedia } from '../../../utils/utils';
 
 const VerticalSecction = React.forwardRef(
   ({ idVideo, like = 0, comment = 0, author }, ref) => {
@@ -120,7 +121,7 @@ const VerticalSecction = React.forwardRef(
           borderColor={COLOR.WHITE}
           borderWidth={1}>
           <Icon
-            source={{ uri: `${SERVER_DOMAIN}/avatars/${author.avatar}` }}
+            source={{ uri: urlSourceMedia(author.avatar) }}
             width={48}
             height={48}
             borderRadius={BORDER.PILL}

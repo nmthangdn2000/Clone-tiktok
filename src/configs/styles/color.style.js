@@ -16,6 +16,9 @@ const COLOR = {
     const hexOpacity = Math.floor(opacity * 255).toString(16);
     return `${hexColor}${hexOpacity}`;
   },
+
+  TOMATO: '#FF6347',
+  ORANGE: '#FFA500',
 };
 
 Object.freeze(COLOR);

@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import ItemSearchHistory from '../../../components/item/ItemSearchHistory';
 import Title from './Title';
 import ItemSearchTrend from '../../../components/item/ItemSearchTrend';
-import { SPACING } from '../../../configs/styles';
+import { COLOR, SPACING } from '../../../configs/styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { KEY_STORAGE } from '../../../constants/constants';
 import { useDispatch } from 'react-redux';
@@ -57,20 +57,22 @@ const DefaultSearch = () => {
 
       <Title lable={'Tìm kiếm được đề xuất'} />
       <ItemSearchTrend
-        text={'Lịch thi đấu bóng đá U23 Việt Nam q wq eqwe qư e'}
+        text={'Lịch thi đấu bóng đá U23 Việt Nam '}
+        dotColor={COLOR.DANGER}
       />
       <ItemSearchTrend
-        text={'Lịch thi đấu bóng đá U23 Việt Nam q wq eqwe qư e'}
+        text={'Các Status vui vẽ yêu đời'}
+        dotColor={COLOR.DANGER2}
       />
       <ItemSearchTrend
-        text={'Lịch thi đấu bóng đá U23 Việt Nam q wq eqwe qư e'}
+        text={'Nhạc tâm trạng hay nhất'}
+        dotColor={COLOR.TOMATO}
       />
       <ItemSearchTrend
-        text={'Lịch thi đấu bóng đá U23 Việt Nam q wq eqwe qư e'}
+        text={'Các trend hiện nay trên tiktok'}
+        dotColor={COLOR.ORANGE}
       />
-      <ItemSearchTrend
-        text={'Lịch thi đấu bóng đá U23 Việt Nam q wq eqwe qư e'}
-      />
+      <ItemSearchTrend text={'Kiểu tóc layer 2 mái 7/3 cho nam'} />
     </View>
   );
 };

@@ -10,7 +10,7 @@ import { urlSourceMedia } from '../../utils/utils';
 const { width } = Dimensions.get('window');
 
 const ItemSearchVideo = ({ index, item }) => {
-  const { caption, background, author, like, empty } = item.item;
+  const { caption, background, author, like, empty } = item;
 
   return empty ? (
     <View style={styles.container} />

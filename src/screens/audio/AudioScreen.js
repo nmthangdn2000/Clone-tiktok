@@ -1,5 +1,5 @@
 import { Pressable, StatusBar, StyleSheet, Text, View } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import GridView from '../../components/GridView';
 import ItemVideo from '../../components/item/ItemVideo';
 import ListHeaderComponent from './components/ListHeaderComponent';
@@ -7,9 +7,9 @@ import { BORDER, COLOR, SPACING, TEXT } from '../../configs/styles';
 import Icon from '../../components/Icon';
 import { ARROW_BACK_IMG, REPLY_IMG, VIDEOCAMR_IMG } from '../../configs/source';
 import CText from '../../components/CText';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { useHeaderHeight } from '@react-navigation/elements';
-
+import * as audioApi from '../../apis/audio.api';
 import Animated, {
   withTiming,
   withRepeat,
@@ -21,7 +21,16 @@ const NUM_COLUMS = 3;
 
 const AudioScreen = () => {
   const navigation = useNavigation();
+  const route = useRoute();
   const headerHeight = useHeaderHeight();
+
+  const [audio, setAudio] = useState({
+    author: '',
+    background: '',
+    name: '',
+    url: '',
+    videoCount: 0,
+  });
 
   const scaleValue = useSharedValue(1);
 
@@ -34,6 +43,19 @@ const AudioScreen = () => {
       ],
     };
   }, []);
+
+  const fetchData = useCallback(async () => {
+    try {
+      const getAudio = await audioApi.getAudioById(route.params._id);
+      setAudio(getAudio.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [route]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   useEffect(() => {
     scaleValue.value = 1.04;
@@ -89,7 +111,7 @@ const AudioScreen = () => {
         data={data}
         renderItem={item => <ItemVideo item={item} NUM_COLUMS={NUM_COLUMS} />}
         NUM_COLUMS={NUM_COLUMS}
-        ListHeaderComponent={ListHeaderComponent}
+        ListHeaderComponent={() => <ListHeaderComponent audio={audio} />}
       />
       <View style={styles.containerButton}>
         <Animated.View style={[styles.button, scaleStyle]}>

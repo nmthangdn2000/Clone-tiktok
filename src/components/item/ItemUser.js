@@ -1,4 +1,4 @@
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image, Pressable } from 'react-native';
 import React from 'react';
 import CText from '../../components/CText';
 
@@ -6,31 +6,40 @@ import { AVATA_IMG } from '../../configs/source';
 import { BORDER, COLOR, SPACING, TEXT } from '../../configs/styles';
 import CButton from '../CButton';
 import { urlSourceMedia } from '../../utils/utils';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
 const ItemUser = ({ item }) => {
-  const { avatar, name, userName, follow, numVideo } = item;
+  const navigate = useNavigation();
+  const { avatar, name, userName, follow, numVideo, _id } = item;
+  //
   return (
-    <View style={styles.container}>
-      <Image source={{ uri: urlSourceMedia(avatar) }} style={styles.avatar} />
-      <View style={styles.content}>
-        <CText text={TEXT.STRONG} numberOfLines={1}>
-          {name}
-        </CText>
-        <CText text={TEXT.SUBTITLE} numberOfLines={1} color={COLOR.GRAY}>
-          {userName}
-        </CText>
-        <CText text={TEXT.SUBTITLE} color={COLOR.GRAY}>
-          {follow} follower - {numVideo} Video
-        </CText>
+    <Pressable
+      onPress={() =>
+        navigate.navigate('ProfileScreen', { showHeader: true, id: _id })
+      }>
+      <View style={styles.container}>
+        <Image source={{ uri: urlSourceMedia(avatar) }} style={styles.avatar} />
+        <View style={styles.content}>
+          <CText text={TEXT.STRONG} numberOfLines={1}>
+            {name}
+          </CText>
+          <CText text={TEXT.SUBTITLE} numberOfLines={1} color={COLOR.GRAY}>
+            {userName}
+          </CText>
+          <CText text={TEXT.SUBTITLE} color={COLOR.GRAY}>
+            {follow} follower - {numVideo} Video
+          </CText>
+        </View>
+        <View>
+          <CButton
+            lable={'Follow'}
+            onPress={() => console.log('Follow')}
+            width={100}
+          />
+        </View>
       </View>
-      <View>
-        <CButton
-          lable={'Follow'}
-          onPress={() => console.log('Follow')}
-          width={100}
-        />
-      </View>
-    </View>
+    </Pressable>
   );
 };
 

@@ -13,8 +13,11 @@ import CText from '../CText';
 import { BORDER, COLOR, SPACING, TEXT } from '../../configs/styles';
 import Icon from '../Icon';
 import { useNavigation } from '@react-navigation/native';
+import { urlSourceMedia } from '../../utils/utils';
 
-const ItemSearchAudio = () => {
+const ItemSearchAudio = ({ item }) => {
+  const { background, name, author, videoCount, _id } = item;
+
   const navigation = useNavigation();
 
   const handleClick = () => {
@@ -23,28 +26,31 @@ const ItemSearchAudio = () => {
 
   return (
     <Pressable
-      onPress={() => navigation.navigate('AudioScreen')}
+      onPress={() => navigation.navigate('AudioScreen', { _id })}
       style={styles.container}>
       <TouchableOpacity
         onPress={handleClick}
         activeOpacity={0.6}
         style={styles.backgroundAudio}>
-        <Image source={AVATA_IMG} style={styles.image} />
+        <Image
+          source={{ uri: urlSourceMedia(background) }}
+          style={styles.image}
+        />
         <Icon source={PLAY_ICON_IMG} />
       </TouchableOpacity>
       <View style={styles.infor}>
         <CText text={TEXT.STRONG} fontSize={16} numberOfLines={1}>
-          Chỉ yêu mình anh Chỉ yêu mình anh Chỉ yêu mình anh
+          {name}
         </CText>
         <CText text={TEXT.REGULAR} color={COLOR.GRAY} numberOfLines={1}>
-          Thắng Nguyễn
+          {author}
         </CText>
         <View style={styles.inforBottom}>
           <CText text={TEXT.REGULAR} color={COLOR.GRAY}>
             00:30
           </CText>
           <CText text={TEXT.REGULAR} color={COLOR.GRAY}>
-            10
+            {videoCount}
           </CText>
         </View>
       </View>

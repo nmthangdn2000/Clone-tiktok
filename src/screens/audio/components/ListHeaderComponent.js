@@ -1,25 +1,26 @@
 import { StyleSheet, Text, View, Image } from 'react-native';
 import React from 'react';
 import { BORDER, COLOR, SPACING, TEXT } from '../../../configs/styles';
-import {
-  AVATA_IMG,
-  BOOKMARK_IMG,
-  PLAY_ICON_IMG,
-} from '../../../configs/source';
+import { BOOKMARK_IMG, PLAY_ICON_IMG } from '../../../configs/source';
 import Icon from '../../../components/Icon';
 import CText from '../../../components/CText';
+import { urlSourceMedia } from '../../../utils/utils';
 
-const ListHeaderComponent = () => {
+const ListHeaderComponent = ({ audio }) => {
+  const { author, background, name, url, videoCount } = audio;
   return (
     <View style={styles.container}>
       <View style={styles.backgroundAudio}>
-        <Image source={AVATA_IMG} style={styles.image} />
+        <Image
+          source={{ uri: urlSourceMedia(background) }}
+          style={styles.image}
+        />
         <Icon source={PLAY_ICON_IMG} width={32} height={32} />
       </View>
       <View style={styles.content}>
         <View style={styles.inforAudio}>
           <CText text={TEXT.STRONG} fontSize={20} numberOfLines={1}>
-            Chờ yêu chill
+            {name}
           </CText>
           <CText
             text={TEXT.SUBTITLE}
@@ -27,14 +28,14 @@ const ListHeaderComponent = () => {
             fontSize={13}
             numberOfLines={1}
             marginTop={SPACING.S2}>
-            Dế choắc - Tiên Tiên
+            {author}
           </CText>
           <CText
             text={TEXT.SUBTITLE}
             color={COLOR.GRAY}
             fontSize={13}
             numberOfLines={1}>
-            14 videos
+            {videoCount} videos
           </CText>
         </View>
         <View style={styles.buttonFavorites}>
