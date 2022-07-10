@@ -1,5 +1,5 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import React, { useState } from 'react';
+import React, { useCallback } from 'react';
 import { COLOR } from '../../../configs/styles';
 import Svg, { Circle } from 'react-native-svg';
 import Animated, {
@@ -36,10 +36,13 @@ const CircularProgress = ({
   const borderRadiusButtonRecord = useSharedValue(50);
   const widthButtonRecord = useSharedValue(widthButton - 40);
 
-  const animatedProps = useAnimatedProps(() => ({
-    //   2 * Math.PI * (R + 10) is 2PI*R
-    strokeDashoffset: CIRCLE_LENGTH * (1 - progress.value),
-  }));
+  const animatedProps = useAnimatedProps(
+    () => ({
+      //   2 * Math.PI * (R + 10) is 2PI*R
+      strokeDashoffset: CIRCLE_LENGTH * (1 - progress.value),
+    }),
+    [],
+  );
 
   const styleAnimated = useAnimatedStyle(() => {
     const timer = 200;
@@ -56,14 +59,14 @@ const CircularProgress = ({
       width,
       height: width,
     };
-  });
+  }, []);
 
-  const updateState = () => {
+  const updateState = useCallback(() => {
     setIsRecord(true);
     stopRecording();
-  };
+  }, [setIsRecord, stopRecording]);
 
-  const handleClick = async () => {
+  const handleClick = useCallback(async () => {
     if (isRecord) {
       // took a while before recording
       setTimeout(() => {
@@ -95,7 +98,18 @@ const CircularProgress = ({
       widthButtonRecord.value = widthButton - 40;
       stopRecording();
     }
-  };
+  }, [
+    borderRadiusButtonRecord,
+    isRecord,
+    progress,
+    second,
+    setIsRecord,
+    startRecording,
+    stopRecording,
+    updateState,
+    widthButton,
+    widthButtonRecord,
+  ]);
 
   const styles = StyleSheet.create({
     container: {

@@ -19,84 +19,99 @@ import {
 } from '../../configs/source';
 import { CText, Icon } from '../../components';
 import CloseButton from './components/CloseButton';
-import { useNavigation } from '@react-navigation/native';
+import {
+  useIsFocused,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 
-const PreviewVideoScreen = ({ route }) => {
+const options = [
+  { icon: SPEED_IMG, name: 'Tốc độ', onclick: () => console.log('a') },
+  { icon: FLIP_IMG, name: 'Lật', onclick: () => console.log('a') },
+  { icon: TIMESTAMP_IMG, name: 'Hẹn giờ', onclick: () => console.log('a') },
+  {
+    icon: FLASH_OFF_IMG,
+    name: 'Flash',
+    onclick: () => console.log('a'),
+  },
+];
+
+const PreviewVideoScreen = () => {
   const navigation = useNavigation();
-  const [pathVideo, setPathVideo] = useState(null);
+  const route = useRoute();
+  const [isFocused, setIsFocused] = useState(true);
+  const [pauseVideo, setPauseVideo] = useState(false);
 
-  useEffect(() => {
-    setPathVideo(route.params.pathVideo);
-  }, [route]);
-
-  const options = [
-    { icon: SPEED_IMG, name: 'Tốc độ', onclick: () => console.log('a') },
-    { icon: FLIP_IMG, name: 'Lật', onclick: () => console.log('a') },
-    { icon: TIMESTAMP_IMG, name: 'Hẹn giờ', onclick: () => console.log('a') },
-    {
-      icon: FLASH_OFF_IMG,
-      name: 'Flash',
-      onclick: () => console.log('a'),
-    },
-  ];
-  return (
-    <View style={styles.container}>
-      <StatusBar
-        barStyle={'light-content'}
-        animated={true}
-        backgroundColor={COLOR.BLACK}
-        translucent={false}
-      />
-      {pathVideo && (
-        <Video
-          style={styles.video}
-          source={{ uri: pathVideo }}
-          resizeMode={'cover'}
-          repeat
-          controls
+  if (isFocused) {
+    return (
+      <View style={styles.container}>
+        <StatusBar
+          barStyle={'light-content'}
+          animated={true}
+          backgroundColor={COLOR.BLACK}
+          translucent={false}
         />
-      )}
-
-      <CloseButton navigation={navigation} icon={ARROW_BACK_IMG} />
-      <View style={styles.audioTop}>
-        <View style={styles.containerAudio}>
-          <Icon
-            source={MUSIC_ICON_IMG}
-            tintColor={COLOR.WHITE}
-            height={16}
-            width={16}
+        {isFocused && (
+          <Video
+            style={styles.video}
+            source={{ uri: route?.params?.pathVideo }}
+            resizeMode={'cover'}
+            paused={pauseVideo}
+            repeat
+            controls
           />
-          <Text style={styles.txtAudio}>Thêm âm thanh</Text>
+        )}
+
+        <CloseButton navigation={navigation} icon={ARROW_BACK_IMG} />
+        <View style={styles.audioTop}>
+          <View style={styles.containerAudio}>
+            <Icon
+              source={MUSIC_ICON_IMG}
+              tintColor={COLOR.WHITE}
+              height={16}
+              width={16}
+            />
+            <Text style={styles.txtAudio}>Thêm âm thanh</Text>
+          </View>
+        </View>
+        <View style={styles.actionRight}>
+          {options.map((option, index) => {
+            return (
+              <Pressable
+                key={index}
+                onPress={option.onclick}
+                style={styles.itemOption}>
+                <Image source={option.icon} style={styles.icon} />
+                <Text style={styles.txtOption}>{option.name}</Text>
+              </Pressable>
+            );
+          })}
+        </View>
+        <View style={styles.actionBottom}>
+          <Pressable
+            style={[styles.button, { backgroundColor: COLOR.WHITE }]}
+            onPress={() => navigation.goBack()}>
+            <CText>Quay lại</CText>
+          </Pressable>
+          <Pressable
+            style={[styles.button, { backgroundColor: COLOR.DANGER }]}
+            onPress={() => {
+              setPauseVideo(true);
+              setIsFocused(true);
+              setTimeout(() => {
+                navigation.replace('PostVideoScreen', {
+                  pathVideo: route?.params?.pathVideo,
+                });
+              }, 2000);
+            }}>
+            <CText color={COLOR.WHITE}>Tiếp tục</CText>
+          </Pressable>
         </View>
       </View>
-      <View style={styles.actionRight}>
-        {options.map((option, index) => {
-          return (
-            <Pressable
-              key={index}
-              onPress={option.onclick}
-              style={styles.itemOption}>
-              <Image source={option.icon} style={styles.icon} />
-              <Text style={styles.txtOption}>{option.name}</Text>
-            </Pressable>
-          );
-        })}
-      </View>
-      <View style={styles.actionBottom}>
-        <Pressable style={[styles.button, { backgroundColor: COLOR.WHITE }]}>
-          <CText onPress={() => navigation.goBack()}>Quay lại</CText>
-        </Pressable>
-        <Pressable style={[styles.button, { backgroundColor: COLOR.DANGER }]}>
-          <CText
-            onPress={() =>
-              navigation.navigate('PostVideoScreen', { pathVideo })
-            }>
-            Tiếp tục
-          </CText>
-        </Pressable>
-      </View>
-    </View>
-  );
+    );
+  } else {
+    <View style={styles.container} />;
+  }
 };
 
 export default PreviewVideoScreen;
@@ -104,7 +119,7 @@ export default PreviewVideoScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'red',
+    backgroundColor: COLOR.BLACK,
   },
   video: {
     flex: 1,

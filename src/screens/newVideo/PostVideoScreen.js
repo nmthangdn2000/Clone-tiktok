@@ -22,10 +22,12 @@ import {
   USER_IMG,
 } from '../../configs/source';
 import { BORDER, COLOR, SPACING, TEXT } from '../../configs/styles';
-import Video from 'react-native-video';
 import TopPostVideo from './components/TopPostVideo';
 import ItemChoose from './components/ItemChoose';
 import ItemAddCaption from './components/ItemAddCaption';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { KEY_STORAGE } from '../../constants/constants';
+import * as videoApi from '../../apis/video.api';
 
 const listAddress = [
   'Hòa Vang',
@@ -39,8 +41,9 @@ const listAddress = [
 const PostVideoScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
-
+  console.log(route?.params?.pathVideo);
   const [caption, setCaption] = useState('');
+  const [privacy, setPrivacy] = useState(false);
 
   useEffect(() => {
     navigation.setOptions({
@@ -58,30 +61,27 @@ const PostVideoScreen = () => {
     });
   }, [navigation]);
 
-  const CaptionView = () => {
-    const listText = caption.split(' ');
+  const handlePostVideo = async () => {
+    try {
+      const token = await AsyncStorage.getItem(KEY_STORAGE.TOKEN);
+      const formData = new FormData();
+      formData.append('video', route?.params?.pathVideo);
+      formData.append('caption', caption);
+      formData.append('privacy', privacy);
 
-    return (
-      <CText color={COLOR.LIGHT_GRAY2}>
-        {listText.map((item, index) => {
-          if (item.trim()[0] === '#') {
-            return (
-              <CText key={index} color={COLOR.LIGHT_GRAY2} text={TEXT.STRONG}>
-                {item.trim()}{' '}
-              </CText>
-            );
-          }
-          return item.trim() + ' ';
-        })}
-      </CText>
-    );
+      const result = await videoApi.postVideo(formData, token);
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <Container
       flex={1}
       backgroundColor={COLOR.WHITE}
-      paddingHorizontal={SPACING.S4}>
+      paddingHorizontal={SPACING.S4}
+      paddingTop={StatusBar.currentHeight + 40}>
       <StatusBar
         barStyle={'dark-content'}
         animated={true}
@@ -117,7 +117,8 @@ const PostVideoScreen = () => {
       <ItemChoose
         iconLeft={LOCK_OUTLINE_ICON}
         name={'Ai có thể xem video này'}
-        iconRight={ARROW_FORWARD_IOS_ICON}
+        type={privacy ? 'Chỉ mình bạn' : 'Mọi người'}
+        setData={a => setPrivacy(a)}
       />
       <ItemChoose iconLeft={MESSAGE_OUTLINE_ICON} name={'Cho phép bình luận'} />
       <ItemChoose iconLeft={FIBER_SMART_RECORD_ICON} name={'Cho phép Duet'} />
@@ -128,18 +129,15 @@ const PostVideoScreen = () => {
         iconRight={ARROW_FORWARD_IOS_ICON}
       />
       <View style={styles.actionBottom}>
-        <Pressable style={[styles.button, { backgroundColor: COLOR.WHITE }]}>
-          <CText onPress={() => navigation.goBack()}>Nháp</CText>
+        <Pressable
+          style={[styles.button, { backgroundColor: COLOR.WHITE }]}
+          onPress={() => navigation.goBack()}>
+          <CText>Nháp</CText>
         </Pressable>
-        <Pressable style={[styles.button, { backgroundColor: COLOR.DANGER2 }]}>
-          <CText
-            color={COLOR.WHITE}
-            onPress={() =>
-              // navigation.navigate('PostVideoScreen', { pathVideo })
-              console.log('adad')
-            }>
-            Đăng
-          </CText>
+        <Pressable
+          style={[styles.button, { backgroundColor: COLOR.DANGER2 }]}
+          onPress={handlePostVideo}>
+          <CText color={COLOR.WHITE}>Đăng</CText>
         </Pressable>
       </View>
     </Container>

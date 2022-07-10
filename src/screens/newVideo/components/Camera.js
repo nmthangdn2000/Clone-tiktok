@@ -1,5 +1,5 @@
 import { StyleSheet, View, Text, Image, Pressable } from 'react-native';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { RNCamera } from 'react-native-camera';
 import {
   FLIP_IMG,
@@ -14,10 +14,10 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 
-const Camera = ({ camera, isRecord }) => {
+const Camera = ({ camera, isRecord, navigation }) => {
   const [typeCamera, setTypeCamera] = useState(true);
   const [flash, setFlash] = useState(false);
-
+  const [uri, setUri] = useState('');
   const options = [
     { icon: SPEED_IMG, name: 'Tốc độ', onclick: () => console.log('a') },
     { icon: FLIP_IMG, name: 'Lật', onclick: () => console.log('a') },
@@ -40,15 +40,26 @@ const Camera = ({ camera, isRecord }) => {
     };
   }, []);
 
-  const handleClickFlip = () => {
+  const handleClickFlip = useCallback(() => {
     rotateFlip.value =
       rotateFlip.value === 360 ? withSpring(0) : withSpring(360);
     setTypeCamera(!typeCamera);
-  };
+  }, [rotateFlip, typeCamera]);
 
   return (
     <>
       <RNCamera
+        onRecordingStart={data => {
+          console.log('start camera', data.nativeEvent.uri);
+          setUri(data.nativeEvent.uri);
+        }}
+        onRecordingEnd={() => {
+          setTimeout(() => {
+            navigation.navigate('PreviewVideoScreen', {
+              pathVideo: uri,
+            });
+          }, 3000);
+        }}
         ref={camera}
         style={styles.preview}
         type={

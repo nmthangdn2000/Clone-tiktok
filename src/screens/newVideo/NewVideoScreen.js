@@ -7,19 +7,18 @@ import Upload from './components/Upload';
 import { COLOR, SPACING } from '../../configs/styles';
 import Camera from './components/Camera';
 import CloseButton from './components/CloseButton';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 
-const NewVideoScreen = ({ navigation }) => {
+const NewVideoScreen = () => {
+  const navigation = useNavigation();
+  const isFocused = useIsFocused();
+  console.log('camera', isFocused);
   const camera = useRef(null);
 
   const [isRecord, setIsRecord] = useState(true);
 
   const startRecording = async () => {
-    const { uri, codec = 'mp4' } = await camera.current.recordAsync();
-    if (uri) {
-      navigation.navigate('PreviewVideoScreen', {
-        pathVideo: uri,
-      });
-    }
+    camera.current.recordAsync();
   };
 
   const stopRecording = () => {
@@ -34,12 +33,15 @@ const NewVideoScreen = ({ navigation }) => {
         backgroundColor={COLOR.BLACK}
         translucent={false}
       />
-      <Camera camera={camera} navigation={navigation} isRecord={isRecord} />
+      {isFocused && (
+        <Camera camera={camera} navigation={navigation} isRecord={isRecord} />
+      )}
+
       {isRecord && <CloseButton navigation={navigation} />}
       <View style={styles.containerBottom}>
         {isRecord && <Effect />}
         <View style={styles.containerButtonRecord}>
-          {isRecord && <Text style={{ color: 'white' }}>âccac</Text>}
+          {isRecord && <Text style={{ color: 'white' }}>15s</Text>}
           <CircularProgress
             startRecording={startRecording}
             stopRecording={stopRecording}

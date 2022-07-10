@@ -4,9 +4,12 @@ import { BORDER, COLOR, SPACING, TEXT } from '../../../configs/styles';
 import { Icon, CText } from '../../../components';
 import { Switch } from 'react-native-gesture-handler';
 
-const ItemChoose = ({ iconLeft, name, iconRight, tintColor }) => {
+const ItemChoose = ({ iconLeft, name, iconRight, type, setData }) => {
   const [isEnabled, setIsEnabled] = useState(true);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const toggleSwitch = () => {
+    setIsEnabled(previousState => !previousState);
+    setData(isEnabled);
+  };
   return (
     <View style={styles.container}>
       <Icon source={iconLeft} width={26} height={26} tintColor={COLOR.GRAY} />
@@ -18,6 +21,7 @@ const ItemChoose = ({ iconLeft, name, iconRight, tintColor }) => {
           numberOfLines={1}>
           {name}
         </CText>
+        {type && <CText marginRight={SPACING.S2}>{type}</CText>}
         {iconRight ? (
           <Icon source={iconRight} tintColor={COLOR.GRAY} />
         ) : (

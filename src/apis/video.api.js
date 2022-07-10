@@ -45,8 +45,26 @@ const getVideoLikeByIdUser = async (idUser, page = 1, limit = 40) => {
   return result.data;
 };
 
+const postVideo = async (data, token) => {
+  const headers = {
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'multipart/form-data',
+  };
+
+  const url = `${SERVER_API_URL}/video`;
+  const result = await axios({
+    method: 'post',
+    url,
+    data,
+    headers,
+    timeout: 15000,
+  });
+  return result.data;
+};
+
 export {
   getVideo,
+  postVideo,
   getVideoById,
   getVideoByUserId,
   getVideoByUserAuth,

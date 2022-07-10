@@ -43,11 +43,7 @@ const App = () => {
 
             <Stack.Screen name="AudioScreen" component={AudioScreen} />
             <Stack.Screen name="PostVideoScreen" component={PostVideoScreen} />
-            <Stack.Screen
-              name="ProfileScreen"
-              component={ProfileScreen}
-              options={{ headerShown: false }}
-            />
+            <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
