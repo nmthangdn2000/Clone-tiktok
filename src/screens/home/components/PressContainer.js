@@ -1,4 +1,4 @@
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Animated, {
   cancelAnimation,
@@ -29,6 +29,7 @@ const PressContainer = ({ isActive, pauseVideo, playVideo, verticalRef }) => {
   useEffect(() => {
     if (isActive) {
       iconPlayVideoValue.value = 1;
+      setShowIcon(false);
     }
   }, [isActive, iconPlayVideoValue]);
 
@@ -85,7 +86,7 @@ const PressContainer = ({ isActive, pauseVideo, playVideo, verticalRef }) => {
   );
 };
 
-export default PressContainer;
+export default React.memo(PressContainer);
 
 const styles = StyleSheet.create({
   container: {

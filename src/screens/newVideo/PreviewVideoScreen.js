@@ -19,11 +19,7 @@ import {
 } from '../../configs/source';
 import { CText, Icon } from '../../components';
 import CloseButton from './components/CloseButton';
-import {
-  useIsFocused,
-  useNavigation,
-  useRoute,
-} from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 const options = [
   { icon: SPEED_IMG, name: 'Tốc độ', onclick: () => console.log('a') },

@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from '../Icon';
 import {
@@ -46,7 +52,7 @@ const BottomSheetSocialAuth = () => {
         setDataSocial(dataSignInWithSocial);
       }, 300);
     }
-  }, [bottomSheetSignIn]);
+  }, [bottomSheetSignIn, dataSignInWithSocial]);
 
   const handleClickClose = useCallback(() => {
     bottomSheetRef?.current?.scrollTo(0);
@@ -64,47 +70,50 @@ const BottomSheetSocialAuth = () => {
 
   const backToScreenSocial = useCallback(() => {
     setDataSocial(dataSignInWithSocial);
-  }, []);
+  }, [dataSignInWithSocial]);
 
-  const dataSignInWithSocial = [
-    {
-      icon: USER_IMG,
-      using: 'Sử dụng số điện thoại hoặc email',
-      color: COLOR.BLACK,
-      onPress: () => {
-        setDataSocial([]);
-        setCurrentForm(2); // naviga to register
+  const dataSignInWithSocial = useMemo(
+    () => [
+      {
+        icon: USER_IMG,
+        using: 'Sử dụng số điện thoại hoặc email',
+        color: COLOR.BLACK,
+        onPress: () => {
+          setDataSocial([]);
+          setCurrentForm(2); // naviga to register
+        },
       },
-    },
-    {
-      icon: FACEBOOK_ICON,
-      using: 'Tiếp tục với Facebook',
-    },
-    {
-      icon: GOOGLE_ICON,
-      using: 'Tiếp tục với Google',
-    },
-    //   {
-    //     icon: TWITTER_ICON,
-    //     using: 'Tiếp tục với Twitter',
-    //   },
-    //   {
-    //     icon: LINE_ICON,
-    //     using: 'Tiếp tục với Line',
-    //   },
-    {
-      icon: KAKAOTALK_ICON,
-      using: 'Tiếp tục với KakaoTalk',
-    },
-    {
-      icon: APPLE_ICON,
-      using: 'Tiếp tục với Apple',
-    },
-    {
-      icon: INSTAGRAM_ICON,
-      using: 'Tiếp tục với Instagram',
-    },
-  ];
+      {
+        icon: FACEBOOK_ICON,
+        using: 'Tiếp tục với Facebook',
+      },
+      {
+        icon: GOOGLE_ICON,
+        using: 'Tiếp tục với Google',
+      },
+      //   {
+      //     icon: TWITTER_ICON,
+      //     using: 'Tiếp tục với Twitter',
+      //   },
+      //   {
+      //     icon: LINE_ICON,
+      //     using: 'Tiếp tục với Line',
+      //   },
+      {
+        icon: KAKAOTALK_ICON,
+        using: 'Tiếp tục với KakaoTalk',
+      },
+      {
+        icon: APPLE_ICON,
+        using: 'Tiếp tục với Apple',
+      },
+      {
+        icon: INSTAGRAM_ICON,
+        using: 'Tiếp tục với Instagram',
+      },
+    ],
+    [],
+  );
 
   const ItemSignIn = ({ index, icon, using, color, onPress }) => {
     return (
@@ -259,4 +268,4 @@ const BottomSheetSocialAuth = () => {
   );
 };
 
-export default BottomSheetSocialAuth;
+export default React.memo(BottomSheetSocialAuth);

@@ -78,4 +78,4 @@ const ModalSignIn = () => {
   );
 };
 
-export default ModalSignIn;
+export default React.memo(ModalSignIn);

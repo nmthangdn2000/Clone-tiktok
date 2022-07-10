@@ -237,7 +237,7 @@ const BottomSecction = ({ isActive, caption, authorName, audio }) => {
   );
 };
 
-export default BottomSecction;
+export default React.memo(BottomSecction);
 
 const styles = StyleSheet.create({
   floatingMusicNote: {

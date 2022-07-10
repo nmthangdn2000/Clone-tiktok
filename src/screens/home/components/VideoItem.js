@@ -1,5 +1,10 @@
 import { Dimensions, StatusBar, StyleSheet } from 'react-native';
-import React, { useImperativeHandle, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 import VerticalSecction from './VerticalSecction';
 import BottomSecction from './BottomSecction';
 import Video from 'react-native-video';
@@ -35,13 +40,13 @@ const VideoItem = React.forwardRef(({ item }, ref) => {
     },
   }));
 
-  const pauseVideo = () => {
+  const pauseVideo = useCallback(() => {
     setIsActive(false);
-  };
+  }, []);
 
-  const playVideo = () => {
+  const playVideo = useCallback(() => {
     setIsActive(true);
-  };
+  }, []);
 
   return (
     <Container
@@ -116,7 +121,7 @@ const VideoItem = React.forwardRef(({ item }, ref) => {
   );
 });
 
-export default VideoItem;
+export default React.memo(VideoItem);
 
 const styles = StyleSheet.create({
   video: {

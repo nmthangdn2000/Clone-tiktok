@@ -31,8 +31,6 @@ const VerticalSecction = React.forwardRef(
     const dispatch = useDispatch();
     const [amountLike, setAmountLike] = useState(Number(like));
 
-    const isShowComment = useSelector(state => state.mainScreen.isShowComment);
-
     const navigation = useNavigation();
 
     const heartValue = useSharedValue(0);
@@ -181,7 +179,7 @@ const VerticalSecction = React.forwardRef(
   },
 );
 
-export default VerticalSecction;
+export default React.memo(VerticalSecction);
 
 const styles = StyleSheet.create({
   iconHeart: {
