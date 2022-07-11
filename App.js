@@ -19,7 +19,9 @@ const App = () => {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Provider store={store}>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Index">
+          <Stack.Navigator
+            initialRouteName="Index"
+            screenOptions={{ animation: 'none' }}>
             <Stack.Screen
               name="Splash"
               component={SplashScreen}
@@ -38,7 +40,7 @@ const App = () => {
             <Stack.Screen
               name="PreviewVideoScreen"
               component={PreviewVideoScreen}
-              options={{ headerShown: false }}
+              options={{ headerShown: false, animationEnabled: false }}
             />
 
             <Stack.Screen name="AudioScreen" component={AudioScreen} />

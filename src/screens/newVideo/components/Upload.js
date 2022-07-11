@@ -4,12 +4,16 @@ import { BORDER, COLOR, TEXT } from '../../../configs/styles/index';
 import { Illustration_IMG } from '../../../configs/source';
 import { launchImageLibrary } from 'react-native-image-picker';
 
-const Upload = () => {
+const Upload = ({ endRecord }) => {
   const handleClick = async () => {
-    const options = { mediaType: 'video' };
+    try {
+      const options = { mediaType: 'video' };
 
-    const result = await launchImageLibrary(options);
-    console.log(result);
+      const result = await launchImageLibrary(options);
+      endRecord(result?.assets[0]?.uri);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -20,7 +24,7 @@ const Upload = () => {
   );
 };
 
-export default Upload;
+export default React.memo(Upload);
 
 const styles = StyleSheet.create({
   container: {

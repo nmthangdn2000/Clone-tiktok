@@ -18,24 +18,20 @@ const NewVideoScreen = () => {
 
   const [isRecord, setIsRecord] = useState(false);
 
-  const startRecording = useCallback(async () => {
-    try {
-      const option = uri ? { path: uri } : {};
-      console.log(option);
-      await camera.current.recordAsync(option);
-    } catch (error) {
-      console.log(error);
-    }
-  }, [uri]);
+  const startRecording = useCallback(() => {
+    camera.current.recordAsync();
+  }, []);
 
-  const endRecord = useCallback(() => {
-    console.log(uri);
-    setTimeout(() => {
-      navigation.navigate('PreviewVideoScreen', {
-        pathVideo: uri,
-      });
-    }, 1500);
-  }, [uri, navigation]);
+  const endRecord = useCallback(
+    async myUri => {
+      setTimeout(() => {
+        navigation.navigate('PreviewVideoScreen', {
+          pathVideo: uri || myUri,
+        });
+      }, 1500);
+    },
+    [uri, navigation],
+  );
 
   return (
     <View style={styles.container}>
@@ -67,7 +63,7 @@ const NewVideoScreen = () => {
             endRecord={endRecord}
           />
         </View>
-        {!isRecord && <Upload />}
+        {!isRecord && <Upload endRecord={endRecord} />}
       </View>
     </View>
   );
