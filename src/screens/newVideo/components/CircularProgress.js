@@ -1,5 +1,5 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { COLOR } from '../../../configs/styles';
 import Svg, { Circle } from 'react-native-svg';
 import Animated, {
@@ -20,11 +20,11 @@ const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 const CircularProgress = ({
   widthButton = 120,
-  second = 10000,
+  second = 15000,
   startRecording,
-  stopRecording,
   isRecord,
-  setIsRecord,
+  endRecord,
+  camera,
 }) => {
   const SIZE_MORE = 15;
   // circle radius
@@ -62,54 +62,53 @@ const CircularProgress = ({
   }, []);
 
   const updateState = useCallback(() => {
-    setIsRecord(true);
-    stopRecording();
-  }, [setIsRecord, stopRecording]);
+    camera.current.stopRecording();
+    endRecord();
+  }, [camera, endRecord]);
 
-  const handleClick = useCallback(async () => {
+  useEffect(() => {
     if (isRecord) {
       // took a while before recording
-      setTimeout(() => {
-        progress.value = withTiming(
-          1,
-          {
-            duration: (1 - progress.value) * second,
-            easing: Easing.linear,
-          },
-          isFinished => {
-            if (isFinished) {
-              runOnJS(updateState)();
-              progress.value = 0;
-              borderRadiusButtonRecord.value = 50;
-              widthButtonRecord.value = widthButton - 40;
-            }
-          },
-        );
+      progress.value = withTiming(
+        1,
+        {
+          duration: (1 - progress.value) * second,
+          easing: Easing.linear,
+        },
+        isFinished => {
+          if (isFinished) {
+            runOnJS(updateState)();
+            progress.value = 0;
+            borderRadiusButtonRecord.value = 50;
+            widthButtonRecord.value = widthButton - 40;
+          }
+        },
+      );
 
-        borderRadiusButtonRecord.value = 10;
-        widthButtonRecord.value = widthButton - 80;
-      }, 1500);
-      setIsRecord(!isRecord);
-      await startRecording();
+      borderRadiusButtonRecord.value = 10;
+      widthButtonRecord.value = widthButton - 80;
     } else {
-      setIsRecord(!isRecord);
       cancelAnimation(progress);
       borderRadiusButtonRecord.value = 50;
       widthButtonRecord.value = widthButton - 40;
-      stopRecording();
     }
   }, [
+    widthButtonRecord,
     borderRadiusButtonRecord,
-    isRecord,
     progress,
+    isRecord,
     second,
-    setIsRecord,
-    startRecording,
-    stopRecording,
     updateState,
     widthButton,
-    widthButtonRecord,
   ]);
+
+  const handleClick = useCallback(() => {
+    if (isRecord) {
+      camera.current.stopRecording();
+    } else {
+      startRecording();
+    }
+  }, [startRecording, camera, isRecord]);
 
   const styles = StyleSheet.create({
     container: {
@@ -139,7 +138,7 @@ const CircularProgress = ({
           cy={widthButton / 2}
           r={R}
           strokeWidth={6}
-          stroke={isRecord ? BACKGROUND_STROKE_COLOR : BACKGROUND_COLOR}
+          stroke={!isRecord ? BACKGROUND_STROKE_COLOR : BACKGROUND_COLOR}
           fill={BACKGROUND_COLOR}
         />
         <AnimatedCircle
@@ -161,4 +160,4 @@ const CircularProgress = ({
   );
 };
 
-export default CircularProgress;
+export default React.memo(CircularProgress);

@@ -14,10 +14,10 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 
-const Camera = ({ camera, isRecord, navigation }) => {
+const Camera = ({ camera, isRecord, navigation, setUri, setIsRecord }) => {
   const [typeCamera, setTypeCamera] = useState(true);
   const [flash, setFlash] = useState(false);
-  const [uri, setUri] = useState('');
+
   const options = [
     { icon: SPEED_IMG, name: 'Tốc độ', onclick: () => console.log('a') },
     { icon: FLIP_IMG, name: 'Lật', onclick: () => console.log('a') },
@@ -51,14 +51,11 @@ const Camera = ({ camera, isRecord, navigation }) => {
       <RNCamera
         onRecordingStart={data => {
           console.log('start camera', data.nativeEvent.uri);
+          setIsRecord(true);
           setUri(data.nativeEvent.uri);
         }}
         onRecordingEnd={() => {
-          setTimeout(() => {
-            navigation.navigate('PreviewVideoScreen', {
-              pathVideo: uri,
-            });
-          }, 3000);
+          setIsRecord(false);
         }}
         ref={camera}
         style={styles.preview}
@@ -87,7 +84,7 @@ const Camera = ({ camera, isRecord, navigation }) => {
         }}
         android
       />
-      {isRecord && (
+      {!isRecord && (
         <View style={styles.containerOption}>
           <Pressable onPress={handleClickFlip} style={styles.itemOption}>
             <Animated.Image
@@ -113,7 +110,7 @@ const Camera = ({ camera, isRecord, navigation }) => {
   );
 };
 
-export default Camera;
+export default React.memo(Camera);
 
 const styles = StyleSheet.create({
   preview: {

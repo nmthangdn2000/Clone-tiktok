@@ -25,6 +25,7 @@ import { KEY_STORAGE, SERVER_DOMAIN } from '../../../constants/constants';
 import * as likeApi from '../../../apis/like.api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { urlSourceMedia } from '../../../utils/utils';
+import { setModalSignIn } from '../../../store/indexSlice';
 
 const VerticalSecction = React.forwardRef(
   ({ idVideo, like = 0, comment = 0, author }, ref) => {
@@ -65,16 +66,21 @@ const VerticalSecction = React.forwardRef(
             ? 0
             : amountLike - 1;
 
-        const TOKEN = await AsyncStorage.getItem(KEY_STORAGE.TOKEN);
+        try {
+          const TOKEN = await AsyncStorage.getItem(KEY_STORAGE.TOKEN);
 
-        if (currentAmountLike > amountLike) {
-          likeApi.like(idVideo, 'like', TOKEN);
-        } else {
-          likeApi.like(idVideo, 'dislike', TOKEN);
+          if (currentAmountLike > amountLike) {
+            await likeApi.like(idVideo, 'like', TOKEN);
+          } else {
+            await likeApi.like(idVideo, 'dislike', TOKEN);
+          }
+        } catch (error) {
+          console.log(error);
+          dispatch(setModalSignIn(true));
         }
         setAmountLike(currentAmountLike);
       },
-      [heartValue, amountLike, idVideo],
+      [heartValue, amountLike, idVideo, dispatch],
     );
 
     useImperativeHandle(ref, () => ({

@@ -5,7 +5,7 @@
 // const test = () => {
 //   const videoRef = useRef<RNCamera>(null);
 
-//   videoRef.current?.recordAsync()
+//   videoRef.current?.recordAsync({p})
 
 //   return (
 //     <View>

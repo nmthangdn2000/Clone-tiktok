@@ -12,7 +12,7 @@ const CloseButton = ({ navigation, icon = CLOSE_IMG }) => {
   );
 };
 
-export default CloseButton;
+export default React.memo(CloseButton);
 
 const styles = StyleSheet.create({
   container: {

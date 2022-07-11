@@ -13,7 +13,7 @@ const initialState: InitialState = {
   currentBottomTab: 'Trang chủ',
   bottomSheetSignIn: false,
   currentUser: '',
-  modalSignIn: true,
+  modalSignIn: false,
 };
 
 const indexSlice = createSlice({

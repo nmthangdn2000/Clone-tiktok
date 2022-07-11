@@ -6,7 +6,7 @@ import {
   Image,
   StatusBar,
 } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Video from 'react-native-video';
 import { BORDER, COLOR, SPACING, TEXT } from '../../configs/styles';
 import {
@@ -51,7 +51,7 @@ const PreviewVideoScreen = () => {
           <Video
             style={styles.video}
             source={{ uri: route?.params?.pathVideo }}
-            resizeMode={'cover'}
+            // resizeMode={'cover'}
             paused={pauseVideo}
             repeat
             controls

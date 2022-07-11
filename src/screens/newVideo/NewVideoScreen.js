@@ -1,5 +1,5 @@
 import { StatusBar, StyleSheet, Text, View } from 'react-native';
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 
 import CircularProgress from './components/CircularProgress';
 import Effect from './components/Effect';
@@ -12,18 +12,30 @@ import { useIsFocused, useNavigation } from '@react-navigation/native';
 const NewVideoScreen = () => {
   const navigation = useNavigation();
   const isFocused = useIsFocused();
-  console.log('camera', isFocused);
+  const [uri, setUri] = useState('');
+
   const camera = useRef(null);
 
-  const [isRecord, setIsRecord] = useState(true);
+  const [isRecord, setIsRecord] = useState(false);
 
-  const startRecording = async () => {
-    camera.current.recordAsync();
-  };
+  const startRecording = useCallback(async () => {
+    try {
+      const option = uri ? { path: uri } : {};
+      console.log(option);
+      await camera.current.recordAsync(option);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [uri]);
 
-  const stopRecording = () => {
-    camera.current.stopRecording();
-  };
+  const endRecord = useCallback(() => {
+    console.log(uri);
+    setTimeout(() => {
+      navigation.navigate('PreviewVideoScreen', {
+        pathVideo: uri,
+      });
+    }, 1500);
+  }, [uri, navigation]);
 
   return (
     <View style={styles.container}>
@@ -34,22 +46,28 @@ const NewVideoScreen = () => {
         translucent={false}
       />
       {isFocused && (
-        <Camera camera={camera} navigation={navigation} isRecord={isRecord} />
+        <Camera
+          camera={camera}
+          setUri={setUri}
+          navigation={navigation}
+          isRecord={isRecord}
+          setIsRecord={setIsRecord}
+        />
       )}
 
-      {isRecord && <CloseButton navigation={navigation} />}
+      {!isRecord && <CloseButton navigation={navigation} />}
       <View style={styles.containerBottom}>
-        {isRecord && <Effect />}
+        {!isRecord && <Effect />}
         <View style={styles.containerButtonRecord}>
-          {isRecord && <Text style={{ color: 'white' }}>15s</Text>}
+          {!isRecord && <Text style={{ color: 'white' }}>15s</Text>}
           <CircularProgress
             startRecording={startRecording}
-            stopRecording={stopRecording}
             isRecord={isRecord}
-            setIsRecord={setIsRecord}
+            camera={camera}
+            endRecord={endRecord}
           />
         </View>
-        {isRecord && <Upload />}
+        {!isRecord && <Upload />}
       </View>
     </View>
   );
