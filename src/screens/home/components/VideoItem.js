@@ -12,9 +12,14 @@ import { Container, CText } from '../../../components';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { HEIGHT, WIDTH } from '../../../configs/constant';
 import PressContainer from './PressContainer';
-import { SERVER_DOMAIN } from '../../../constants/constants';
+import {
+  BOTTOM_NAVIGATOR_HEIGHT,
+  SERVER_DOMAIN,
+  STATUSBAR_HEIGHT,
+} from '../../../constants/constants';
 import Slider from '@react-native-community/slider';
 import { COLOR, SPACING } from '../../../configs/styles';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const { width, height } = Dimensions.get('window');
 
@@ -51,7 +56,9 @@ const VideoItem = React.forwardRef(({ item }, ref) => {
   return (
     <Container
       width={width}
-      height={HEIGHT - bottomHeight - StatusBar.currentHeight}
+      height={
+        HEIGHT - bottomHeight - STATUSBAR_HEIGHT + 2 - BOTTOM_NAVIGATOR_HEIGHT
+      }
       backgroundColor="black">
       <Video
         ref={videoRef}

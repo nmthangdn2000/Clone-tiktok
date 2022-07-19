@@ -55,6 +55,6 @@ export interface TextCustomType extends TextStyle {
   onPress?: any;
   numberOfLines?: number | undefined;
   text?: any;
-  style?: StyleProp<ImageStyle>;
+  style?: StyleProp<TextStyle>;
 }
 //TextStyle

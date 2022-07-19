@@ -38,8 +38,6 @@ const PreviewVideoScreen = () => {
   const [isFocused, setIsFocused] = useState(true);
   const [pauseVideo, setPauseVideo] = useState(false);
 
-  console.log(route?.params?.pathVideo);
-
   if (isFocused) {
     return (
       <View style={styles.container}>

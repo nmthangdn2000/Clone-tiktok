@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { COLOR, SPACING, TEXT } from '../../configs/styles';
+import { COLOR, TEXT } from '../../configs/styles';
 import Top from './tab/Top';
 import Hashtag from './tab/Hashtag';
 import Audio from './tab/Audio';

@@ -65,12 +65,16 @@ const PostVideoScreen = () => {
     try {
       const token = await AsyncStorage.getItem(KEY_STORAGE.TOKEN);
       const formData = new FormData();
-      formData.append('video', route?.params?.pathVideo);
+      formData.append('video', {
+        uri: route?.params?.pathVideo,
+        name: route?.params?.pathVideo.split('/').reverse()[0],
+        type: 'mp4/*',
+      });
       formData.append('caption', caption);
       formData.append('privacy', privacy);
 
       const result = await videoApi.postVideo(formData, token);
-      console.log(result);
+      navigation.replace('Trang chủ');
     } catch (error) {
       console.log(error);
     }

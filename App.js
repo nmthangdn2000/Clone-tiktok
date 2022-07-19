@@ -20,7 +20,7 @@ const App = () => {
       <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Index"
+            initialRouteName="Splash"
             screenOptions={{ animation: 'none' }}>
             <Stack.Screen
               name="Splash"

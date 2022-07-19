@@ -6,7 +6,7 @@ import { COLOR } from '../../configs/styles/index';
 const SplashScreen = ({ navigation }) => {
   useEffect(() => {
     setTimeout(() => {
-      navigation.replace('MainScreen');
+      navigation.replace('Index');
     }, 3000);
   });
   return (

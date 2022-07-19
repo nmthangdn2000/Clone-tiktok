@@ -86,7 +86,7 @@ const PressContainer = ({ isActive, pauseVideo, playVideo, verticalRef }) => {
   );
 };
 
-export default React.memo(PressContainer);
+export default PressContainer;
 
 const styles = StyleSheet.create({
   container: {
