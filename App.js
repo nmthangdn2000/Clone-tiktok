@@ -8,7 +8,6 @@ import { store } from './src/store/store';
 import { Provider } from 'react-redux';
 import AudioScreen from './src/screens/audio/AudioScreen';
 import Index from './src/screens';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import ProfileScreen from './src/screens/profile/ProfileScreen';
 import PostVideoScreen from './src/screens/newVideo/PostVideoScreen';
 
@@ -16,40 +15,38 @@ const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <Provider store={store}>
-        <NavigationContainer>
-          <Stack.Navigator
-            initialRouteName="Splash"
-            screenOptions={{ animation: 'none' }}>
-            <Stack.Screen
-              name="Splash"
-              component={SplashScreen}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Index"
-              component={Index}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="NewVideo"
-              component={NewVideoScreen}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="PreviewVideoScreen"
-              component={PreviewVideoScreen}
-              options={{ headerShown: false, animationEnabled: false }}
-            />
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Splash"
+          screenOptions={{ animation: 'none' }}>
+          <Stack.Screen
+            name="Splash"
+            component={SplashScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Index"
+            component={Index}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="NewVideo"
+            component={NewVideoScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="PreviewVideoScreen"
+            component={PreviewVideoScreen}
+            options={{ headerShown: false, animationEnabled: false }}
+          />
 
-            <Stack.Screen name="AudioScreen" component={AudioScreen} />
-            <Stack.Screen name="PostVideoScreen" component={PostVideoScreen} />
-            <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </Provider>
-    </GestureHandlerRootView>
+          <Stack.Screen name="AudioScreen" component={AudioScreen} />
+          <Stack.Screen name="PostVideoScreen" component={PostVideoScreen} />
+          <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 };
 

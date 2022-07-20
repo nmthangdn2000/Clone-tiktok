@@ -27,7 +27,6 @@ import BoxCreateVideo from './components/BoxCreateVideo';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentBottomTab } from '../../store/indexSlice';
 import BottomSheetComment from './components/BottomSheetComment';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const Bottom = createBottomTabNavigator();
 
@@ -51,7 +50,7 @@ const MainScreen = ({ navigation }) => {
     }
   };
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <>
       <StatusBar
         barStyle={'light-content'}
         backgroundColor={COLOR.TRANSPARENT}
@@ -214,7 +213,7 @@ const MainScreen = ({ navigation }) => {
       </Bottom.Navigator>
       <BottomSheetComment />
       <BoxCreateVideo />
-    </GestureHandlerRootView>
+    </>
   );
 };
 

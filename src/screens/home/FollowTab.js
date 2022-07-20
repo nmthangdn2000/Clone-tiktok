@@ -1,10 +1,10 @@
-import { FlatList, StatusBar, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import VideoItem from './components/VideoItem';
 import { HEIGHT } from '../../configs/constant';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useRoute, useIsFocused } from '@react-navigation/native';
-import { Container, Icon } from '../../components';
+import { Icon } from '../../components';
 import { COLOR } from '../../configs/styles';
 import { TIKTOK_LOADER_GIF } from '../../configs/source';
 import Animated, {
@@ -17,9 +17,7 @@ import Animated, {
 import * as VideoApi from '../../apis/video.api';
 import { useDispatch } from 'react-redux';
 import { setCurrentUser } from '../../store/indexSlice';
-import { gestureHandlerRootHOC } from 'react-native-gesture-handler';
-
-const statusbarHeight = StatusBar.currentHeight;
+import { STATUSBAR_HEIGHT } from '../../constants/constants';
 
 const FollowTab = () => {
   const dispatch = useDispatch();
@@ -42,10 +40,10 @@ const FollowTab = () => {
   const router = useRoute();
   const isFocused = useIsFocused();
   const bottomHeight = useBottomTabBarHeight();
-  console.log(router.name);
+
   const videoPlaying = useRef();
 
-  const HEIGHT_ITEM = HEIGHT - bottomHeight - StatusBar.currentHeight;
+  const HEIGHT_ITEM = HEIGHT - bottomHeight - STATUSBAR_HEIGHT;
   const cellRefs = useRef({});
 
   // const data = [
@@ -121,7 +119,7 @@ const FollowTab = () => {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      paddingTop: statusbarHeight,
+      paddingTop: STATUSBAR_HEIGHT,
       paddingBottom: bottomHeight,
       backgroundColor: COLOR.BACKGROUND_LOADING,
       justifyContent: 'center',
@@ -129,7 +127,7 @@ const FollowTab = () => {
     },
   });
 
-  const VideoTab = gestureHandlerRootHOC(() => (
+  return (
     <Animated.View style={[styles.container, containerStyle]}>
       {isLoading ? (
         <Icon source={TIKTOK_LOADER_GIF} width={50} height={50} />
@@ -164,9 +162,7 @@ const FollowTab = () => {
         />
       )}
     </Animated.View>
-  ));
-
-  return <VideoTab />;
+  );
 };
 
 export default FollowTab;

@@ -8,14 +8,17 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Container, Icon } from '../../../components';
 import { PLAY_ICON_IMG } from '../../../configs/source';
-import { TapGestureHandler } from 'react-native-gesture-handler';
+import {
+  GestureHandlerRootView,
+  TapGestureHandler,
+} from 'react-native-gesture-handler';
 import ItemLikeDoubleTap from './ItemLikeDoubleTap';
 
 const PressContainer = ({ isActive, pauseVideo, playVideo, verticalRef }) => {
   const [showIcon, setShowIcon] = useState(false);
   const [listLikeDoubleTap, setListLikeDoubleTap] = useState([]);
 
-  const doubleTapRef = useRef();
+  const doubleTapRef = React.createRef();
 
   const iconPlayVideoValue = useSharedValue(1);
   const iconPlayVideoStyle = useAnimatedStyle(() => {
@@ -55,34 +58,39 @@ const PressContainer = ({ isActive, pauseVideo, playVideo, verticalRef }) => {
   }, [isActive, iconPlayVideoValue, pauseVideo, playVideo]);
 
   return (
-    <TapGestureHandler waitFor={doubleTapRef} onActivated={onSingleTap}>
-      <TapGestureHandler
-        maxDelayMs={150}
-        ref={doubleTapRef}
-        numberOfTaps={2}
-        onActivated={onDoubleTap}>
-        <View>
-          <Container height="100%" justifyContent="center" alignItems="center">
-            {showIcon && (
-              <Animated.View style={[styles.iconPlay, iconPlayVideoStyle]}>
-                <Icon
-                  source={PLAY_ICON_IMG}
-                  width={'100%'}
-                  height={'100%'}
-                  activeOpacity={0.5}
-                  onPress={null}
-                />
-              </Animated.View>
-            )}
-            {listLikeDoubleTap.map((item, index) => {
-              return (
-                <ItemLikeDoubleTap key={JSON.stringify(item)} item={item} />
-              );
-            })}
-          </Container>
-        </View>
+    <GestureHandlerRootView>
+      <TapGestureHandler waitFor={doubleTapRef} onActivated={onSingleTap}>
+        <TapGestureHandler
+          maxDelayMs={150}
+          ref={doubleTapRef}
+          numberOfTaps={2}
+          onActivated={onDoubleTap}>
+          <View>
+            <Container
+              height="100%"
+              justifyContent="center"
+              alignItems="center">
+              {showIcon && (
+                <Animated.View style={[styles.iconPlay, iconPlayVideoStyle]}>
+                  <Icon
+                    source={PLAY_ICON_IMG}
+                    width={'100%'}
+                    height={'100%'}
+                    activeOpacity={0.5}
+                    onPress={null}
+                  />
+                </Animated.View>
+              )}
+              {listLikeDoubleTap.map((item, index) => {
+                return (
+                  <ItemLikeDoubleTap key={JSON.stringify(item)} item={item} />
+                );
+              })}
+            </Container>
+          </View>
+        </TapGestureHandler>
       </TapGestureHandler>
-    </TapGestureHandler>
+    </GestureHandlerRootView>
   );
 };
 
