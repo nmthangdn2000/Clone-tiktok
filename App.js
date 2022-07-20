@@ -10,6 +10,12 @@ import AudioScreen from './src/screens/audio/AudioScreen';
 import Index from './src/screens';
 import ProfileScreen from './src/screens/profile/ProfileScreen';
 import PostVideoScreen from './src/screens/newVideo/PostVideoScreen';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+
+GoogleSignin.configure({
+  webClientId:
+    '931371691595-qlna3n3pn58rf49btdee65rdk4vevd6l.apps.googleusercontent.com',
+});
 
 const Stack = createNativeStackNavigator();
 

@@ -4,7 +4,11 @@ import { BORDER, COLOR, SPACING } from '../../configs/styles';
 import { HEIGHT } from '../../configs/constant';
 
 import { Container } from '..';
-import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import {
+  Gesture,
+  GestureDetector,
+  GestureHandlerRootView,
+} from 'react-native-gesture-handler';
 import Animated, {
   interpolate,
   interpolateColor,
@@ -87,18 +91,19 @@ const BottomSheet = React.forwardRef(
 
     return (
       <Animated.View style={[styles.container, rBottomSheetContainerStyle]}>
-        <Text>adadadad</Text>
         <Pressable onPress={() => scrollTo(0)}>
           <Container width={'100%'} height={'100%'} />
         </Pressable>
         <Animated.View style={[styles.bottomSheetContainer, rBottomSheetStyle]}>
-          <GestureDetector gesture={gesture}>
-            <View onLayout={getHeightLayout}>
-              {HeaderComponent}
-              {children}
-              {FooterComponent}
-            </View>
-          </GestureDetector>
+          <GestureHandlerRootView>
+            <GestureDetector gesture={gesture}>
+              <View onLayout={getHeightLayout}>
+                {HeaderComponent}
+                {children}
+                {FooterComponent}
+              </View>
+            </GestureDetector>
+          </GestureHandlerRootView>
         </Animated.View>
       </Animated.View>
     );

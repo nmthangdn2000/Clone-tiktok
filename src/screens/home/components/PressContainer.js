@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Animated, {
   cancelAnimation,
   useAnimatedStyle,
@@ -94,7 +94,7 @@ const PressContainer = ({ isActive, pauseVideo, playVideo, verticalRef }) => {
   );
 };
 
-export default PressContainer;
+export default React.memo(PressContainer);
 
 const styles = StyleSheet.create({
   container: {

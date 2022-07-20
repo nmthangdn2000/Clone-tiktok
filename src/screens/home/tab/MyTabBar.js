@@ -74,7 +74,7 @@ const MyTabBar = ({ state, descriptors, navigation, position }) => {
           tintColor={COLOR.WHITE}
         />
       </Container>
-      {routes.length > 1 && measures.length > 1 && (
+      {measures.length > 1 && (
         <Indicator measures={measures} position={position} width={40} />
       )}
     </Container>

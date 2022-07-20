@@ -33,6 +33,7 @@ import Animated, {
   FadeOut,
 } from 'react-native-reanimated';
 import { Pressable } from 'react-native';
+import { onGoogleButtonPress } from '../../auth/google.auth';
 
 const BottomSheetSocialAuth = () => {
   const dispatch = useDispatch();
@@ -90,6 +91,10 @@ const BottomSheetSocialAuth = () => {
       {
         icon: GOOGLE_ICON,
         using: 'Tiếp tục với Google',
+        onPress: () =>
+          onGoogleButtonPress()
+            .then(() => console.log('login success'))
+            .catch(err => console.log(err)),
       },
       //   {
       //     icon: TWITTER_ICON,
