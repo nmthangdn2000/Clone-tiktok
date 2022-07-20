@@ -17,7 +17,7 @@ const MyTabBar = ({ state, descriptors, navigation, position }) => {
     setTimeout(() => {
       let m = [];
       routes.forEach(item => {
-        item.ref.current.measureLayout(
+        item.ref?.current?.measureLayout(
           containerRef.current,
           (x, y, width, height) => {
             m.push({ x, y, width, height });
@@ -27,7 +27,7 @@ const MyTabBar = ({ state, descriptors, navigation, position }) => {
           },
         );
       });
-    }, 500);
+    }, 1000);
   }, []);
 
   return (

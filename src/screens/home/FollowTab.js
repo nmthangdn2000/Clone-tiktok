@@ -17,6 +17,7 @@ import Animated, {
 import * as VideoApi from '../../apis/video.api';
 import { useDispatch } from 'react-redux';
 import { setCurrentUser } from '../../store/indexSlice';
+import { gestureHandlerRootHOC } from 'react-native-gesture-handler';
 
 const statusbarHeight = StatusBar.currentHeight;
 
@@ -128,7 +129,7 @@ const FollowTab = () => {
     },
   });
 
-  return (
+  const VideoTab = gestureHandlerRootHOC(() => (
     <Animated.View style={[styles.container, containerStyle]}>
       {isLoading ? (
         <Icon source={TIKTOK_LOADER_GIF} width={50} height={50} />
@@ -163,7 +164,9 @@ const FollowTab = () => {
         />
       )}
     </Animated.View>
-  );
+  ));
+
+  return <VideoTab />;
 };
 
 export default FollowTab;
