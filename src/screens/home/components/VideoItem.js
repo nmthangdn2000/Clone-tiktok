@@ -7,34 +7,25 @@ import React, {
 } from 'react';
 import VerticalSecction from './VerticalSecction';
 import BottomSecction from './BottomSecction';
-import Video from 'react-native-video';
-import { Container, CText } from '../../../components';
+import { Container } from '../../../components';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
-import { HEIGHT, WIDTH } from '../../../configs/constant';
 import PressContainer from './PressContainer';
 import {
   BOTTOM_NAVIGATOR_HEIGHT,
-  SERVER_DOMAIN,
   STATUSBAR_HEIGHT,
+  HEIGHT,
+  WIDTH,
 } from '../../../constants/constants';
-import Slider from '@react-native-community/slider';
-import { COLOR, SPACING } from '../../../configs/styles';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import CVideo from './CVideo';
 
-const { width, height } = Dimensions.get('window');
-
-const VideoItem = React.forwardRef(({ item }, ref) => {
+const VideoItem = React.forwardRef(({ item, index }, ref) => {
   const { _id, caption, url, author, audio, like, comment } = item;
-  const verticalRef = useRef();
-  const videoRef = useRef();
-  const sliderRef = useRef();
+  const verticalRef = React.createRef();
+  const videoRef = React.createRef();
 
   const bottomHeight = useBottomTabBarHeight();
 
   const [isActive, setIsActive] = useState(false);
-  const [duration, setDuration] = useState(0);
-  const [sliderValue, setSliderValue] = useState(0);
-  const [seek, setSeek] = useState(0);
 
   useImperativeHandle(ref, () => ({
     pauseVideo: () => {
@@ -55,26 +46,12 @@ const VideoItem = React.forwardRef(({ item }, ref) => {
 
   return (
     <Container
-      width={width}
+      width={WIDTH}
       height={
         HEIGHT - bottomHeight - STATUSBAR_HEIGHT + 2 - BOTTOM_NAVIGATOR_HEIGHT
       }
       backgroundColor="black">
-      <Video
-        ref={videoRef}
-        source={{
-          uri: `${SERVER_DOMAIN}/${url}`,
-        }}
-        style={styles.video}
-        resizeMode="cover"
-        paused={!isActive}
-        repeat
-        onLoad={data => setDuration(data.duration)}
-        onProgress={data => {
-          setSliderValue(data.currentTime / duration);
-        }}
-        seek={seek}
-      />
+      <CVideo isActive={isActive} url={url} videoRef={videoRef} />
 
       <PressContainer
         isActive={isActive}
@@ -99,41 +76,8 @@ const VideoItem = React.forwardRef(({ item }, ref) => {
         author={author}
         idVideo={_id}
       />
-
-      <Container
-        width={WIDTH}
-        padding={0}
-        position="absolute"
-        bottom={-SPACING.S1 - 4}
-        elevation={100}>
-        <Slider
-          ref={sliderRef}
-          style={{
-            left: -SPACING.S2 * 2 + SPACING.S1,
-            width: WIDTH + SPACING.S3 * 2,
-          }}
-          minimumValue={0}
-          maximumValue={1}
-          minimumTrackTintColor={COLOR.WHITE}
-          maximumTrackTintColor={COLOR.WHITE}
-          thumbTintColor={COLOR.WHITE}
-          value={sliderValue}
-          onSlidingComplete={value => {
-            setSeek(value * duration);
-            setSliderValue(value);
-          }}
-        />
-      </Container>
     </Container>
   );
 });
 
 export default React.memo(VideoItem);
-
-const styles = StyleSheet.create({
-  video: {
-    position: 'absolute',
-    width: width,
-    height: height,
-  },
-});

@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Animated, {
   cancelAnimation,
   useAnimatedStyle,
@@ -18,7 +18,7 @@ const PressContainer = ({ isActive, pauseVideo, playVideo, verticalRef }) => {
   const [showIcon, setShowIcon] = useState(false);
   const [listLikeDoubleTap, setListLikeDoubleTap] = useState([]);
 
-  const doubleTapRef = React.createRef();
+  const doubleTapRef = useRef();
 
   const iconPlayVideoValue = useSharedValue(1);
   const iconPlayVideoStyle = useAnimatedStyle(() => {
@@ -61,7 +61,7 @@ const PressContainer = ({ isActive, pauseVideo, playVideo, verticalRef }) => {
     <GestureHandlerRootView>
       <TapGestureHandler waitFor={doubleTapRef} onActivated={onSingleTap}>
         <TapGestureHandler
-          maxDelayMs={150}
+          maxDelayMs={250}
           ref={doubleTapRef}
           numberOfTaps={2}
           onActivated={onDoubleTap}>

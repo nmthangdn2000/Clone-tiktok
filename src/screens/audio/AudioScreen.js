@@ -75,7 +75,7 @@ const AudioScreen = () => {
         <Icon
           source={REPLY_IMG}
           tintColor={COLOR.BLACK}
-          onPress={() => console.log('ádkjalskd')}
+          onPress={() => console.log('aaa')}
         />
       ),
     });

@@ -17,7 +17,10 @@ import Animated, {
 import * as VideoApi from '../../apis/video.api';
 import { useDispatch } from 'react-redux';
 import { setCurrentUser } from '../../store/indexSlice';
-import { STATUSBAR_HEIGHT } from '../../constants/constants';
+import {
+  BOTTOM_NAVIGATOR_HEIGHT,
+  STATUSBAR_HEIGHT,
+} from '../../constants/constants';
 
 const FollowTab = () => {
   const dispatch = useDispatch();
@@ -43,7 +46,8 @@ const FollowTab = () => {
 
   const videoPlaying = useRef();
 
-  const HEIGHT_ITEM = HEIGHT - bottomHeight - STATUSBAR_HEIGHT;
+  const HEIGHT_ITEM =
+    HEIGHT - bottomHeight - STATUSBAR_HEIGHT + 2 - BOTTOM_NAVIGATOR_HEIGHT;
   const cellRefs = useRef({});
 
   // const data = [
@@ -89,7 +93,7 @@ const FollowTab = () => {
   useEffect(() => {
     const cell = cellRefs.current[videoPlaying.current];
     if (cell) {
-      if (router.name === 'Dành cho bạn' && isFocused === true) {
+      if (isFocused === true) {
         cell.playVideo();
       } else {
         cell.pauseVideo();
@@ -148,7 +152,7 @@ const FollowTab = () => {
           scrollEventThrottle={16}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
-          initialNumToRender={3}
+          initialNumToRender={0}
           maxToRenderPerBatch={3}
           removeClippedSubviews={true}
           windowSize={5}

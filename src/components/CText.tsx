@@ -10,7 +10,7 @@ const CText = (props: TextCustomType) => {
     color = COLOR.BLACK,
     text = TEXT.REGULAR,
     onPress,
-    style = {},
+    ...style
   } = props;
 
   const initStyle = {
