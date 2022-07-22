@@ -30,30 +30,32 @@ const CVideo = ({ videoRef, url, isActive }) => {
         }}
         seek={seek}
       />
-      <Container
-        width={WIDTH}
-        padding={0}
-        position="absolute"
-        bottom={-SPACING.S1 - 4}
-        elevation={100}>
-        <Slider
-          ref={sliderRef}
-          style={{
-            left: -SPACING.S2 * 2 + SPACING.S1,
-            width: WIDTH + SPACING.S3 * 2,
-          }}
-          minimumValue={0}
-          maximumValue={1}
-          minimumTrackTintColor={COLOR.WHITE}
-          maximumTrackTintColor={COLOR.WHITE}
-          thumbTintColor={COLOR.WHITE}
-          value={sliderValue}
-          onSlidingComplete={value => {
-            setSeek(value * duration);
-            setSliderValue(value);
-          }}
-        />
-      </Container>
+      {isActive && (
+        <Container
+          width={WIDTH}
+          padding={0}
+          position="absolute"
+          bottom={-SPACING.S1 - 4}
+          elevation={100}>
+          <Slider
+            ref={sliderRef}
+            style={{
+              left: -SPACING.S2 * 2 + SPACING.S1,
+              width: WIDTH + SPACING.S3 * 2,
+            }}
+            minimumValue={0}
+            maximumValue={1}
+            minimumTrackTintColor={COLOR.WHITE}
+            maximumTrackTintColor={COLOR.WHITE}
+            thumbTintColor={COLOR.WHITE}
+            value={sliderValue}
+            onSlidingComplete={value => {
+              setSeek(value * duration);
+              setSliderValue(value);
+            }}
+          />
+        </Container>
+      )}
     </>
   );
 };

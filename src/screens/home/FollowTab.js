@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet } from 'react-native';
+import { BackHandler, FlatList, StyleSheet } from 'react-native';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import VideoItem from './components/VideoItem';
 import { HEIGHT } from '../../configs/constant';
@@ -24,9 +24,12 @@ import {
 
 const FollowTab = () => {
   const dispatch = useDispatch();
+  const timeReloadRef = useRef(0);
+  const flatListRef = useRef();
 
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const containerValue = useSharedValue(0);
 
@@ -49,25 +52,6 @@ const FollowTab = () => {
   const HEIGHT_ITEM =
     HEIGHT - bottomHeight - STATUSBAR_HEIGHT + 2 - BOTTOM_NAVIGATOR_HEIGHT;
   const cellRefs = useRef({});
-
-  // const data = [
-  //   { key: '1' },
-  //   { key: '2' },
-  //   { key: '3' },
-  //   { key: '4' },
-  //   { key: '5' },
-  //   { key: '6' },
-  //   { key: '7' },
-  //   { key: '8' },
-  //   { key: '9' },
-  //   { key: '10' },
-  //   { key: '11' },
-  //   { key: '6' },
-  //   { key: '7' },
-  //   { key: '8' },
-  //   { key: '9' },
-  //   { key: '10' },
-  // ];
 
   const onViewableItemsChanged = useRef(props => {
     const changed = props.changed;
@@ -106,13 +90,15 @@ const FollowTab = () => {
       const result = await VideoApi.getVideo();
       if (result.success) {
         setData([...result.data.data]);
-        setIsLoading(false);
         containerValue.value = withTiming(1, { duration: 1000 });
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
+      setIsRefreshing(false);
     }
-  }, []);
+  }, [isRefreshing]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -131,14 +117,30 @@ const FollowTab = () => {
     },
   });
 
+  BackHandler.addEventListener('hardwareBackPress', function () {
+    const time = Date.now();
+    if (time - timeReloadRef.current > 10000) {
+      setIsRefreshing(true);
+      flatListRef.current.scrollToOffset({ animated: true, offset: 0 });
+      fetchData();
+      timeReloadRef.current = Date.now();
+      return true;
+    }
+
+    return false;
+  });
+
   return (
     <Animated.View style={[styles.container, containerStyle]}>
       {isLoading ? (
         <Icon source={TIKTOK_LOADER_GIF} width={50} height={50} />
       ) : (
         <FlatList
+          ref={flatListRef}
           data={data}
           pagingEnabled
+          onRefresh={() => setIsRefreshing(true)}
+          refreshing={isRefreshing}
           renderItem={({ item, index }) => {
             return (
               <VideoItem

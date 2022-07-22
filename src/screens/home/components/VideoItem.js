@@ -20,8 +20,8 @@ import CVideo from './CVideo';
 
 const VideoItem = React.forwardRef(({ item, index }, ref) => {
   const { _id, caption, url, author, audio, like, comment } = item;
-  const verticalRef = React.createRef();
-  const videoRef = React.createRef();
+  const verticalRef = useRef();
+  const videoRef = useRef();
 
   const bottomHeight = useBottomTabBarHeight();
 

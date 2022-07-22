@@ -8,7 +8,7 @@ import { LIVE_ICON, SEARCH_IMG } from '../../../configs/source';
 
 const MyTabBar = ({ state, descriptors, navigation, position }) => {
   const routes = state.routes.map(r => {
-    return { ...r, ref: React.createRef() };
+    return { ...r, ref: useRef() };
   });
   const containerRef = useRef(null);
   const [measures, setMeasures] = useState([]);

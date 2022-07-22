@@ -1,12 +1,9 @@
 import { StyleSheet, Text, View, Animated } from 'react-native';
 import React from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-// import Animated, {
-//   interpolate,
-//   useAnimatedStyle,
-// } from 'react-native-reanimated';
-import { STATUSBAR_HEIGHT } from '../../../constants/constants';
 import { COLOR, SPACING, TEXT } from '../../../configs/styles';
+import RedDot from '../../../components/more/RedDot';
+import { Container } from '../../../components';
 
 const Tab = React.forwardRef(
   ({ state, route, descriptors, navigation, index, position }, ref) => {
@@ -61,6 +58,11 @@ const Tab = React.forwardRef(
             <Text style={styles.label}>{label}</Text>
           </Animated.View>
         </TouchableOpacity>
+        {index === 0 && (
+          <Container position="absolute" right={0} top={SPACING.S3}>
+            <RedDot />
+          </Container>
+        )}
       </View>
     );
   },

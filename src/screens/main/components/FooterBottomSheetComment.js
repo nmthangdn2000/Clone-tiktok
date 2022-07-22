@@ -36,7 +36,7 @@ const FooterBottomSheetComment = ({ idVideo, fetchData }) => {
 
   useEffect(() => {
     const showSubscription = Keyboard.addListener('keyboardDidShow', e => {
-      setHeightKeyboardStatus(e.endCoordinates.height + 40);
+      setHeightKeyboardStatus(e.endCoordinates.height);
     });
     const hideSubscription = Keyboard.addListener('keyboardDidHide', e => {
       setHeightKeyboardStatus(0);
@@ -82,7 +82,8 @@ const FooterBottomSheetComment = ({ idVideo, fetchData }) => {
       width={'100%'}
       alignItems="center"
       borderTopWidth={0.2}
-      borderTopColor={COLOR.LIGHT_GRAY}>
+      borderTopColor={COLOR.LIGHT_GRAY}
+      backgroundColor={COLOR.WHITE}>
       <Icon
         source={AVATA_IMG}
         borderRadius={BORDER.PILL}
