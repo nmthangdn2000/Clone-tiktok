@@ -1,0 +1,12 @@
+R_DEF: Internal format may change without notice
+local
+id exo_play_pause_container
+layout exo_player_control_view
+string error_drm_not_supported
+string error_drm_unknown
+string error_drm_unsupported_scheme
+string error_instantiating_decoder
+string error_no_decoder
+string error_no_secure_decoder
+string error_querying_decoders
+string unrecognized_media_format
