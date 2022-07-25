@@ -19,7 +19,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 const BottomSheet = React.forwardRef(
-  ({ HeaderComponent, FooterComponent, children, closeBottomSheet }, ref) => {
+  ({ HeaderComponent, FooterComponent, children, onCloseBottomSheet }, ref) => {
     const [heightLayout, setHeightLayout] = useState(0);
 
     const translateY = useSharedValue(0);
@@ -32,8 +32,8 @@ const BottomSheet = React.forwardRef(
 
       translateY.value = withTiming(destination);
 
-      if (destination === 0 && closeBottomSheet) {
-        runOnJS(closeBottomSheet)();
+      if (destination === 0 && onCloseBottomSheet) {
+        runOnJS(onCloseBottomSheet)();
       }
     }, []);
 
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.WHITE,
     borderTopLeftRadius: BORDER.MEDIUM,
     borderTopRightRadius: BORDER.MEDIUM,
-
+    overflow: 'hidden',
     position: 'absolute',
     top: HEIGHT,
     left: 0,

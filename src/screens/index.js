@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import ModalSignIn from '../components/modal/ModalSignIn';
 import BottomSheetSignIn from '../components/bottomSheets/BottomSheetSocialAuth';
 import '../utils/pushnotification';
+import BottomSettingProfile from '../components/bottomSheets/BottomSettingProfile';
 
 const { Navigator, Screen } = createMaterialTopTabNavigator();
 
@@ -34,6 +35,7 @@ const Index = () => {
       </Navigator>
       <ModalSignIn />
       <BottomSheetSignIn />
+      <BottomSettingProfile />
     </>
   );
 };

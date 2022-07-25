@@ -5,6 +5,7 @@ import {
   ImageStyle,
   StyleProp,
   TextStyle,
+  ViewProps,
   ViewStyle,
 } from 'react-native';
 
@@ -38,8 +39,9 @@ export interface PaddingCustomType {
   paddingVertical?: number | string | undefined;
 }
 
-export interface ContainerType extends ViewStyle {
+export interface ContainerType extends ViewStyle, ViewProps {
   children?: React.ReactNode;
+
 }
 
 export interface IconCustomType extends ImageStyle {

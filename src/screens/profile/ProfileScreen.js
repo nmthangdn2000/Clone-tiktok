@@ -1,11 +1,17 @@
-import { StatusBar } from 'react-native';
+import { Image, Pressable, StatusBar } from 'react-native';
 import React, { useCallback, useEffect, useState } from 'react';
 import User from './User';
 import { Tabs } from 'react-native-collapsible-tab-view';
 import ListVideo from './ListVideo';
 import { Container, Icon, Row } from '../../components';
 import { COLOR, SPACING } from '../../configs/styles';
-import { ARROW_BACK_IMG, MORE_VERT_IMG } from '../../configs/source';
+import {
+  ADD_ACCOUNT_ICON_IMG,
+  ARROW_BACK_IMG,
+  MORE_VERT_IMG,
+  USER_FILLED_IMG,
+  USER_IMG,
+} from '../../configs/source';
 import {
   useIsFocused,
   useNavigation,
@@ -13,9 +19,11 @@ import {
 } from '@react-navigation/native';
 import * as userApi from '../../apis/user.api';
 import * as videoApi from '../../apis/video.api';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { KEY_STORAGE } from '../../constants/constants';
+import BottomSettingProfile from '../../components/bottomSheets/BottomSettingProfile';
+import { setBottomSheetSettingProfile } from '../../store/indexSlice';
 
 const statusbarHeight = StatusBar.currentHeight;
 
@@ -39,6 +47,7 @@ const data = [
 ];
 const ProfileScreen = () => {
   const isFocused = useIsFocused();
+  const dispatch = useDispatch();
 
   const currentUser = useSelector(state => state.index.currentUser);
 
@@ -70,7 +79,6 @@ const ProfileScreen = () => {
       const dataUser = userApi.getUserById(id);
 
       const [userInfor, listVideo] = await Promise.all([dataUser, dataVideo]);
-      console.log(userInfor.data);
       setUser(userInfor.data);
       setVideos(listVideo.data.data || []);
 
@@ -98,6 +106,36 @@ const ProfileScreen = () => {
     }
   }, [isFocused, fetchData, showHeader]);
 
+  const handleClickMoreOption = useCallback(() => {
+    dispatch(setBottomSheetSettingProfile(true));
+  }, []);
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerShown: true,
+      headerTitle: () => null,
+      headerShadowVisible: false,
+      headerTitleAlign: 'center',
+      headerLeft: () => (
+        <Icon source={ADD_ACCOUNT_ICON_IMG} marginLeft={SPACING.S4} />
+      ),
+      headerRight: () => (
+        <Icon
+          source={MORE_VERT_IMG}
+          marginRight={SPACING.S4}
+          onPress={handleClickMoreOption}
+        />
+      ),
+      tabBarIcon: ({ color, focused }) => {
+        return (
+          <Icon
+            source={focused ? USER_FILLED_IMG : USER_IMG}
+            tintColor={color}
+          />
+        );
+      },
+    });
+  }, []);
   return (
     <Container
       flex={1}
@@ -124,12 +162,13 @@ const ProfileScreen = () => {
                 source={ARROW_BACK_IMG}
                 onPress={() => navigation.goBack()}
               />
-              <Icon source={MORE_VERT_IMG} />
+              <Icon source={MORE_VERT_IMG} onPress={handleClickMoreOption} />
             </Row>
           </Container>
         </>
       ) : null}
-      <Tabs.Container renderHeader={() => <User user={user} />}>
+      <Tabs.Container
+        renderHeader={() => <User user={user} showHeader={showHeader} />}>
         <Tabs.Tab name="SELECTED_IMG">
           <ListVideo dataList={videos} />
         </Tabs.Tab>

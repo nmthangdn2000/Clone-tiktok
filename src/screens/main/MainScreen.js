@@ -15,11 +15,7 @@ import {
   NEW_VIDEO_IMG,
   NEW_VIDEO_DART_IMG,
   SEARCH_IMG,
-  USER_IMG,
-  ADD_ACCOUNT_ICON_IMG,
-  MORE_VERT_IMG,
   HOME_FILLED_IMG,
-  USER_FILLED_IMG,
   MESSAGE_FILLED_IMG,
 } from '../../configs/source';
 import BoxCreateVideo from './components/BoxCreateVideo';
@@ -51,11 +47,7 @@ const MainScreen = ({ navigation }) => {
   };
   return (
     <>
-      <StatusBar
-        barStyle={'light-content'}
-        backgroundColor={COLOR.TRANSPARENT}
-        translucent={true}
-      />
+      <StatusBar backgroundColor={COLOR.TRANSPARENT} translucent={true} />
 
       <Bottom.Navigator
         screenOptions={{
@@ -177,29 +169,6 @@ const MainScreen = ({ navigation }) => {
           name="Hồ sơ"
           component={ProfileScreen}
           initialParams={{ showHeader: false }}
-          options={{
-            headerShown: true,
-            headerTitleAlign: 'center',
-            headerLeft: () => (
-              <Pressable style={styles.buttonLeft} onPress={handleButtonBack}>
-                <Image source={ADD_ACCOUNT_ICON_IMG} />
-              </Pressable>
-            ),
-            headerRight: () => (
-              <Pressable style={styles.buttonRight} onPress={null}>
-                <Image source={MORE_VERT_IMG} />
-              </Pressable>
-            ),
-            tabBarIcon: ({ color, focused }) => {
-              return (
-                <Image
-                  source={focused ? USER_FILLED_IMG : USER_IMG}
-                  tintColor={color}
-                  style={styles.bottomTabIcon}
-                />
-              );
-            },
-          }}
           listeners={{
             focus: () => {
               StatusBar.setBarStyle('dark-content');

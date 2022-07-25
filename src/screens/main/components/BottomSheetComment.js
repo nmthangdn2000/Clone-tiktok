@@ -65,7 +65,7 @@ const BottomSheetComment = () => {
     dispatch(setIsShowComment(false));
   }, [dispatch]);
 
-  const closeBottomSheet = () => {
+  const onCloseBottomSheet = () => {
     dispatch(setIsShowComment(false));
   };
 
@@ -81,7 +81,7 @@ const BottomSheetComment = () => {
           fetchData={fetchData}
         />
       }
-      closeBottomSheet={closeBottomSheet}>
+      onCloseBottomSheet={onCloseBottomSheet}>
       <Container padding={SPACING.S3} height={HEIGHT / 2} marginBottom={68}>
         {isLoading ? (
           <Loading />

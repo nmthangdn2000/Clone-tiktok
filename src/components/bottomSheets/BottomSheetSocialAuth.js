@@ -60,7 +60,7 @@ const BottomSheetSocialAuth = () => {
     setDataSocial([]);
   }, []);
 
-  const closeBottomSheet = () => {
+  const onCloseBottomSheet = () => {
     dispatch(setBottomSheetSignIn(false));
     setDataSocial([]);
   };
@@ -156,7 +156,7 @@ const BottomSheetSocialAuth = () => {
   };
 
   return (
-    <BottomSheet ref={bottomSheetRef} closeBottomSheet={closeBottomSheet}>
+    <BottomSheet ref={bottomSheetRef} onCloseBottomSheet={onCloseBottomSheet}>
       <Container paddingTop={SPACING.S5} height={HEIGHT - 48}>
         <Container
           paddingHorizontal={SPACING.S4}

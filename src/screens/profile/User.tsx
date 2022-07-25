@@ -4,16 +4,35 @@ import { SPACING, TEXT, COLOR, BORDER } from '../../configs/styles/index';
 import { AVATA_IMG, BOOKMARK_IMG } from '../../configs/source';
 import { UserModel } from '../../models/User.model';
 import { urlSourceMedia } from '../../utils/utils';
+import { Container } from '../../components';
 
 export type Props = {
   user: UserModel;
+  showHeader: boolean;
 };
 
-const User: React.FC<Props> = ({ user }) => {
+const User: React.FC<Props> = ({ user, showHeader }) => {
   const EditProfile = () => {
     return (
       <View style={[styles.buttonStyle, { height: 50 }]}>
         <Text style={styles.txtButon}>Chỉnh sửa thông tin</Text>
+      </View>
+    );
+  };
+
+  const Follow = () => {
+    return (
+      <View
+        style={[
+          styles.buttonStyle,
+          {
+            height: 50,
+            backgroundColor: COLOR.DANGER2,
+            width: 150,
+            borderColor: COLOR.DANGER2,
+          },
+        ]}>
+        <Text style={[styles.txtButon, { color: COLOR.WHITE }]}>Follow</Text>
       </View>
     );
   };
@@ -24,14 +43,14 @@ const User: React.FC<Props> = ({ user }) => {
         source={{ uri: urlSourceMedia(user?.avatar) }}
         style={styles.avata}
       />
-      <Text style={styles.txtUserName}>@{user?.name || 0}</Text>
+      <Text style={styles.txtUserName}>@{user?.name || '.....'}</Text>
       <View style={styles.containerFollow}>
         <View style={styles.itemFollow}>
           <Text style={styles.txtAmountFollow}>{user?.following || 0}</Text>
           <Text style={styles.txtTitleFollow}>Đang Follow</Text>
         </View>
         <View style={styles.itemFollow}>
-          <Text style={styles.txtAmountFollow}>{user?.follower}</Text>
+          <Text style={styles.txtAmountFollow}>{user?.follower || 0}</Text>
           <Text style={styles.txtTitleFollow}>Follow</Text>
         </View>
         <View style={styles.itemFollow}>
@@ -40,7 +59,7 @@ const User: React.FC<Props> = ({ user }) => {
         </View>
       </View>
       <View style={styles.containerButton}>
-        <EditProfile />
+        {!showHeader ? <EditProfile /> : <Follow />}
         <View style={[styles.buttonStyle, { height: 50 }]}>
           <Image source={BOOKMARK_IMG} style={styles.iconButton} />
         </View>
