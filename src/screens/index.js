@@ -6,7 +6,7 @@ import ProfileScreen from './profile/ProfileScreen';
 import { useSelector } from 'react-redux';
 import ModalSignIn from '../components/modal/ModalSignIn';
 import BottomSheetSignIn from '../components/bottomSheets/BottomSheetSocialAuth';
-import '../utils/socket';
+import '../utils/pushnotification';
 
 const { Navigator, Screen } = createMaterialTopTabNavigator();
 
