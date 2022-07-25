@@ -70,7 +70,7 @@ const ProfileScreen = () => {
       const dataUser = userApi.getUserById(id);
 
       const [userInfor, listVideo] = await Promise.all([dataUser, dataVideo]);
-
+      console.log(userInfor.data);
       setUser(userInfor.data);
       setVideos(listVideo.data.data || []);
 

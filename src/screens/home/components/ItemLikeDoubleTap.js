@@ -26,7 +26,7 @@ const ItemLikeDoubleTap = ({ item }) => {
     return {
       transform: [
         { scale: zoomValue.value },
-        { translateY: interpolate(zoomValue.value, [0.6, 1.5], [0, -30]) },
+        { translateY: interpolate(zoomValue.value, [0.6, 1.5], [0, -100]) },
         { rotate: rotateValue.value },
       ],
       opacity: interpolate(zoomValue.value, [0.6, 1.5], [1, 0]),
@@ -36,12 +36,12 @@ const ItemLikeDoubleTap = ({ item }) => {
   useEffect(() => {
     zoomValue.value = withTiming(
       0.6,
-      { duration: 250, easing: Easing.bounce },
+      { duration: 350, easing: Easing.bounce },
       () => {
         zoomValue.value = withDelay(
           300,
-          withTiming(2, {
-            duration: 500,
+          withTiming(1.5, {
+            duration: 550,
             easing: Easing.linear,
           }),
         );

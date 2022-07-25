@@ -15,7 +15,7 @@ const HomeScreen = () => {
       <Tab.Navigator
         tabBar={props => <MyTabBar {...props} />}
         initialRouteName="Dành cho bạn">
-        <Tab.Screen name="Đang follow" component={Test} />
+        <Tab.Screen name="Đang follow" component={FollowTab} />
         <Tab.Screen name="Dành cho bạn" component={FollowTab} />
       </Tab.Navigator>
     </Container>

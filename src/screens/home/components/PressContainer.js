@@ -55,6 +55,7 @@ const PressContainer = ({ isActive, pauseVideo, playVideo, verticalRef }) => {
       setShowIcon(false);
       cancelAnimation(iconPlayVideoValue);
     }
+    setListLikeDoubleTap([]);
   }, [isActive, iconPlayVideoValue, pauseVideo, playVideo]);
 
   return (

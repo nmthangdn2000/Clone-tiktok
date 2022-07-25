@@ -109,8 +109,8 @@ const FollowTab = () => {
   }, []);
 
   useEffect(() => {
-    handleFecthData();
-  }, [handleFecthData]);
+    if (isFocused && data.length === 0) handleFecthData();
+  }, [handleFecthData, isFocused]);
 
   const styles = StyleSheet.create({
     container: {

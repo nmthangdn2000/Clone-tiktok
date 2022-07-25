@@ -3,6 +3,7 @@ import React from 'react';
 import { SPACING, TEXT, COLOR, BORDER } from '../../configs/styles/index';
 import { AVATA_IMG, BOOKMARK_IMG } from '../../configs/source';
 import { UserModel } from '../../models/User.model';
+import { urlSourceMedia } from '../../utils/utils';
 
 export type Props = {
   user: UserModel;
@@ -19,11 +20,14 @@ const User: React.FC<Props> = ({ user }) => {
 
   return (
     <View style={styles.container}>
-      <Image source={AVATA_IMG} style={styles.avata} />
-      <Text style={styles.txtUserName}>@{user?.name}</Text>
+      <Image
+        source={{ uri: urlSourceMedia(user?.avatar) }}
+        style={styles.avata}
+      />
+      <Text style={styles.txtUserName}>@{user?.name || 0}</Text>
       <View style={styles.containerFollow}>
         <View style={styles.itemFollow}>
-          <Text style={styles.txtAmountFollow}>{user?.following}</Text>
+          <Text style={styles.txtAmountFollow}>{user?.following || 0}</Text>
           <Text style={styles.txtTitleFollow}>Đang Follow</Text>
         </View>
         <View style={styles.itemFollow}>
@@ -31,7 +35,7 @@ const User: React.FC<Props> = ({ user }) => {
           <Text style={styles.txtTitleFollow}>Follow</Text>
         </View>
         <View style={styles.itemFollow}>
-          <Text style={styles.txtAmountFollow}>{user?.totalLike}</Text>
+          <Text style={styles.txtAmountFollow}>{user?.totalLike || 0}</Text>
           <Text style={styles.txtTitleFollow}>Thích</Text>
         </View>
       </View>
