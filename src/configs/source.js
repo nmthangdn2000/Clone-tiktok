@@ -45,6 +45,7 @@ const MORE_HORIZ_ICON = require('../assets/images/more_horiz.png');
 const FIBER_SMART_RECORD_ICON = require('../assets/images/fiber_smart_record.png');
 const STITCH_ICON = require('../assets/images/stitch.png');
 const LIVE_ICON = require('../assets/images/live_icon.png');
+const WIFI_OFF_ICON = require('../assets/images/wifi_off.png');
 
 const FACEBOOK_ICON = require('../assets/icon-social/facebook.png');
 const INSTAGRAM_ICON = require('../assets/icon-social/instagram.png');
@@ -143,4 +144,5 @@ export {
   FIBER_SMART_RECORD_ICON,
   STITCH_ICON,
   LIVE_ICON,
+  WIFI_OFF_ICON,
 };

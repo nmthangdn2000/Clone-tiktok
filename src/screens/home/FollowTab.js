@@ -21,6 +21,7 @@ import {
   BOTTOM_NAVIGATOR_HEIGHT,
   STATUSBAR_HEIGHT,
 } from '../../constants/constants';
+import NotFoundData from './components/NotFoundData';
 
 const FollowTab = () => {
   const dispatch = useDispatch();
@@ -100,11 +101,16 @@ const FollowTab = () => {
     }
   }, [isRefreshing]);
 
-  useEffect(() => {
+  const handleFecthData = useCallback(() => {
+    setIsLoading(true);
     setTimeout(() => {
       fetchData();
-    }, 1000);
-  }, [fetchData]);
+    }, 3000);
+  }, []);
+
+  useEffect(() => {
+    handleFecthData();
+  }, [handleFecthData]);
 
   const styles = StyleSheet.create({
     container: {
@@ -129,12 +135,12 @@ const FollowTab = () => {
 
     return false;
   });
-
+  console.log(isLoading);
   return (
     <Animated.View style={[styles.container, containerStyle]}>
       {isLoading ? (
         <Icon source={TIKTOK_LOADER_GIF} width={50} height={50} />
-      ) : (
+      ) : data.length > 0 ? (
         <FlatList
           ref={flatListRef}
           data={data}
@@ -166,6 +172,8 @@ const FollowTab = () => {
             index,
           })}
         />
+      ) : (
+        <NotFoundData onPress={handleFecthData} />
       )}
     </Animated.View>
   );
