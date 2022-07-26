@@ -48,6 +48,8 @@ const LIVE_ICON = require('../assets/images/live_icon.png');
 const WIFI_OFF_ICON = require('../assets/images/wifi_off.png');
 const SETTING_ICON = require('../assets/images/settings.png');
 const COPPY_CONTENT_ICON = require('../assets/images/content_copy.png');
+const PHOTO_CAMERA_ICON = require('../assets/images/photo_camera.png');
+const VIDEOCAM_OUTLINE_ICON = require('../assets/images/videocam_outline.png');
 
 const FACEBOOK_ICON = require('../assets/icon-social/facebook.png');
 const INSTAGRAM_ICON = require('../assets/icon-social/instagram.png');
@@ -149,4 +151,6 @@ export {
   WIFI_OFF_ICON,
   SETTING_ICON,
   COPPY_CONTENT_ICON,
+  PHOTO_CAMERA_ICON,
+  VIDEOCAM_OUTLINE_ICON,
 };

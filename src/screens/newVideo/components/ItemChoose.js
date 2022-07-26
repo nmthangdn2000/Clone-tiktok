@@ -8,15 +8,15 @@ const ItemChoose = ({ iconLeft, name, iconRight, type, setData }) => {
   const [isEnabled, setIsEnabled] = useState(true);
   const toggleSwitch = () => {
     setIsEnabled(previousState => !previousState);
-    setData(isEnabled);
+    if (setData) setData(isEnabled);
   };
   return (
     <View style={styles.container}>
-      <Icon source={iconLeft} width={26} height={26} tintColor={COLOR.GRAY} />
+      <Icon source={iconLeft} width={24} height={24} tintColor={COLOR.GRAY} />
       <View style={styles.content}>
         <CText
           text={TEXT.REGULAR}
-          fontSize={16}
+          fontSize={15}
           color={COLOR.BLACK}
           numberOfLines={1}>
           {name}

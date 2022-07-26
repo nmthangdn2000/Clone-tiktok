@@ -25,7 +25,9 @@ const ItemOption = ({
       flexDirection="row"
       justifyContent="space-between"
       alignItems="center">
-      <CText color={colorTxtLeft}>{txtLeft}</CText>
+      <CText fontSize={15} color={colorTxtLeft}>
+        {txtLeft}
+      </CText>
       <Container flexDirection="row">
         <CText marginRight={SPACING.S2} color={colorTxtRight}>
           {txtRight}
