@@ -1,10 +1,11 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import { SPACING, TEXT, COLOR, BORDER } from '../../configs/styles/index';
 import { AVATA_IMG, BOOKMARK_IMG } from '../../configs/source';
 import { UserModel } from '../../models/User.model';
 import { urlSourceMedia } from '../../utils/utils';
 import { Container } from '../../components';
+import { useNavigation } from '@react-navigation/native';
 
 export type Props = {
   user: UserModel;
@@ -12,11 +13,14 @@ export type Props = {
 };
 
 const User: React.FC<Props> = ({ user, showHeader }) => {
+  const navigation = useNavigation();
   const EditProfile = () => {
     return (
-      <View style={[styles.buttonStyle, { height: 50 }]}>
-        <Text style={styles.txtButon}>Chỉnh sửa thông tin</Text>
-      </View>
+      <TouchableOpacity onPress={() => navigation.navigate('SettingScreen')}>
+        <View style={[styles.buttonStyle, { height: 50 }]}>
+          <Text style={styles.txtButon}>Chỉnh sửa thông tin</Text>
+        </View>
+      </TouchableOpacity>
     );
   };
 

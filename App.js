@@ -11,6 +11,7 @@ import Index from './src/screens';
 import ProfileScreen from './src/screens/profile/ProfileScreen';
 import PostVideoScreen from './src/screens/newVideo/PostVideoScreen';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import SettingScreen from './src/screens/setting/SettingScreen';
 
 GoogleSignin.configure({
   webClientId:
@@ -50,6 +51,7 @@ const App = () => {
           <Stack.Screen name="AudioScreen" component={AudioScreen} />
           <Stack.Screen name="PostVideoScreen" component={PostVideoScreen} />
           <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+          <Stack.Screen name="SettingScreen" component={SettingScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
