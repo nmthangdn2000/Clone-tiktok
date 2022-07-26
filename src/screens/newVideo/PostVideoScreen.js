@@ -122,7 +122,7 @@ const PostVideoScreen = () => {
         iconLeft={LOCK_OUTLINE_ICON}
         name={'Ai có thể xem video này'}
         type={privacy ? 'Chỉ mình bạn' : 'Mọi người'}
-        setData={a => setPrivacy(a)}
+        onChange={a => setPrivacy(a)}
       />
       <ItemChoose iconLeft={MESSAGE_OUTLINE_ICON} name={'Cho phép bình luận'} />
       <ItemChoose iconLeft={FIBER_SMART_RECORD_ICON} name={'Cho phép Duet'} />

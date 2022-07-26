@@ -4,11 +4,18 @@ import { BORDER, COLOR, SPACING, TEXT } from '../../../configs/styles';
 import { Icon, CText } from '../../../components';
 import { Switch } from 'react-native-gesture-handler';
 
-const ItemChoose = ({ iconLeft, name, iconRight, type, setData }) => {
-  const [isEnabled, setIsEnabled] = useState(true);
+const ItemChoose = ({
+  iconLeft,
+  name,
+  iconRight,
+  type,
+  onChange,
+  initValue,
+}) => {
+  const [isEnabled, setIsEnabled] = useState(initValue);
   const toggleSwitch = () => {
     setIsEnabled(previousState => !previousState);
-    if (setData) setData(isEnabled);
+    if (onChange) onChange(!isEnabled);
   };
   return (
     <View style={styles.container}>

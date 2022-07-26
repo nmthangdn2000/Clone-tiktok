@@ -10,13 +10,19 @@ import {
   VIDEOCAM_OUTLINE_ICON,
 } from '../../../configs/source';
 import { STATUSBAR_HEIGHT } from '../../../constants/constants';
+import { UserModel } from '../../../models/User.model';
+import { urlSourceMedia } from '../../../utils/utils';
 
-const Header = ({ data }) => {
+interface Props {
+  data: UserModel | undefined;
+}
+
+const Header = ({ data }: Props) => {
   const Media = ({ uri, icon, text }) => {
     return (
       <Container justifyContent="center">
         <Container width={96} height={96}>
-          <Avatar uri={uri} />
+          <Avatar uri={{ uri: urlSourceMedia(data?.avatar) }} />
           <Container
             width={'100%'}
             height={'100%'}

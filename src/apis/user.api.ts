@@ -9,13 +9,22 @@ const getUser = async (
 ): Promise<UserModel[]> => {
   const url = `${SERVER_API_URL}/user?page=${page}&q=${query}&limit=${limit}`;
   const result = await axios.get(url);
-  return result.data;
+  return result?.data?.data;
 };
 
-const getUserById = async (id: string): Promise<UserModel> => {
+const getUserById = async (id: string | null): Promise<UserModel> => {
   const url = `${SERVER_API_URL}/user/${id}`;
   const result = await axios.get(url);
+  return result?.data?.data;;
+};
+
+const updateUser = async (data: UserModel, token: string | null): Promise<UserModel> => {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const url = `${SERVER_API_URL}/user/`;
+  const result = await axios.put(url, data, config);
   return result.data;
 };
 
-export { getUser, getUserById };
+export { getUser, getUserById, updateUser };

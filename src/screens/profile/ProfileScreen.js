@@ -74,19 +74,20 @@ const ProfileScreen = () => {
         dataVideo = videoApi.getVideoByUserAuth(token);
       } else {
         id = route.params.id ? route.params.id : currentUser;
+
         dataVideo = videoApi.getVideoByUserId(id);
       }
       const dataUser = userApi.getUserById(id);
 
       const [userInfor, listVideo] = await Promise.all([dataUser, dataVideo]);
-      setUser(userInfor.data);
+      setUser(userInfor);
       setVideos(listVideo.data.data || []);
 
       let getVidesLike = [];
-      if (!showHeader && userInfor.data.privacy.like) {
+      if (!showHeader && userInfor?.privacy.like) {
         getVidesLike = await videoApi.getVideoLikeByUserAuth(token);
       } else {
-        getVidesLike = await videoApi.getVideoLikeByIdUser(userInfor.data._id);
+        getVidesLike = await videoApi.getVideoLikeByIdUser(userInfor?._id);
       }
 
       setVideosLike(getVidesLike.data || []);
