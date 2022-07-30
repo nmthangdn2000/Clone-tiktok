@@ -2,6 +2,7 @@ import { StyleSheet, Image, Pressable } from 'react-native';
 import React from 'react';
 import { CLOSE_IMG } from '../../../configs/source';
 import { COLOR, SPACING } from '../../../configs/styles';
+import { STATUSBAR_HEIGHT } from '../../../constants/constants';
 
 const CloseButton = ({ navigation, icon = CLOSE_IMG }) => {
   const handleClick = () => navigation.goBack();

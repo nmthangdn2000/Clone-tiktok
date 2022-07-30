@@ -17,7 +17,7 @@ import {
   SPEED_IMG,
   TIMESTAMP_IMG,
 } from '../../configs/source';
-import { CText, Icon } from '../../components';
+import { Container, CText, Icon } from '../../components';
 import CloseButton from './components/CloseButton';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { STATUSBAR_HEIGHT } from '../../constants/constants';
@@ -58,8 +58,13 @@ const PreviewVideoScreen = () => {
             controls
           />
         )}
-
-        <CloseButton navigation={navigation} icon={ARROW_BACK_IMG} />
+        <Container
+          marginTop={STATUSBAR_HEIGHT}
+          position={'absolute'}
+          backgroundColor="red"
+          zIndex={100}>
+          <CloseButton navigation={navigation} icon={ARROW_BACK_IMG} />
+        </Container>
         <View style={styles.audioTop}>
           <View style={styles.containerAudio}>
             <Icon
@@ -120,11 +125,16 @@ const styles = StyleSheet.create({
   },
   video: {
     flex: 1,
+    zIndex: -1,
   },
   audioTop: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    zIndex: 100,
+    marginTop: SPACING.S4 + STATUSBAR_HEIGHT,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: SPACING.S4,
   },
   containerAudio: {
     backgroundColor: COLOR.setOpacity(COLOR.BLACK, 0.4),

@@ -15,9 +15,11 @@ import { COLOR, SPACING } from '../../configs/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { setBottomSheetLogout } from '../../store/indexSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 
 const BottomSheetLogout = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const bottomSheetLogout = useSelector(state => state.index.bottomSheetLogout);
   const bottomSheetRef = useRef();
 
@@ -33,9 +35,10 @@ const BottomSheetLogout = () => {
   };
 
   const handleLogout = async () => {
-    console.log('handleLogout');
     try {
-      // await AsyncStorage.clear();
+      await AsyncStorage.clear();
+      navigation.navigate('Trang chủ');
+      handleCancleLogout();
     } catch (error) {
       console.log(error);
     }

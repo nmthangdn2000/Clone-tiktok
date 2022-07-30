@@ -18,6 +18,8 @@ import {
 } from '../../../constants/constants';
 import CVideo from './CVideo';
 
+const { height } = Dimensions.get('window');
+
 const VideoItem = React.forwardRef(({ item, index }, ref) => {
   const { _id, caption, url, author, audio, like, comment } = item;
   const verticalRef = useRef();
@@ -47,11 +49,14 @@ const VideoItem = React.forwardRef(({ item, index }, ref) => {
   return (
     <Container
       width={WIDTH}
-      height={
-        HEIGHT - bottomHeight - STATUSBAR_HEIGHT + 2 - BOTTOM_NAVIGATOR_HEIGHT
-      }
+      height={HEIGHT - bottomHeight - STATUSBAR_HEIGHT}
       backgroundColor="black">
-      <CVideo isActive={isActive} url={url} videoRef={videoRef} />
+      <CVideo
+        isActive={isActive}
+        url={url}
+        videoRef={videoRef}
+        bottomHeight={bottomHeight}
+      />
 
       <PressContainer
         isActive={isActive}

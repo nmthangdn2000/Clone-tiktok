@@ -3,6 +3,7 @@ import { SERVER_API_URL } from '../constants/constants';
 
 const getVideo = async (query = '', limit = 10, page = 1) => {
   const url = `${SERVER_API_URL}/video/all?page=${page}&q=${query}&limit${limit}`;
+  console.log(url);
   const result = await axios.get(url);
   return result.data;
 };

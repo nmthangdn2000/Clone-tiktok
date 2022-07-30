@@ -1,18 +1,27 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useRef, useState } from 'react';
 import Video from 'react-native-video';
-import { SERVER_DOMAIN } from '../../../constants/constants';
+import { SERVER_DOMAIN, STATUSBAR_HEIGHT } from '../../../constants/constants';
 import { HEIGHT, WIDTH } from '../../../configs/constant';
 import { COLOR, SPACING } from '../../../configs/styles';
 import { Container } from '../../../components';
 import Slider from '@react-native-community/slider';
 
-const CVideo = ({ videoRef, url, isActive }) => {
+const CVideo = ({ videoRef, url, isActive, bottomHeight }) => {
   const sliderRef = useRef();
 
   const [duration, setDuration] = useState(0);
   const [sliderValue, setSliderValue] = useState(0);
   const [seek, setSeek] = useState(0);
+
+  const styles = StyleSheet.create({
+    video: {
+      position: 'absolute',
+      width: WIDTH,
+      height: '100%',
+    },
+  });
+
   return (
     <>
       <Video
@@ -61,11 +70,3 @@ const CVideo = ({ videoRef, url, isActive }) => {
 };
 
 export default React.memo(CVideo);
-
-const styles = StyleSheet.create({
-  video: {
-    position: 'absolute',
-    width: WIDTH,
-    height: HEIGHT,
-  },
-});

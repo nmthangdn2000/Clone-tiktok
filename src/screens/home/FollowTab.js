@@ -1,4 +1,4 @@
-import { BackHandler, FlatList, StyleSheet } from 'react-native';
+import { BackHandler, Dimensions, FlatList, StyleSheet } from 'react-native';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import VideoItem from './components/VideoItem';
 import { HEIGHT } from '../../configs/constant';
@@ -50,8 +50,7 @@ const FollowTab = () => {
 
   const videoPlaying = useRef();
 
-  const HEIGHT_ITEM =
-    HEIGHT - bottomHeight - STATUSBAR_HEIGHT + 2 - BOTTOM_NAVIGATOR_HEIGHT;
+  const HEIGHT_ITEM = HEIGHT - bottomHeight - STATUSBAR_HEIGHT;
   const cellRefs = useRef({});
 
   const onViewableItemsChanged = useRef(props => {
