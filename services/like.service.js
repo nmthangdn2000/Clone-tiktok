@@ -4,6 +4,7 @@ import LikeModel from '../models/like.model';
 import VideoModel from '../models/video.model';
 import UserModel from '../models/user.model';
 import * as videoService from './video.service';
+import * as notificationService from './notification.service';
 
 const getByUser = async ({ user, id }) => {
   if (!user) {
@@ -66,6 +67,7 @@ const like = async (user, id) => {
   ]);
 
   await videoService.updateById(id, { like: countLike[0].users });
+  notificationService.likeNotification(id, user).catch((err) => console.log(err));
 };
 
 const getSumLikeByUser = async (user) => {

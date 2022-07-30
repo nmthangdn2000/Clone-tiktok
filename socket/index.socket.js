@@ -9,7 +9,7 @@ const socketIo = (server) => {
     cors: { origin: getCorsOrigins(), credentials: true },
   });
 
-  io.use(verifyUserSocket);
+  // io.use(verifyUserSocket);
 
   const onConnection = (s) => {
     socket = s;

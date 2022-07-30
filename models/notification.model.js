@@ -1,6 +1,6 @@
 import * as BaseModel from './base.model';
 import mongoose from 'mongoose';
-import { ERROR, REF_MODEL } from '../common/constants';
+import { CONTEN_NOTIFICATION, ERROR, REF_MODEL } from '../common/constants';
 
 const Schema = mongoose.Schema;
 // model name
@@ -25,7 +25,10 @@ const model = {
     type: Schema.Types.ObjectId,
     refPath: 'type',
   },
-  message: String,
+  content: {
+    type: Number,
+    enum: CONTEN_NOTIFICATION,
+  },
   isRead: {
     type: Boolean,
     default: false,

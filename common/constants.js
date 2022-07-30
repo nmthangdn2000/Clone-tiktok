@@ -123,9 +123,26 @@ const STATUS_ORDER = {
 
 const REF_MODEL = {
   VIDEO: 'videos',
-  LIKEL: 'likes',
   FOLLOW: 'follows',
   COMMENT: 'comments',
 };
 
-export { LIMIT, PAGE, HttpMethod, ERROR, RESPONSE, TYPE_ACCOUNT, STATUS_ACCOUNT, STATUS_ORDER, REF_MODEL };
+const CONTEN_NOTIFICATION = {
+  NEW_VIDEO: 1,
+  FOLLOW: 2,
+  LIKE: 3,
+  COMMENT: 4,
+};
+
+export {
+  LIMIT,
+  PAGE,
+  HttpMethod,
+  ERROR,
+  RESPONSE,
+  TYPE_ACCOUNT,
+  STATUS_ACCOUNT,
+  STATUS_ORDER,
+  REF_MODEL,
+  CONTEN_NOTIFICATION,
+};

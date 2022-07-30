@@ -4,6 +4,7 @@ import VideoModel from '../models/video.model';
 import { deleteFile, pagination } from './base.service';
 import * as likeService from './like.service';
 import * as followService from './follow.service';
+import mongoose from 'mongoose';
 
 const filter = async (q = '', page = PAGE, limit = LIMIT, sort) => {
   const query = q
@@ -48,10 +49,11 @@ const filter = async (q = '', page = PAGE, limit = LIMIT, sort) => {
 };
 
 const getById = async (id) => {
+  if (!id) throw new Error(ERROR.CanNotGetUser);
   const getUser = UserModel.findById(id).lean();
-  const getSumLike = likeService.getSumLikeByUser(id);
+  const getSumLike = likeService.getSumLikeByUser(new mongoose.Types.ObjectId(id));
   const getFollow = followService.getByUser(id);
-  const getTotalVideo = VideoModel.find({ author: id }).countDocuments();
+  const getTotalVideo = VideoModel.find({ author: new mongoose.Types.ObjectId(id) }).countDocuments();
   const [user, totalLike, follow, totalVideo] = await Promise.all([getUser, getSumLike, getFollow, getTotalVideo]);
   if (!user) throw new Error(ERROR.CanNotGetUser);
   const follower = follow ? follow.follower : 0;

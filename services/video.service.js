@@ -4,6 +4,7 @@ import * as audioService from './audio.service';
 import * as likeService from './like.service';
 import * as hashtagService from './hashtag.service';
 import { textToSlug, pagination, deleteFile, takeScreenshorts, takeAudio } from './base.service';
+import mongoose from 'mongoose';
 
 const getAll = async ({ q = '', page = PAGE, limit = LIMIT, sort }) => {
   const query = q
@@ -42,11 +43,12 @@ const getAll = async ({ q = '', page = PAGE, limit = LIMIT, sort }) => {
 };
 //pri is private
 const getByUser = async ({ id, q: { page = PAGE, limit = LIMIT, sort, privacy = false }, user }) => {
-  const query = { author: id };
+  if (!id) throw new Error(ERROR.CanNotGetVideo);
+  const query = { author: new mongoose.Types.ObjectId(id) };
   // user in token
   if (user) {
     query.privacy = privacy;
-    query.author = user;
+    query.author = new mongoose.Types.ObjectId(user);
   } else query.privacy = false;
 
   const count = VideoModel.find(query).countDocuments();
@@ -65,6 +67,7 @@ const getByUser = async ({ id, q: { page = PAGE, limit = LIMIT, sort, privacy = 
 };
 
 const getById = async (id) => {
+  if (!id) throw new Error(ERROR.CanNotGetVideo);
   const video = await VideoModel.findById(id).populate('audio', 'name author background');
   if (!video) throw new Error(ERROR.CanNotGetVideo);
   return video;
