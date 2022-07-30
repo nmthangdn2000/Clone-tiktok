@@ -9,8 +9,6 @@ import {
   ADD_ACCOUNT_ICON_IMG,
   ARROW_BACK_IMG,
   MORE_VERT_IMG,
-  USER_FILLED_IMG,
-  USER_IMG,
 } from '../../configs/source';
 import {
   useIsFocused,
@@ -22,7 +20,6 @@ import * as videoApi from '../../apis/video.api';
 import { useDispatch, useSelector } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { KEY_STORAGE } from '../../constants/constants';
-import BottomSettingProfile from '../../components/bottomSheets/BottomSettingProfile';
 import { setBottomSheetSettingProfile } from '../../store/indexSlice';
 
 const statusbarHeight = StatusBar.currentHeight;
@@ -127,14 +124,6 @@ const ProfileScreen = () => {
           onPress={handleClickMoreOption}
         />
       ),
-      tabBarIcon: ({ color, focused }) => {
-        return (
-          <Icon
-            source={focused ? USER_FILLED_IMG : USER_IMG}
-            tintColor={color}
-          />
-        );
-      },
     });
   }, []);
   return (

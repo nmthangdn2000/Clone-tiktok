@@ -18,7 +18,7 @@ const User = () => {
     try {
       const getUser = await userApi.getUser(txtSearch, 20);
 
-      const listUser = getUser.data.data.map(e => {
+      const listUser = getUser.data.map(e => {
         const u = {
           avatar: e.avatar,
           name: e.name,

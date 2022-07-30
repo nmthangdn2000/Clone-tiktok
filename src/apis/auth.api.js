@@ -17,7 +17,7 @@ const signUp = async (name, email, password) => {
     email,
     password,
   };
-  const url = `${SERVER_API_URL}/login`;
+  const url = `${SERVER_API_URL}/register`;
   const result = await axios.post(url, data);
   return result.data;
 };

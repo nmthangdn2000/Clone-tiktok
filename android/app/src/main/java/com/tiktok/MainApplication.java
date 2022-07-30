@@ -13,7 +13,7 @@ import com.tiktok.newarchitecture.MainApplicationReactNativeHost;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import com.brentvatne.react.ReactVideoPackage;
-import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage; 
+// import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage; 
 
 public class MainApplication extends Application implements ReactApplication {
 

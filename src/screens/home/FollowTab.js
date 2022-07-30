@@ -90,7 +90,7 @@ const FollowTab = () => {
     try {
       const result = await VideoApi.getVideo();
       if (result.success) {
-        setData([...result.data.data]);
+        setData([...result.data.data].reverse());
         containerValue.value = withTiming(1, { duration: 1000 });
       }
     } catch (error) {

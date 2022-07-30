@@ -8,6 +8,7 @@ import ModalSignIn from '../components/modal/ModalSignIn';
 import BottomSheetSignIn from '../components/bottomSheets/BottomSheetSocialAuth';
 import '../utils/pushnotification';
 import BottomSettingProfile from '../components/bottomSheets/BottomSettingProfile';
+import BottomSheetLogout from '../components/bottomSheets/BottomSheetLogout';
 
 const { Navigator, Screen } = createMaterialTopTabNavigator();
 
@@ -36,6 +37,7 @@ const Index = () => {
       <ModalSignIn />
       <BottomSheetSignIn />
       <BottomSettingProfile />
+      <BottomSheetLogout />
     </>
   );
 };

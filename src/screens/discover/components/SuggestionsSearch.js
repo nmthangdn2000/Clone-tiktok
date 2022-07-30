@@ -16,7 +16,7 @@ const SuggestionsSearch = () => {
   const fetchData = async text => {
     try {
       const search = await userApi.getUser(text);
-      const result = search.data.data.map(e => {
+      const result = search.data.map(e => {
         return {
           text: e.name,
           avatar: e.avatar,

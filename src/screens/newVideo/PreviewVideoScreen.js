@@ -20,6 +20,7 @@ import {
 import { CText, Icon } from '../../components';
 import CloseButton from './components/CloseButton';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { STATUSBAR_HEIGHT } from '../../constants/constants';
 
 const options = [
   { icon: SPEED_IMG, name: 'Tốc độ', onclick: () => console.log('a') },
@@ -139,7 +140,7 @@ const styles = StyleSheet.create({
   },
   actionRight: {
     position: 'absolute',
-    top: SPACING.S4,
+    top: STATUSBAR_HEIGHT + SPACING.S4,
     right: SPACING.S2,
   },
   actionBottom: {

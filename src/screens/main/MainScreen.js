@@ -17,6 +17,8 @@ import {
   SEARCH_IMG,
   HOME_FILLED_IMG,
   MESSAGE_FILLED_IMG,
+  USER_FILLED_IMG,
+  USER_IMG,
 } from '../../configs/source';
 import BoxCreateVideo from './components/BoxCreateVideo';
 
@@ -169,6 +171,17 @@ const MainScreen = ({ navigation }) => {
           name="Hồ sơ"
           component={ProfileScreen}
           initialParams={{ showHeader: false }}
+          options={{
+            tabBarIcon: ({ color, focused }) => {
+              return (
+                <Image
+                  source={focused ? USER_FILLED_IMG : USER_IMG}
+                  tintColor={color}
+                  style={styles.bottomTabIcon}
+                />
+              );
+            },
+          }}
           listeners={{
             focus: () => {
               StatusBar.setBarStyle('dark-content');

@@ -22,17 +22,29 @@ const BottomSheetSignUp = ({ setCurrentForm, backToScreenSocial }) => {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
 
   const [showModal, setShowModal] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(false);
+  const [isFailure, setIsFailure] = useState(false);
 
-  const handleClickSignUp = async () => {
-    try {
-      setShowModal(true);
-      const result = await authApi.signUp(txtName, txtEmail, txtPassword);
-      console.log(result);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setShowModal(false);
-    }
+  const handleClickSignUp = () => {
+    setIsEmpty(false);
+    setIsFailure(false);
+    setShowModal(true);
+
+    setTimeout(async () => {
+      try {
+        if (!txtName || !txtEmail || !txtPassword) {
+          return setIsEmpty(true);
+        }
+        const result = await authApi.signUp(txtName, txtEmail, txtPassword);
+        console.log(result);
+        setCurrentForm(1);
+      } catch (error) {
+        console.log(error);
+        setIsFailure(true);
+      } finally {
+        setShowModal(false);
+      }
+    }, 2000);
   };
 
   return (
@@ -78,7 +90,15 @@ const BottomSheetSignUp = ({ setCurrentForm, backToScreenSocial }) => {
             onPressIconRight={() => setSecureTextEntry(!secureTextEntry)}
           />
         </Container>
-
+        <Container padding={SPACING.S3}>
+          <CText color={COLOR.DANGER}>
+            {isEmpty
+              ? 'Bạn phải nhập đầy đủ các trường'
+              : isFailure
+              ? 'Email đã tồn tại'
+              : ''}
+          </CText>
+        </Container>
         <Container
           marginTop={SPACING.S5}
           borderRadius={BORDER.SMALL}

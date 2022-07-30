@@ -21,6 +21,8 @@ import Animated, {
 import { StyleSheet } from 'react-native';
 import { getTranslateX } from '../../../utils/utils';
 
+const iconCaption = ['#', '@', '▶', '◉'];
+
 const BottomSecction = ({ isActive, caption, authorName, audio }) => {
   const discAnimatedValue = useSharedValue(0);
   const musicNote1AnimatedValue = useSharedValue(0);
@@ -147,7 +149,7 @@ const BottomSecction = ({ isActive, caption, authorName, audio }) => {
     return (
       <CText color={COLOR.LIGHT_GRAY2}>
         {listText.map((item, index) => {
-          if (item.trim()[0] === '#') {
+          if (iconCaption.includes(item.trim()[0])) {
             return (
               <CText key={index} color={COLOR.LIGHT_GRAY2} text={TEXT.STRONG}>
                 {item.trim()}{' '}

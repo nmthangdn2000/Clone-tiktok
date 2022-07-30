@@ -27,19 +27,21 @@ const ItemSearchVideo = ({ index, item }) => {
           {caption}
         </CText>
         <View style={styles.infor}>
-          <View style={styles.avatar}>
-            <Image
-              source={{ uri: urlSourceMedia(author.avatar) }}
-              style={styles.avatar}
-            />
+          <View style={styles.inforName}>
+            <View style={styles.avatar}>
+              <Image
+                source={{ uri: urlSourceMedia(author.avatar) }}
+                style={styles.avatar}
+              />
+            </View>
+            <CText
+              numberOfLines={1}
+              flexGrow={1}
+              paddingHorizontal={SPACING.S1}>
+              {author.name}
+            </CText>
           </View>
-          <CText
-            numberOfLines={1}
-            flexGrow={1}
-            maxWidth={'60%'}
-            paddingHorizontal={SPACING.S1}>
-            {author.name}
-          </CText>
+
           <View style={styles.numHeart}>
             <Icon
               source={HEART_OUTLINE_IMG}
@@ -62,7 +64,7 @@ export default ItemSearchVideo;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: (width / 2 - SPACING.S2) * 2,
+    height: (width / 2 - SPACING.S2) * 2 + SPACING.S2,
     margin: SPACING.S2,
   },
   video: {
@@ -75,12 +77,19 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop: SPACING.S2,
+    justifyContent: 'space-between',
   },
   avatar: {
     width: 30,
     height: 30,
     borderRadius: BORDER.PILL,
     backgroundColor: COLOR.setOpacity(COLOR.BLACK, 0.1),
+  },
+  inforName: {
+    flexDirection: 'row',
+    maxWidth: '80%',
+    alignItems: 'center',
   },
   numHeart: {
     flexDirection: 'row',

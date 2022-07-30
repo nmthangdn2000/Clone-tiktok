@@ -28,6 +28,7 @@ import ItemAddCaption from './components/ItemAddCaption';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { KEY_STORAGE } from '../../constants/constants';
 import * as videoApi from '../../apis/video.api';
+import ModalLoading from '../../components/modal/ModalLoading';
 
 const listAddress = [
   'Hòa Vang',
@@ -37,13 +38,15 @@ const listAddress = [
   'sun world bà nà hills',
   'công viên châu á',
 ];
+const iconCaption = ['#', '@', '▶', '◉'];
 
 const PostVideoScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
-  console.log(route?.params?.pathVideo);
+
   const [caption, setCaption] = useState('');
   const [privacy, setPrivacy] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     navigation.setOptions({
@@ -63,6 +66,7 @@ const PostVideoScreen = () => {
 
   const handlePostVideo = async () => {
     try {
+      setShowModal(true);
       const token = await AsyncStorage.getItem(KEY_STORAGE.TOKEN);
       const formData = new FormData();
       formData.append('video', {
@@ -74,10 +78,19 @@ const PostVideoScreen = () => {
       formData.append('privacy', privacy);
 
       const result = await videoApi.postVideo(formData, token);
-      navigation.replace('Trang chủ');
+      navigation.replace('Index');
     } catch (error) {
       console.log(error);
+    } finally {
+      setShowModal(false);
     }
+  };
+
+  const handleClickAddress = e => {
+    let txt = caption.trim();
+    if (iconCaption.includes(txt[txt.length - 1])) txt = txt.slice(0, -1);
+    console.log(txt);
+    setCaption(txt.trim() + ' ◉' + e);
   };
 
   return (
@@ -92,6 +105,7 @@ const PostVideoScreen = () => {
         backgroundColor={COLOR.WHITE}
         translucent={false}
       />
+      {showModal && <ModalLoading visible={showModal} />}
       <TopPostVideo
         // pathVideo={route.params.pathVideo}
         caption={caption}
@@ -114,7 +128,13 @@ const PostVideoScreen = () => {
           showsVerticalScrollIndicator={false}
           scrollToOverflowEnabled={true}>
           {listAddress.map((e, i) => {
-            return <ItemAddCaption name={e} key={i} />;
+            return (
+              <ItemAddCaption
+                name={e}
+                key={i}
+                onPress={() => handleClickAddress(e)}
+              />
+            );
           })}
         </ScrollView>
       </Container>
@@ -167,5 +187,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     flexDirection: 'row',
+    backgroundColor: COLOR.WHITE,
   },
 });

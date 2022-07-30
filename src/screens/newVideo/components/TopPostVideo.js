@@ -7,11 +7,14 @@ import { WIDTH } from '../../../configs/constant';
 import ItemAddCaption from './ItemAddCaption';
 
 const listCaption = ['# hashtag', '@ Nhắc đến', '▶ Video'];
+const iconCaption = ['#', '@', '▶', '◉'];
 
 const TopPostVideo = ({ pathVideo, caption, setCaption }) => {
   const handleCick = t => {
-    const txt = caption.trim();
-    setCaption(txt + ' ' + t.split(' ')[0]);
+    let txt = caption.trim();
+    if (iconCaption.includes(txt[txt.length - 1])) txt = txt.slice(0, -1);
+    console.log(txt);
+    setCaption(txt.trim() + ' ' + t.split(' ')[0]);
   };
   return (
     <Container>

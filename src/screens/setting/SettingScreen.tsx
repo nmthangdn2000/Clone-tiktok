@@ -17,7 +17,7 @@ const SettingScreen = () => {
     try {
       const id = await AsyncStorage.getItem(KEY_STORAGE.ID_USER);
       const res = await userApi.getUserById(id);
-      console.log(res);
+      console.log('res', res);
 
       setUser(res);
     } catch (error) {
@@ -38,7 +38,7 @@ const SettingScreen = () => {
         showsVerticalScrollIndicator={false}
         scrollToOverflowEnabled={true}>
         <Header data={user} />
-        <Introduce />
+        <Introduce data={user} />
         <Social />
         <Private data={user} />
       </ScrollView>

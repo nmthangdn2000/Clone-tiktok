@@ -27,7 +27,7 @@ const Top = () => {
 
       const [users, videos] = await Promise.all([getUser, getVideo]);
 
-      const listUser = users.data.data.map(e => {
+      const listUser = users.data.map(e => {
         const u = {
           avatar: e.avatar,
           name: e.name,

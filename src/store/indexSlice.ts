@@ -8,6 +8,7 @@ interface InitialState {
   currentUser: string;
   modalSignIn: boolean;
   bottomSheetSettingProfile: boolean;
+  bottomSheetLogout: boolean;
 }
 
 const initialState: InitialState = {
@@ -16,6 +17,7 @@ const initialState: InitialState = {
   currentUser: '',
   modalSignIn: false,
   bottomSheetSettingProfile: false,
+  bottomSheetLogout: false,
 };
 
 const indexSlice = createSlice({
@@ -37,6 +39,9 @@ const indexSlice = createSlice({
     setBottomSheetSettingProfile: (state, action: PayloadAction<InitialState>) => {
       state.bottomSheetSettingProfile = action.payload;
     },
+    setBottomSheetLogout: (state, action: PayloadAction<InitialState>) => {
+      state.bottomSheetLogout = action.payload;
+    },
   },
 });
 
@@ -47,5 +52,6 @@ export const {
   setBottomSheetSignIn,
   setCurrentUser,
   setModalSignIn,
-  setBottomSheetSettingProfile
+  setBottomSheetSettingProfile,
+  setBottomSheetLogout
 } = indexSlice.actions;
